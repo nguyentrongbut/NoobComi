@@ -4,6 +4,7 @@ import "./globals.css";
 import AppHeader from "@/components/header/app.header";
 import NavbarMobile from "@/components/header/navbar.mobile";
 import { Overlay } from "@radix-ui/react-dialog";
+import AppFooter from "@/components/footer/app.footer";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
                 <AppHeader />
                 {children}
                 <NavbarMobile/>
+                <AppFooter />
             </body>
         </html>
     );
