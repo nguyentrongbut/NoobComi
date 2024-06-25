@@ -40,6 +40,7 @@ const AppFooter = () => {
                             <li key={item.href}>
                                 <Link
                                     href={item.href}
+                                    target="_blank"
                                     className="p-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 "
                                 >
                                     <LinkIcon></LinkIcon>
