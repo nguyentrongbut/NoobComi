@@ -69,7 +69,7 @@ const HeaderSearch = () => {
                 ref={searchHeaderMobileRef}
                 onClick={() => setSearchMobileClick(true)}
             >
-                <IconSearch></IconSearch>
+                <IconSearch className="my-auto"></IconSearch>
             </div>
             <div
                 className={`fixed top-0 left-0 right-0 z-10 xl:relative flex gap-3 ${
@@ -96,14 +96,14 @@ const HeaderSearch = () => {
                         href="/search"
                         className="absolute right-2 top-0 h-full flex justify-center items-center w-[30px] cursor-pointer z-10"
                     >
-                        <IconFilter></IconFilter>
+                        <IconFilter className="my-auto pointer-events-none w-5 h-5"></IconFilter>
                     </Link>
                 </div>
                 <div
                     className="p-2 block xl:hidden"
                     onClick={handleArrowUpClick}
                 >
-                    <IconArrowUp></IconArrowUp>
+                    <IconArrowUp className="my-auto text-red-400"></IconArrowUp>
                 </div>
                 {/* when state is true, display the search menu */}
                 {searchClick && (

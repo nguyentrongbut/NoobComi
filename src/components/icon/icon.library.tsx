@@ -1,18 +1,18 @@
 import React from "react";
 
-function IconLibrary() {
+function IconLibrary({ width = 24, height = 24, strokeWidth = 2, color = "currentColor",  className = ""}) {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width={width}
+            height={height}
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
+            stroke={color}
+            strokeWidth={strokeWidth}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="tabler-icon tabler-icon-bookmark"
+            className={`tabler-icon tabler-icon-bookmark ${className}`}
         >
             <path d="M18 7v14l-6 -4l-6 4v-14a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4z"></path>
         </svg>
