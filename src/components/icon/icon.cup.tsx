@@ -1,17 +1,19 @@
-const IconCup = ({ width = 24, height = 24, strokeWidth = 2, color = "currentColor",  className = ""}) => {
+import { ComponentProps } from "react";
+
+const IconCup = (props: ComponentProps<"svg">) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={width}
-            height={height}
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke={color}
-            strokeWidth={strokeWidth}
+            stroke="currentColor"
+            strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={className}
             aria-hidden="true"
+            {...props}
         >
             <path d="M8 21l8 0"></path>
             <path d="M12 17l0 4"></path>

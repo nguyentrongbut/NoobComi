@@ -1,17 +1,19 @@
-const IconPencil = ({ width = 24, height = 24, strokeWidth = 2, color = "currentColor",  className = ""}) => {
+import { ComponentProps } from "react";
+
+const IconPencil = (props: ComponentProps<"svg">) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width={width}
-            height={height}
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
-            stroke={color}
-            strokeWidth={strokeWidth}
+            stroke="currentColor"
+            strokeWidth={2}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={className}
             aria-hidden="true"
+            {...props}
         >
             <path d="M3 21v-4a4 4 0 1 1 4 4h-4"></path>
             <path d="M21 3a16 16 0 0 0 -12.8 10.2"></path>
