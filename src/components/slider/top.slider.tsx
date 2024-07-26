@@ -1,0 +1,111 @@
+"use client";
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import Link from "next/link";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import IconArrowPrev from "@/components/icon/icon.arrow.prev";
+import IconArrowNext from "@/components/icon/icon.arrow.next";
+const TopSlider = (props: any) => {
+    const { data, title } = props;
+    const swiperRef = useRef<any>(null);
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [isEnd, setIsEnd] = useState(false)
+    // console.log(data);
+    // console.log(title);
+
+    return (
+        <section className="wrapper my-12 lg:my-8">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold flex-grow mb-6">
+                <Link href="/search">{title}</Link>
+            </h2>
+            <Swiper
+                // install Swiper modules
+                modules={[Scrollbar, A11y]}
+                spaceBetween={20}
+                slidesPerView={3.5}
+                slidesPerGroup={2}
+                // pagination={{ clickable: true }}
+                // scrollbar={{ draggable: true }}
+                onSlideChange={() => console.log("slide change")}
+                onSwiper={(swiper) => console.log(swiper)}
+                centeredSlides={true}
+                centeredSlidesBounds={true}
+                onBeforeInit={(swiper) => {
+                    swiperRef.current = swiper;
+                }}
+                breakpoints={{
+                    1280: {
+                        slidesPerView: 6,
+                    },
+                    1024: {
+                        slidesPerView: 5,
+                    },
+                }}
+                onReachBeginning={()=> {
+                    setIsBeginning(true)
+                }}
+                onReachEnd={() => {
+                    setIsEnd(true)
+                }}
+                onFromEdge={() => {
+                    setIsBeginning(false);
+                    setIsEnd(false);
+                }}
+            >
+                {data.map((data: ITopComics, index: number) => {
+                    return (
+                        <SwiperSlide key={`${data.id}-top-tier`}>
+                            <figure className="group">
+                                <Link
+                                    href="/title"
+                                    className="aspect-[5/7] block h-full group-hover:opacity-85 transition-opacity"
+                                >
+                                    <Image
+                                        src={data.cover}
+                                        alt={data.title}
+                                        className="object-cover mb-auto rounded shadow-md select-none w-full h-full"
+                                        priority={[0, 1, 2, 3, 4, 5].includes(
+                                            index
+                                        )}
+                                        width={300}
+                                        height={300}
+                                    ></Image>
+                                </Link>
+                                <Link href="/title">
+                                    {/* mt-2 text-sm line-clamp-2 */}
+                                    <figcaption className="line-clamp-fix mt-2 text-sm group-hover:opacity-85 transition-opacity duration-300 delay-200">
+                                        {data.title}
+                                    </figcaption>
+                                </Link>
+                            </figure>
+                        </SwiperSlide>
+                    );
+                })}
+                <div className="absolute inset-0 flex justify-between">
+                    <button
+                        className={`invisible w-16 select-none hover:bg-black/25 ${isBeginning ? "" : "lg:visible"} flex items-center justify-center h-full z-50 group`}
+                        onClick={() => swiperRef.current?.slidePrev()}
+                    >
+                        <IconArrowPrev className="text-white w-8 h-8 group-hover:scale-125 transition-[opacity,transform]"></IconArrowPrev>
+                    </button>
+                    <button
+                        className={`invisible w-16 select-none hover:bg-black/25 ${isEnd ? "" : "lg:visible"} flex items-center justify-center h-full z-50 group`}
+                        onClick={() => swiperRef.current?.slideNext()}
+                    >
+                        <IconArrowNext className="text-white w-8 h-8 group-hover:scale-125 transition-[opacity,transform]"></IconArrowNext>
+                    </button>
+                </div>
+            </Swiper>
+        </section>
+    );
+};
+
+export default TopSlider;

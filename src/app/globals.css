@@ -77,23 +77,36 @@
 }
 
 @layer utilities {
+    .line-clamp-fix {
+        overflow: hidden;
+        max-width: 100%;
+        text-overflow: ellipsis;
+        max-height: 44px;
+    }
     .wrapper {
         max-width: 1440px;
         width: calc(100% - 160px);
         margin-left: auto;
         margin-right: auto;
     }
+    .banner-overlay {
+        background: linear-gradient(
+            to bottom,
+            rgb(255 255 255 / 0.6),
+            rgb(255, 255, 255)
+        );
+    }
     @media (max-width: 1024px) {
         .wrapper {
             width: calc(100% - 80px);
         }
     }
-    @media (max-width: 768px) { 
+    @media (max-width: 768px) {
         .wrapper {
             width: calc(100% - 60px);
         }
     }
-    @media (max-width: 450px) { 
+    @media (max-width: 450px) {
         .mw-400 {
             display: none;
         }
