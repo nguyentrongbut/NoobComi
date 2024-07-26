@@ -70,7 +70,7 @@ const navSideBarLinks = [
 const NavbarMobile = () => {
     //pb-16
     return (
-        <nav className="fixed bottom-0 left-0 right-0 bg-white block md:hidden">
+        <nav className="fixed bottom-0 left-0 right-0 bg-white block md:hidden z-10">
             <ul className="wrapper flex">
                 {/* Map through the navLinks array to display each link */}
                 {navLinks.map((item, index) => {
