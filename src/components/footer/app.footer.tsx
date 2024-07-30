@@ -27,9 +27,14 @@ const AppFooter = () => {
                 <nav className="flex flex-wrap justify-center">
                     {footerLinks.map((item) => {
                         return (
-                            <Link key={item.href} href={item.href} className="px-6 py-3 block">
-                                {item.title}
-                            </Link>
+                            <div key={item.href} className="px-4 py-2">
+                                <Link
+                                    href={item.href}
+                                    className="px-2 py-1 block hover:bg-neutral-200 rounded-md"
+                                >
+                                    {item.title}
+                                </Link>
+                            </div>
                         );
                     })}
                 </nav>
@@ -41,7 +46,7 @@ const AppFooter = () => {
                                 <Link
                                     href={item.href}
                                     target="_blank"
-                                    className="p-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 "
+                                    className="p-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 hover:bg-neutral-200 rounded-md"
                                 >
                                     <LinkIcon></LinkIcon>
                                 </Link>
