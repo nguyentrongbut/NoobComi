@@ -21,8 +21,8 @@ export default async function Home() {
     return (
         <main>
             <MainSlider data={data}></MainSlider>
-            <TopSlider data={follow} title="Most Followed"></TopSlider>
-            <TopSlider data={like} title="Most Liked"></TopSlider>
+            <TopSlider data={follow} title="Most Followed" linkPage="/follow" showLinkPage={true}></TopSlider>
+            <TopSlider data={like} title="Most Liked" linkPage="/update" showLinkPage={true}></TopSlider>
         </main>
     );
 }

@@ -13,19 +13,30 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import IconArrowPrev from "@/components/icon/icon.arrow.prev";
 import IconArrowNext from "@/components/icon/icon.arrow.next";
+import IconArrowPrev2 from "@/components/icon/icon.arrow.prev2";
 const TopSlider = (props: any) => {
-    const { data, title } = props;
+    const { data, title, linkPage, showLinkPage } = props;
     const swiperRef = useRef<any>(null);
     const [isBeginning, setIsBeginning] = useState(true);
-    const [isEnd, setIsEnd] = useState(false)
+    const [isEnd, setIsEnd] = useState(false);
     // console.log(data);
     // console.log(title);
 
     return (
         <section className="wrapper my-12 lg:my-8">
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold flex-grow mb-6">
-                <Link href="/search">{title}</Link>
-            </h2>
+            <div className="flex items-center justify-between">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold flex-grow mb-6">
+                    <Link href="/search">{title}</Link>
+                </h2>
+                {showLinkPage && (
+                    <Link
+                        href={linkPage}
+                        className="rounded-full p-2 hover:bg-neutral-200/40"
+                    >
+                        <IconArrowPrev2></IconArrowPrev2>
+                    </Link>
+                )}
+            </div>
             <Swiper
                 // install Swiper modules
                 modules={[Scrollbar, A11y]}
@@ -49,11 +60,11 @@ const TopSlider = (props: any) => {
                         slidesPerView: 5,
                     },
                 }}
-                onReachBeginning={()=> {
-                    setIsBeginning(true)
+                onReachBeginning={() => {
+                    setIsBeginning(true);
                 }}
                 onReachEnd={() => {
-                    setIsEnd(true)
+                    setIsEnd(true);
                 }}
                 onFromEdge={() => {
                     setIsBeginning(false);
@@ -91,13 +102,17 @@ const TopSlider = (props: any) => {
                 })}
                 <div className="absolute inset-0 flex justify-between">
                     <button
-                        className={`invisible w-16 select-none hover:bg-black/25 ${isBeginning ? "" : "lg:visible"} flex items-center justify-center h-full z-50 group`}
+                        className={`invisible w-16 select-none hover:bg-black/25 ${
+                            isBeginning ? "" : "lg:visible"
+                        } flex items-center justify-center h-full z-50 group`}
                         onClick={() => swiperRef.current?.slidePrev()}
                     >
                         <IconArrowPrev className="text-white w-8 h-8 group-hover:scale-125 transition-[opacity,transform]"></IconArrowPrev>
                     </button>
                     <button
-                        className={`invisible w-16 select-none hover:bg-black/25 ${isEnd ? "" : "lg:visible"} flex items-center justify-center h-full z-50 group`}
+                        className={`invisible w-16 select-none hover:bg-black/25 ${
+                            isEnd ? "" : "lg:visible"
+                        } flex items-center justify-center h-full z-50 group`}
                         onClick={() => swiperRef.current?.slideNext()}
                     >
                         <IconArrowNext className="text-white w-8 h-8 group-hover:scale-125 transition-[opacity,transform]"></IconArrowNext>
