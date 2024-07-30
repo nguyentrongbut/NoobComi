@@ -24,8 +24,8 @@ const TopSlider = (props: any) => {
 
     return (
         <section className="wrapper my-12 lg:my-8">
-            <div className="flex items-center justify-between">
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold flex-grow mb-6">
+            <div className="flex items-center justify-between mb-6">
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold flex-grow">
                     <Link href="/search">{title}</Link>
                 </h2>
                 {showLinkPage && (
