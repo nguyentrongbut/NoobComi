@@ -144,6 +144,7 @@ const AppHeader = () => {
                                     className="object-cover"
                                 ></Image> */}
                                 {/* User Client */}
+                                <div title="User"></div>
                                 <IconUserClient></IconUserClient>
                             </PopoverTrigger>
                             <PopoverContent className="mt-1 p-0 w-fit shadow-lg">

@@ -95,6 +95,7 @@ const HeaderSearch = () => {
                     <Link
                         href="/search"
                         className="absolute right-2 top-0 h-full flex justify-center items-center w-[30px] cursor-pointer z-10"
+                        title="filter"
                     >
                         <IconFilter className="my-auto pointer-events-none w-5 h-5"></IconFilter>
                     </Link>

@@ -33,6 +33,7 @@ const TopSlider = (props: any) => {
                     <Link
                         href={linkPage}
                         className="rounded-full p-2 hover:bg-neutral-200/40"
+                        title={`go to ${title} page`}
                     >
                         <IconArrowPrev2></IconArrowPrev2>
                     </Link>
@@ -113,6 +114,7 @@ const TopSlider = (props: any) => {
                             isBeginning ? "" : "lg:visible"
                         } flex items-center justify-center h-full z-50 group`}
                         onClick={() => swiperRef.current?.slidePrev()}
+                        title="previous slider"
                     >
                         <IconArrowPrev className="text-white w-8 h-8 group-hover:scale-125 transition-[opacity,transform]"></IconArrowPrev>
                     </button>
@@ -121,6 +123,7 @@ const TopSlider = (props: any) => {
                             isEnd ? "" : "lg:visible"
                         } flex items-center justify-center h-full z-50 group`}
                         onClick={() => swiperRef.current?.slideNext()}
+                        title="next slider"
                     >
                         <IconArrowNext className="text-white w-8 h-8 group-hover:scale-125 transition-[opacity,transform]"></IconArrowNext>
                     </button>

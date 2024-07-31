@@ -138,6 +138,7 @@ const MainSlider = (props: any) => {
                         <button
                             onClick={() => swiperRef.current?.slidePrev()}
                             className="w-7 h-7 md:w-10 md:h-10 bg-[#666666] hover:bg-current md:hover:bg-[#ebebec] md:bg-transparent flex items-center justify-center rounded-full z-20"
+                            title="previous slider"
                         >
                             <IconArrowPrev className="text-white md:text-current"></IconArrowPrev>
                         </button>
@@ -145,6 +146,7 @@ const MainSlider = (props: any) => {
                         <button
                             onClick={() => swiperRef.current?.slideNext()}
                             className="w-7 h-7 md:w-10 md:h-10 bg-[#666666] hover:bg-current md:hover:bg-[#ebebec] md:bg-transparent flex items-center justify-center rounded-full z-20"
+                            title="next slider"
                         >
                             <IconArrowNext className="text-white md:text-current"></IconArrowNext>
                         </button>

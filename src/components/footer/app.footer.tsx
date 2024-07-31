@@ -13,11 +13,27 @@ const footerLinks = [
 ];
 
 const socialLinks = [
-    { icon: IconDiscord, href: "https://discord.com" },
-    { icon: IconFacebook, href: "https://facebook.com" },
-    { icon: IconInstagram, href: "https://instagram.com" },
-    { icon: IconTwitter, href: "https://x.com" },
-    { icon: IconLinkedIn, href: "https://vn.linkedin.com" },
+    {
+        icon: IconDiscord,
+        href: "https://discord.com",
+        title: "go to MangaNoob's discord",
+    },
+    {
+        icon: IconFacebook,
+        href: "https://facebook.com",
+        title: "go to MangaNoob's facebook",
+    },
+    {
+        icon: IconInstagram,
+        href: "https://instagram.com",
+        title: "go to MangaNoob's instagram",
+    },
+    { icon: IconTwitter, href: "https://x.com", title: "go to MangaNoob's x" },
+    {
+        icon: IconLinkedIn,
+        href: "https://vn.linkedin.com",
+        title: "go to MangaNoob's linkedin",
+    },
 ];
 
 const AppFooter = () => {
@@ -47,6 +63,7 @@ const AppFooter = () => {
                                     href={item.href}
                                     target="_blank"
                                     className="p-1 flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 hover:bg-neutral-200 rounded-md"
+                                    title={item.title}
                                 >
                                     <LinkIcon></LinkIcon>
                                 </Link>
