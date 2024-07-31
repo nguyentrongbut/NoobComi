@@ -1,6 +1,7 @@
 import queryString from 'query-string';
+import slugify from 'slugify';
 
-export const sendRequest = async <T>(props:IRequest) => {
+export const sendRequest = async <T>(props: IRequest) => {
     let {
         url,
         method,
@@ -39,3 +40,9 @@ export const sendRequest = async <T>(props:IRequest) => {
         }
     });
 };
+
+export const covertSlugUrl = (str: string) => {
+    if (!str) return "";
+    str = slugify(str, { lower: true, locale: 'en' });
+    return str;
+}

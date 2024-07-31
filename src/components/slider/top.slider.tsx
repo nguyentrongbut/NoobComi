@@ -14,6 +14,7 @@ import { useRef, useState } from "react";
 import IconArrowPrev from "@/components/icon/icon.arrow.prev";
 import IconArrowNext from "@/components/icon/icon.arrow.next";
 import IconArrowPrev2 from "@/components/icon/icon.arrow.prev2";
+import { covertSlugUrl } from "@/utils/api";
 const TopSlider = (props: any) => {
     const { data, title, linkPage, showLinkPage } = props;
     const swiperRef = useRef<any>(null);
@@ -76,7 +77,9 @@ const TopSlider = (props: any) => {
                         <SwiperSlide key={`${data.id}-top-tier`}>
                             <figure className="group">
                                 <Link
-                                    href="/title"
+                                    href={`/title/${covertSlugUrl(
+                                        data.title
+                                    )}-${data.id}.html`}
                                     className="aspect-[5/7] block h-full group-hover:opacity-85 transition-opacity"
                                 >
                                     <Image
@@ -90,7 +93,11 @@ const TopSlider = (props: any) => {
                                         height={300}
                                     ></Image>
                                 </Link>
-                                <Link href="/title">
+                                <Link
+                                    href={`/title/${covertSlugUrl(
+                                        data.title
+                                    )}-${data.id}.html`}
+                                >
                                     {/* mt-2 text-sm line-clamp-2 */}
                                     <figcaption className="line-clamp-fix mt-2 text-sm group-hover:opacity-85 transition-opacity duration-300 delay-200">
                                         {data.title}

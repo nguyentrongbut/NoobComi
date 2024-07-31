@@ -96,6 +96,14 @@
             rgb(255, 255, 255)
         );
     }
+    .banner-overlay--title {
+        background: linear-gradient(
+            67.81deg,
+            rgba(0, 0, 0, 0.2) 35.51%,
+            transparent
+        );
+        backdrop-filter: 4px;
+    }
     @media (max-width: 1024px) {
         .wrapper {
             width: calc(100% - 80px);
@@ -122,6 +130,14 @@
         transition-duration: 0.3s;
         transition-property: transform;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .primary-color {
+        color: rgb(5 170 240);
+    }
+
+    .bg-primary-color {
+        background-color: rgb(5 170 240);
     }
 
     ::-webkit-scrollbar {

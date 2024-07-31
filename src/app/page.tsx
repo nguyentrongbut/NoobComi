@@ -1,6 +1,7 @@
 import MainSlider from "@/components/slider/main.slider";
 import TopSlider from "@/components/slider/top.slider";
 import { sendRequest } from "@/utils/api";
+import Link from "next/link";
 
 export default async function Home() {
     const data = await sendRequest<ITopComics[]>({

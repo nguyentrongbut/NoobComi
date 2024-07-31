@@ -20,5 +20,12 @@ declare global {
             name: string;
         }
         genres: string[];
+        views: number;
+        likes: number;
+        follow: number;
+        totalComment: number;
+        updatedAt: number;
+        createdAt: number;
+        state: string;
     }
 }

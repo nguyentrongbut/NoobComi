@@ -13,6 +13,7 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import IconArrowPrev from "@/components/icon/icon.arrow.prev";
 import IconArrowNext from "@/components/icon/icon.arrow.next";
+import { covertSlugUrl } from "@/utils/api";
 const MainSlider = (props: any) => {
     const data: any = props.data;
     const swiperRef = useRef<any>();
@@ -48,7 +49,9 @@ const MainSlider = (props: any) => {
                     return (
                         <SwiperSlide key={`${comic.id}-news`}>
                             <Link
-                                href="/title"
+                                href={`/title/${covertSlugUrl(comic.title)}-${
+                                    comic.id
+                                }.html`}
                                 className="flex h-full relative shadow"
                             >
                                 <Image
