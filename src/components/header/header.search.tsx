@@ -73,8 +73,8 @@ const HeaderSearch = () => {
             </div>
             <div
                 className={`fixed top-0 left-0 right-0 z-10 xl:relative flex gap-3 ${
-                    searchMobileClick ? "block" : "hidden xl:block"
-                } p-5 xl:p-0 bg-white`}
+                    searchMobileClick ? "block bg-white" : "hidden xl:block"
+                } p-5 xl:p-0`}
                 ref={searchHeaderRef}
             >
                 <div
