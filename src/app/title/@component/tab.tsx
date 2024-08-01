@@ -32,7 +32,7 @@ const Tab = (props: any) => {
                                 className={`px-4 py-2 block min-w-[6rem] text-center flex-shrink-0 hover:opacity-90 transition-opacity ${
                                     isActive
                                         ? "border-b-2 border-blue-600 font-bold"
-                                        : "font-medium opacity-50"
+                                        : "font-medium opacity-60"
                                 }`}
                             >
                                 {item.title}

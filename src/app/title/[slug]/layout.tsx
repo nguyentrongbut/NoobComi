@@ -45,7 +45,7 @@ function formatNumber(number: number) {
     } else if (number >= 1e3) {
         return (number / 1e3).toFixed(0) + "K";
     } else {
-        return number.toString();
+        return number?.toString();
     }
 }
 
@@ -58,8 +58,6 @@ export default async function RootLayout({
     if (React.isValidElement(children) && children.props.segmentPath) {
         params = children.props.segmentPath[3][1];
     }
-
-    console.log(">>>params: ", params);
 
     const id = params ? extractIdFromSlug(params) : "";
 
@@ -88,8 +86,8 @@ export default async function RootLayout({
                 <div className="relative h-52 sm:h-80 -mt-24 sm:-mt-40">
                     <div className="wrapper relative left-0 flex justify-center sm:justify-start space-x-4">
                         <Image
-                            src={data.cover}
-                            alt={data.title}
+                            src={data?.cover}
+                            alt={data?.title}
                             width={230}
                             height={320}
                             loading="lazy"
@@ -99,46 +97,48 @@ export default async function RootLayout({
                             <div></div>
                             <h2
                                 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold whitespace-nowrap overflow-hidden text-ellipsis mt-2 xl:mt-4"
-                                title={data.title}
+                                title={data?.title}
                             >
-                                {data.title}
+                                {data?.title}
                             </h2>
                             <ul className="flex text-base space-x-4 justify-start">
                                 <li className="flex whitespace-nowrap items-center shadow rounded-full py-0.5 px-2 border border-[#a3a3a3] hover:border-[#737373] transition-[border]">
                                     <IconAuthor className="flex-shrink-0 primary-color"></IconAuthor>
                                     <Link href="/author" className="ml-2">
-                                        {data.author.name}
+                                        {data?.author?.name}
                                     </Link>
                                 </li>
                                 <li className="flex items-center gap-4">
                                     <span
                                         className="flex gap-2 items-center"
-                                        title={data.follow.toString()}
+                                        title={data?.follow?.toString()}
                                     >
                                         <IconSave className="primary-color"></IconSave>
-                                        <span>{formatNumber(data.follow)}</span>
+                                        <span>
+                                            {formatNumber(data?.follow)}
+                                        </span>
                                     </span>
                                     <span
                                         className="flex gap-2 items-center"
-                                        title={data.likes.toString()}
+                                        title={data?.likes?.toString()}
                                     >
                                         <IconHeart className="primary-color"></IconHeart>
-                                        <span>{formatNumber(data.likes)}</span>
+                                        <span>{formatNumber(data?.likes)}</span>
                                     </span>
                                     <span
                                         className="flex gap-2 items-center"
-                                        title={data.views.toString()}
+                                        title={data?.views?.toString()}
                                     >
                                         <IconEye className="primary-color"></IconEye>
-                                        <span>{formatNumber(data.views)}</span>
+                                        <span>{formatNumber(data?.views)}</span>
                                     </span>
                                     <span
                                         className="flex gap-2 items-center"
-                                        title={data.totalComment.toString()}
+                                        title={data?.totalComment?.toString()}
                                     >
                                         <IconComment className="primary-color"></IconComment>
                                         <span>
-                                            {formatNumber(data.totalComment)}
+                                            {formatNumber(data?.totalComment)}
                                         </span>
                                     </span>
                                 </li>
@@ -149,29 +149,32 @@ export default async function RootLayout({
                 </div>
                 <div className="wrapper">
                     <div className="mt-2 sm:mt-4 flex gap-4">
-                        <Button className="flex bg-primary-color hover:opacity-90 w-[228.5625px] font-medium">
+                        <Button className="flex bg-primary-color hover:opacity-90 w-[228.5625px] font-medium text-base">
                             <IconSave></IconSave>
                             <span className="ml-1">Follow</span>
                         </Button>
-                        <Button className="flex bg-primary-color hover:opacity-90 p-2 font-medium">
+                        <Button className="flex bg-primary-color hover:opacity-90 p-2 font-medium text-base">
                             <IconHeart></IconHeart>
                             <span className="ml-1">Support</span>
                         </Button>
-                        <Button className="flex primary-color hover:bg-blue-100 bg-white p-2 font-medium">
+                        <Button className="flex primary-color hover:bg-blue-100 bg-white p-2 font-medium text-base">
                             <IconShare></IconShare>
                             <span className="ml-1">Share</span>
                         </Button>
-                        <Button className="flex primary-color hover:bg-blue-100 bg-white p-2 font-medium">
-                            <Link href={`/title/${params}/reviews`}>
+                        <Button className="flex primary-color hover:bg-blue-100 bg-white font-medium p-0 text-base">
+                            <Link
+                                href={`/title/${params}/reviews`}
+                                className="p-2"
+                            >
                                 Write a review
                             </Link>
                         </Button>
                     </div>
                     <ul className="flex mt-4 gap-1">
-                        {data.genres.map((genres) => {
+                        {data?.genres?.map((genres) => {
                             return (
                                 <li
-                                    key={`${data.id}-genres`}
+                                    key={`${data?.id}-genres`}
                                     className="uppercase text-xs rounded-md py-1 px-2 bg-[#e5e5e5] font-medium"
                                 >
                                     {genres}
@@ -179,7 +182,7 @@ export default async function RootLayout({
                             );
                         })}
                     </ul>
-                    <p className="text-sm sm:text-base mt-4">{data.desc}</p>
+                    <p className="text-sm sm:text-base mt-4">{data?.desc}</p>
                 </div>
             </header>
             <Tab params={params}></Tab>

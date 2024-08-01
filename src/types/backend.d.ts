@@ -1,9 +1,9 @@
-export {}
+export { }
 declare global {
     interface IRequest {
         url: string;
         method: string;
-        body?: {[key:string]: any};
+        body?: { [key: string]: any };
         queryParams?: any;
         useCredentials?: boolean;
         headers?: any;
@@ -27,5 +27,19 @@ declare global {
         updatedAt: number;
         createdAt: number;
         state: string;
+    }
+
+    interface IChapter {
+        id: number;
+        comicId: number;
+        title: string;
+        content: string;
+        cover: string;
+        images: Array;
+        views: number;
+        comments: number;
+        likes: number;
+        vip: boolean;
+        createdAt: number
     }
 }
