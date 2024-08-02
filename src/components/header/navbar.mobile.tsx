@@ -25,18 +25,22 @@ const navLinks = [
     {
         icon: IconHome,
         href: "/",
+        title: "home"
     },
     {
         icon: IconDiscover,
         href: "/discover",
+        title: "discover"
     },
     {
         icon: IconEmail,
         href: "/messages",
+        title: "messages"
     },
     {
         icon: IconLibrary,
         href: "/library",
+        title: "library"
     },
 ];
 
@@ -84,6 +88,7 @@ const NavbarMobile = () => {
                             <Link
                                 href={item.href}
                                 className="w-full h-full py-5 flex items-center justify-center"
+                                title={item.title}
                             >
                                 <LinkIcon></LinkIcon>
                             </Link>
@@ -93,7 +98,7 @@ const NavbarMobile = () => {
                 <li className="w-full hover:bg-neutral-100">
                     <div className="w-full h-full py-5 flex items-center justify-center">
                         <Sheet>
-                            <SheetTrigger>
+                            <SheetTrigger title="menu">
                                 <IconMenuBar></IconMenuBar>
                             </SheetTrigger>
                             <SheetContent
