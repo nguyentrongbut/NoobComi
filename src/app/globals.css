@@ -140,6 +140,10 @@
         background-color: rgb(5 170 240);
     }
 
+    .border-primary-color {
+        border-color: rgb(5 170 240);
+    }
+
     ::-webkit-scrollbar {
         border-radius: 0;
         width: 10px;

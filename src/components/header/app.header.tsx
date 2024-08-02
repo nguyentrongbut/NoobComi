@@ -62,7 +62,7 @@ const listChoose = [
 ];
 const AppHeader = () => {
     return (
-        <header className="shadow sticky top-0 left-0 right-0 z-10 backdrop-blur-lg bg-white/80">
+        <header className="shadow sticky top-0 left-0 right-0 z-10 backdrop-blur-lg bg-white/80 z-50">
             <div className="flex justify-between wrapper items-center h-16">
                 <div className="flex gap-4 items-center">
                     <div>

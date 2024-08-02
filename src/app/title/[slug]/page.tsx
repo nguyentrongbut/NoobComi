@@ -1,4 +1,4 @@
-import TabContent from "@/app/title/@component/tab.content";
+import TabContent from "@/app/title/@component/tab.content.wrapper";
 import IconFilter2 from "@/components/icon/icon.filter2";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
@@ -10,6 +10,7 @@ import IconOclock from "@/components/icon/icon.oclock";
 import { sendRequest } from "@/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import IconLock from "@/components/icon/icon.lock";
 
 dayjs.extend(relativeTime);
 
@@ -20,18 +21,16 @@ const ChaptersTab = async (props: any) => {
     const id = temp1[temp1.length - 1];
 
     const data = await sendRequest<IChapter[]>({
-        url: `http://localhost:3009/api/chapters?comicId=${id}&_sort=createdAt&_order=asc`,
+        url: `http://localhost:3009/api//chapters?comicId=${id}&_sort=createdAt&_order=desc`,
         method: "GET",
         nextOption: {
             cache: "no-store",
         },
     });
-
+    
     return (
         <TabContent>
-            {data.length === 0 ? (
-                ""
-            ) : (
+            {data.length > 0 && (
                 <Button className="flex justify-between hover:bg-[#f7f7f7] bg-white text-black gap-2 text-base rounded-md mb-4 lg:-mt-2">
                     <IconFilter2></IconFilter2>
                     <span>Descending</span>
@@ -53,7 +52,7 @@ const ChaptersTab = async (props: any) => {
                                             className="flex w-full justify-between bg-neutral-100 rounded-md hover:bg-[#e5e5e5]"
                                         >
                                             <figure className="flex gap-4">
-                                                <div className="rounded-md overflow-hidden h-20">
+                                                <div className="rounded-md overflow-hidden h-20 relative">
                                                     <Image
                                                         src={chapter?.cover}
                                                         alt={chapter?.content}
@@ -62,10 +61,26 @@ const ChaptersTab = async (props: any) => {
                                                         loading="eager"
                                                         className="w-full aspect-[3/2] object-cover h-full bg-neutral-200"
                                                     ></Image>
+                                                    {chapter?.vip && (
+                                                        <div>
+                                                            <div className="p-1.5 bg-white/80 rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10">
+                                                                <IconLock></IconLock>
+                                                            </div>
+                                                            <div className="absolute w-full h-full inset-0 bg-black/50"></div>
+                                                        </div>
+                                                    )}
                                                 </div>
 
-                                                <figcaption className="mt-2 font-bold">
+                                                <figcaption className="mt-2 font-bold gap-2.5 flex">
                                                     {chapter?.content}
+                                                    {chapter?.vip && (
+                                                        <div className="flex gap-1 rounded-full items-center primary-color border sm:py-[0.125rem h-4 sm:h-6 sm:px-2 justify-center border-primary-color">
+                                                            <IconLock className="size-4"></IconLock>
+                                                            <span className="font-medium text-sm">
+                                                                Vip
+                                                            </span>
+                                                        </div>
+                                                    )}
                                                 </figcaption>
                                             </figure>
                                             <div className="mt-auto flex gap-4 text-sm mx-3 mb-3">
@@ -117,11 +132,11 @@ const ChaptersTab = async (props: any) => {
                         </ul>
                     )}
                 </div>
-                {data.length === 0 ? (
-                    ""
-                ) : (
+                {data.length > 0 && (
                     <div className="flex justify-center items-center gap-y-4">
-                        <p className="text-sm sm:text-base"> results</p>
+                        <p className="text-sm sm:text-base">
+                            {data.length} results
+                        </p>
                     </div>
                 )}
             </section>
