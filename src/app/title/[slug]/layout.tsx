@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     return {
         title: `${res?.title} - MangaNoob (Open Beta)`,
-        description: res?.title,
+        description: `${res?.title} - ${res?.desc} - MangaNoob (Open Beta)`,
     };
 }
 
