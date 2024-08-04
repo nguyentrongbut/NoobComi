@@ -4,17 +4,17 @@ import { sendRequest } from "@/utils/api";
 
 export default async function Home() {
     const data = await sendRequest<ITopComics[]>({
-        url: "http://localhost:3009/api/all-comics?sortByFollow=true",
+        url: `${process.env.WEB_COMIC_API}/api/all-comics?sortByFollow=true`,
         method: "GET",
     });
 
     const like = await sendRequest<ITopComics[]>({
-        url: "http://localhost:3009/api/top-liked",
+        url: `${process.env.WEB_COMIC_API}/api/top-liked`,
         method: "GET",
     });
 
     const follow = await sendRequest<ITopComics[]>({
-        url: "http://localhost:3009/api/top-followed",
+        url: `${process.env.WEB_COMIC_API}/api/top-followed`,
         method: "GET",
     });
 

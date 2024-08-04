@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     // fetch data
     const res = await sendRequest<ITopComics>({
-        url: `http://localhost:3009/api/all-comics/${id}`,
+        url: `${process.env.WEB_COMIC_API}/api/all-comics/${id}`,
         method: "GET",
     });
 
@@ -62,7 +62,7 @@ export default async function RootLayout({
     const id = params ? extractIdFromSlug(params) : "";
 
     const data = await sendRequest<ITopComics>({
-        url: `http://localhost:3009/api/all-comics/${id}`,
+        url: `${process.env.WEB_COMIC_API}/api/all-comics/${id}`,
         method: "GET",
         nextOption: {
             cache: "no-store",
