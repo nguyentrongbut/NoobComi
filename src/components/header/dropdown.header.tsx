@@ -75,7 +75,7 @@ const DropdownHeader = () => {
                                             className="group flex gap-4 items-center py-2 px-4 cursor-pointer hover:bg-neutral-100 transition"
                                         >
                                             <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-neutral-50 group-hover:bg-white transition">
-                                                <LinkIcon className="text-neutral-500 group-hover:text-[#05aaf0] transition"></LinkIcon>
+                                                <LinkIcon className="text-neutral-500 group-hover:primary-color transition"></LinkIcon>
                                             </div>
                                             <div>
                                                 <span className="font-semibold">

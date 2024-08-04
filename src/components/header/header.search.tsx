@@ -82,7 +82,7 @@ const HeaderSearch = () => {
                     className={`relative min-h-[40px] border w-full ${
                         !searchClick
                             ? "border-neutral-500 xl:w-[270px]"
-                            : "border-[#05aaf0] xl:w-[504px]"
+                            : "border-primary-color xl:w-[504px]"
                     } bg-neutral-100 rounded-full overflow-hidden transition-w-b`}
                 >
                     <input

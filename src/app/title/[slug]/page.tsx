@@ -43,7 +43,7 @@ const ChaptersTab = async (props: any) => {
 
     return (
         <TabContent>
-            {data.length > 0 && (
+            {data.length > 1 && (
                 <Button className="flex justify-between hover:bg-[#f7f7f7] bg-white text-black gap-2 text-base rounded-md mb-4 lg:-mt-2">
                     <IconFilter2></IconFilter2>
                     <span>Descending</span>
