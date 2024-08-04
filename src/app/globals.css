@@ -33,6 +33,9 @@
         --ring: 222.2 84% 4.9%;
 
         --radius: 0.5rem;
+
+        /* customs */
+        --primary-color: rgb(5 170 240);
     }
 
     .dark {
@@ -133,15 +136,15 @@
     }
 
     .primary-color {
-        color: rgb(5 170 240);
+        color: var(--primary-color);
     }
 
     .bg-primary-color {
-        background-color: rgb(5 170 240);
+        background-color: var(--primary-color);
     }
 
     .border-primary-color {
-        border-color: rgb(5 170 240);
+        border-color: var(--primary-color);
     }
 
     ::-webkit-scrollbar {
