@@ -99,7 +99,7 @@ const MainSlider = (props: any) => {
                                                     return (
                                                         <li
                                                             className="text-[0.625rem] font-bold uppercase rounded-sm px-[6px] bg-[rgb(240,241,242)] h-[15px]"
-                                                            key={`${comic.id}-genres`}
+                                                            key={`${comic.id}-${genres}`}
                                                         >
                                                             {genres}
                                                         </li>

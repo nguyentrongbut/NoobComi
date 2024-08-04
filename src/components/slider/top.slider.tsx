@@ -20,8 +20,6 @@ const TopSlider = (props: any) => {
     const swiperRef = useRef<any>(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
-    // console.log(data);
-    // console.log(title);
 
     return (
         <section className="wrapper my-12 lg:my-8">
@@ -47,8 +45,6 @@ const TopSlider = (props: any) => {
                 slidesPerGroup={2}
                 // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: true }}
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
                 centeredSlides={true}
                 centeredSlidesBounds={true}
                 onBeforeInit={(swiper) => {
