@@ -78,7 +78,8 @@ export default async function RootLayout({
                         width={1000}
                         height={448}
                         alt={data.title}
-                        loading="lazy"
+                        loading="eager"
+                        priority={true}
                         className="w-full object-cover h-full object-center"
                     ></Image>
                     <div className="absolute inset-0 banner-overlay--title"></div>
@@ -90,7 +91,7 @@ export default async function RootLayout({
                             alt={data?.title}
                             width={230}
                             height={320}
-                            loading="lazy"
+                            loading="eager"
                             className="object-cover min-h-0 h-48 sm:h-80 rounded-md aspect-[5/7] ring-4 ring-black"
                         ></Image>
                         <div className="hidden sm:grid grid-rows-[10rem_1fr_auto]">
