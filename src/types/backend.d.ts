@@ -42,4 +42,20 @@ declare global {
         vip: boolean;
         createdAt: number
     }
+
+    interface IReviews {
+        id: number;
+        comicId: number;
+        authorId: number,
+        content: string,
+        rated: number,
+        createdAt: number,
+        author: {
+            id: number,
+            name: string,
+            country: string,
+            avatar: string,
+            banner: string
+        }
+    }
 }
