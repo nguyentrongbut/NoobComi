@@ -17,7 +17,6 @@ import {
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
-    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
@@ -34,7 +33,7 @@ const ChaptersTab = async (props: any) => {
     const id = temp1[temp1.length - 1];
 
     const data = await sendRequest<IChapter[]>({
-        url: `${process.env.WEB_COMIC_API}/api//chapters?comicId=${id}&_sort=createdAt&_order=desc`,
+        url: `${process.env.WEB_COMIC_API}/api/chapters?comicId=${id}&_sort=createdAt&_order=desc`,
         method: "GET",
         nextOption: {
             cache: "no-store",

@@ -27,6 +27,7 @@ declare global {
         updatedAt: number;
         createdAt: number;
         state: string;
+        rating: number
     }
 
     interface IChapter {
@@ -41,5 +42,21 @@ declare global {
         likes: number;
         vip: boolean;
         createdAt: number
+    }
+
+    interface IReviews {
+        id: number;
+        comicId: number;
+        authorId: number,
+        content: string,
+        rated: number,
+        createdAt: number,
+        author: {
+            id: number,
+            name: string,
+            country: string,
+            avatar: string,
+            banner: string
+        }
     }
 }

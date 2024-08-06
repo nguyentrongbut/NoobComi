@@ -11,6 +11,7 @@ import IconComment from "@/components/icon/icon.comment";
 import { Button } from "@/components/ui/button";
 import IconShare from "@/components/icon/icon.share";
 import Tab from "@/app/title/@component/tab";
+import RatingReadOnly from "@/app/title/[slug]/reviews/@component/rating.read.only";
 
 type Props = {
     params: { slug: string };
@@ -140,6 +141,19 @@ export default async function RootLayout({
                                         <IconComment className="primary-color"></IconComment>
                                         <span>
                                             {formatNumber(data?.totalComment)}
+                                        </span>
+                                    </span>
+                                    <span className="-mt-0.5 flex items-center gap-2">
+                                        <RatingReadOnly
+                                            stars={data?.rating}
+                                            half={true}
+                                        ></RatingReadOnly>
+                                        <span className="mt-0.5 text-sm opacity-70">
+                                            (
+                                            {data?.rating
+                                                ? `${data.rating}`
+                                                : "0.0"}
+                                            )
                                         </span>
                                     </span>
                                 </li>
