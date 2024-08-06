@@ -144,8 +144,17 @@ export default async function RootLayout({
                                         </span>
                                     </span>
                                     <span className="-mt-0.5 flex items-center gap-2">
-                                        <RatingReadOnly stars={data?.rating} half={true}></RatingReadOnly>
-                                        <span className="mt-0.5 text-sm opacity-70">({data?.rating})</span>
+                                        <RatingReadOnly
+                                            stars={data?.rating}
+                                            half={true}
+                                        ></RatingReadOnly>
+                                        <span className="mt-0.5 text-sm opacity-70">
+                                            (
+                                            {data?.rating
+                                                ? `${data.rating}`
+                                                : "0.0"}
+                                            )
+                                        </span>
                                     </span>
                                 </li>
                                 <li></li>
