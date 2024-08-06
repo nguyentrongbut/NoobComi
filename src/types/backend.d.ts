@@ -27,6 +27,7 @@ declare global {
         updatedAt: number;
         createdAt: number;
         state: string;
+        rating: number
     }
 
     interface IChapter {
