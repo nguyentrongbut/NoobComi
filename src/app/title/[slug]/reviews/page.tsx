@@ -1,5 +1,5 @@
 import TabContent from "@/app/title/@component/tab.content.wrapper";
-import Ratting from "@/app/title/[slug]/reviews/@component/ratting";
+import Rating from "@/app/title/[slug]/reviews/@component/rating";
 import IconSend from "@/components/icon/icon.send";
 import IconStarBorder from "@/components/icon/icon.star.border";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,6 +11,7 @@ import Link from "next/link";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import RatingReadOnly from "@/app/title/[slug]/reviews/@component/rating.read.only";
 
 dayjs.extend(relativeTime);
 
@@ -30,7 +31,7 @@ const ReviewsTab = async (props: any) => {
 
     return (
         <TabContent>
-            <Ratting></Ratting>
+            <Rating></Rating>
             <div className="relative">
                 <Textarea className="min-h-[7rem] mt-4 bg-neutral-100 border border-[#a3a3a3] focus:border-[var(--primary-color)] focus:outline-none transition-all peer"></Textarea>
                 <label className="absolute top-2 left-4 text-neutral-700 transition-all rounded text-base pointer-events-none peer-focus-within:text-xs peer-focus-within:-top-2 peer-focus-within:bg-white px-1 -mx-1 max-w-[calc(100% - 2rem)]">
@@ -77,13 +78,9 @@ const ReviewsTab = async (props: any) => {
                                             </h3>
                                         </Link>
                                         <div className="flex -ml-0.5">
-                                            <div className="flex">
-                                                <IconStarBorder className="size-5"></IconStarBorder>
-                                                <IconStarBorder className="size-5"></IconStarBorder>
-                                                <IconStarBorder className="size-5"></IconStarBorder>
-                                                <IconStarBorder className="size-5"></IconStarBorder>
-                                                <IconStarBorder className="size-5"></IconStarBorder>
-                                            </div>
+                                            <RatingReadOnly
+                                                stars={reviews?.rated}
+                                            ></RatingReadOnly>
                                             <div className="text-neutral-500 whitespace-nowrap text-sm mt-1 ml-2">
                                                 {dayjs(
                                                     reviews?.createdAt
