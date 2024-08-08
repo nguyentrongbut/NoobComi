@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
-import { debounce } from "lodash";
 import { useState } from "react";
 
 const UReviewComments = (props: any) => {
@@ -23,8 +22,10 @@ const UReviewComments = (props: any) => {
     } = props;
     const [uRating, setURating] = useState(currentRating);
     const [uReview, setUReview] = useState(currentReview);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async () => {
+        setIsSubmitting(true);
         toast({
             title: "Please wait...",
             description: "Updating review",
@@ -53,9 +54,8 @@ const UReviewComments = (props: any) => {
                 });
             }
         }
+        setIsSubmitting(false);
     };
-
-    debounce(handleSubmit, 3000);
 
     const handleCancel = () => {
         setFormUpdate(false);
@@ -89,9 +89,14 @@ const UReviewComments = (props: any) => {
                 <Button
                     className="flex gap-1 items-center bg-primary-color p-1.5"
                     onClick={handleSubmit}
+                    disabled={isSubmitting}
                 >
-                    <IconSend></IconSend>
-                    <span>Submit</span>
+                    {isSubmitting ? (
+                        <IconLoading className="animate-spin" />
+                    ) : (
+                        <IconSend />
+                    )}
+                    <span>{isSubmitting ? "Submitting..." : "Submit"}</span>
                 </Button>
             </div>
         </>
