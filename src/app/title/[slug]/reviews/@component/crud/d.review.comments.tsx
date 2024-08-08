@@ -16,6 +16,9 @@ import {
 
 import ImgQuestion from "@/../public/images/question.png";
 import Image from "next/image";
+import { toast } from "@/components/ui/use-toast";
+import IconSuccess from "@/components/icon/icon.success";
+import IconLoading from "@/components/icon/icon.loading";
 
 const DReviewComments = (props: any) => {
     const { dId, fetchReviews } = props;
@@ -25,8 +28,19 @@ const DReviewComments = (props: any) => {
             url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${dId}`,
             method: "DELETE",
         });
-        if (data) {
+        if(!data) {
+            toast({
+                title: "Please wait...",
+                description: "Deleting review",
+                icon: <IconLoading/>
+            });
+        } else {
             fetchReviews();
+            toast({
+                title: "Success!",
+                description: "Your review was successfully deleted.",
+                icon: <IconSuccess/>
+            });
         }
     };
 

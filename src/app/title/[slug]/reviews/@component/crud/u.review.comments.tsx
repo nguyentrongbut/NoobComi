@@ -1,8 +1,11 @@
 "use client";
 import Rating from "@/app/title/[slug]/reviews/@component/rating";
+import IconLoading from "@/components/icon/icon.loading";
 import IconSend from "@/components/icon/icon.send";
+import IconSuccess from "@/components/icon/icon.success";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
 import { useState } from "react";
 
@@ -33,10 +36,21 @@ const UReviewComments = (props: any) => {
                     updateAt: Date.now(),
                 },
             });
-            if (data) {
+            if(!data) {
+                toast({
+                    title: "Please wait...",
+                    description: "Updating review",
+                    icon: <IconLoading/>
+                });
+            } else {
                 fetchReviews();
                 setHiddenReviewCurrent(true);
                 setFormUpdate(false);
+                toast({
+                    title: "Success!",
+                    description: "Your review was successfully updated.",
+                    icon: <IconSuccess/>
+                });
             }
         }
     };

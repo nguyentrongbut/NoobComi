@@ -68,7 +68,6 @@ const RReviewComments = (props: any) => {
                     ></UReviewComments>
                 )}
             </form>
-
             <Separator
                 className={`mt-4 bg-neutral-300 ${currentIdUser && "hidden"}`}
             ></Separator>
@@ -126,7 +125,7 @@ const RReviewComments = (props: any) => {
                                                 <RatingReadOnly
                                                     stars={specialReview?.rated}
                                                 ></RatingReadOnly>
-                                                <div className="text-neutral-500 whitespace-nowrap text-sm mt-1 ml-2">
+                                                <div className="text-neutral-500 whitespace-nowrap text-sm ml-2 mt-0.5">
                                                     {dayjs(
                                                         specialReview?.updateAt
                                                     ).fromNow()}
@@ -190,7 +189,7 @@ const RReviewComments = (props: any) => {
                                             <RatingReadOnly
                                                 stars={reviews?.rated}
                                             ></RatingReadOnly>
-                                            <div className="text-neutral-500 whitespace-nowrap text-sm mt-1 ml-2">
+                                            <div className="text-neutral-500 whitespace-nowrap text-sm mt-0.5 ml-2">
                                                 {dayjs(
                                                     reviews?.updateAt
                                                 ).fromNow()}
