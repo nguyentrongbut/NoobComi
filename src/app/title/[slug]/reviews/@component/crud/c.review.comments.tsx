@@ -15,6 +15,11 @@ const CReviewComments = (props: any) => {
     const [rating, setRating] = useState<number | null>(null);
 
     const handleSubmit = async () => {
+        toast({
+            title: "Please wait...",
+            description: "Posting review",
+            icon: <IconLoading />,
+        });
         if (rating != null && !hasReviewId) {
             const data = await sendRequest<IReviews>({
                 url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
@@ -26,13 +31,7 @@ const CReviewComments = (props: any) => {
                     rated: rating,
                 },
             });
-            if (!data) {
-                toast({
-                    title: "Please wait...",
-                    description: "Posting review",
-                    icon: <IconLoading />,
-                });
-            } else {
+            if (data) {
                 setYourReviewComment("");
                 fetchReviews();
                 toast({
