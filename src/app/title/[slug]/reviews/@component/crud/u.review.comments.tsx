@@ -87,7 +87,9 @@ const UReviewComments = (props: any) => {
                     Cancel
                 </Button>
                 <Button
-                    className="flex gap-1 items-center bg-primary-color p-1.5"
+                    className={`flex gap-1 items-center bg-primary-color p-1.5 ${
+                        isSubmitting && "pointer-events-none"
+                    }`}
                     onClick={handleSubmit}
                     disabled={isSubmitting}
                 >
