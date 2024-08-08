@@ -29,7 +29,7 @@ const RReviewComments = (props: any) => {
             },
         });
         setReviews(reviews);
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         fetchReviews();
@@ -156,7 +156,7 @@ const RReviewComments = (props: any) => {
                                         reviews.length !== 1 && "hidden"
                                     }`}
                                 >
-                                    You're the only reviewer!
+                                    You&apos;re the only reviewer!
                                 </p>
                             </li>
                         )}
