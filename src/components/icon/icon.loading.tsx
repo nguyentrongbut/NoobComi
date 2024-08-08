@@ -4,15 +4,15 @@ const IconLoading = (props: ComponentProps<"svg">) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth={4}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="w-4 primary-color animate-spin"
+            className="primary-color animate-spin"
             {...props}
         >
             <path d="M7.5 4.21l0 .01"></path>
