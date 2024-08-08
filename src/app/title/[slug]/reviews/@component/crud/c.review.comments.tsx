@@ -79,7 +79,9 @@ const CReviewComments = (props: any) => {
             </div>
             <div className="flex justify-end mt-6">
                 <Button
-                    className="flex gap-1 items-center bg-primary-color p-1.5"
+                    className={`flex gap-1 items-center bg-primary-color p-1.5 ${
+                        isSubmitting && "pointer-events-none"
+                    }`}
                     onClick={handleSubmit}
                     disabled={isSubmitting}
                 >
