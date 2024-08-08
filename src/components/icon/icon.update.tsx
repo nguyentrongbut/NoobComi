@@ -1,23 +1,24 @@
 import { ComponentProps } from "react";
 
-const IconStarBorder = (props: ComponentProps<"svg">) => {
+const IconUpdate = (props: ComponentProps<"svg">) => {
     return (
         <svg
-            data-v-85755a69=""
+            data-v-b8aef6c3=""
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth={2}
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
             {...props}
         >
-            <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+            <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+            <path d="M13.5 6.5l4 4"></path>
         </svg>
     );
 };
 
-export default IconStarBorder;
+export default IconUpdate;

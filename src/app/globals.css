@@ -173,4 +173,11 @@
     .scroll-bg::-webkit-scrollbar-thumb {
         background: transparent;
     }
+
+    .form-input:not(:placeholder-shown) + .form-label,
+    .form-input:focus + .form-label {
+        top: -12px;
+        font-size: 12px;
+        background-color: white;
+    }
 }

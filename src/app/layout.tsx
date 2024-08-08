@@ -5,6 +5,7 @@ import AppHeader from "@/components/header/app.header";
 import NavbarMobile from "@/components/header/navbar.mobile";
 import AppFooter from "@/components/footer/app.footer";
 import Scroll from "@/components/scroll/scroll";
+import { Toaster } from "@/components/ui/toaster";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -22,12 +23,13 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">    
+        <html lang="en">
             <Scroll />
             <body className={poppins.className}>
                 <AppHeader />
                 {children}
-                <NavbarMobile/>
+                <Toaster />
+                <NavbarMobile />
                 <AppFooter />
             </body>
         </html>
