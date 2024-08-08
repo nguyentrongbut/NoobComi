@@ -3,8 +3,8 @@ import IconStar from "@/components/icon/icon.star";
 import IconStarBorder from "@/components/icon/icon.star.border";
 import { useState } from "react";
 
-const Rating = () => {
-    const [rating, setRating] = useState<number | null>(null);
+const Rating = (props: any) => {
+    const { rating, setRating } = props;
     const [hover, setHover] = useState<number | null>(null);
 
     return (

@@ -51,6 +51,7 @@ declare global {
         content: string,
         rated: number,
         createdAt: number,
+        updateAt: number,
         author: {
             id: number,
             name: string,
