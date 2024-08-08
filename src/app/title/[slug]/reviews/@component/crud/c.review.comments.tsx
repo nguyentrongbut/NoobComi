@@ -1,5 +1,6 @@
 "use client";
 import Rating from "@/app/title/[slug]/reviews/@component/rating";
+import IconError from "@/components/icon/icon.error";
 import IconLoading from "@/components/icon/icon.loading";
 import IconSend from "@/components/icon/icon.send";
 import IconSuccess from "@/components/icon/icon.success";
@@ -16,10 +17,17 @@ const CReviewComments = (props: any) => {
 
     const handleSubmit = async () => {
         toast({
-            title: "Please wait...",
-            description: "Posting review",
-            icon: <IconLoading />,
+            title: "Error!",
+            description: "Please rating",
+            icon: <IconError className="text-red-600"/>,
         });
+        if(rating != null) {
+            toast({
+                title: "Please wait...",
+                description: "Posting review",
+                icon: <IconLoading />,
+            });
+        }
         if (rating != null && !hasReviewId) {
             const data = await sendRequest<IReviews>({
                 url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,

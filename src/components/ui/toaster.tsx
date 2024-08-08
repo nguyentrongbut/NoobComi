@@ -26,12 +26,12 @@ export function Toaster() {
                 return (
                     <Toast key={id} {...props}>
                         <div className="grid gap-1">
-                            <div className="flex gap-2">
+                            <div className="flex gap-2 items-center">
                                 {icon && <div>{icon}</div>}
                                 {title && <ToastTitle>{title}</ToastTitle>}
                             </div>
                             {description && (
-                                <ToastDescription className={icon && "ml-6"}>
+                                <ToastDescription className={icon ? "ml-7" : ""}>
                                     {description}
                                 </ToastDescription>
                             )}
