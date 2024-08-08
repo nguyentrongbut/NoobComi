@@ -33,28 +33,30 @@ const CReviewComments = (props: any) => {
                 icon: <IconLoading />,
             });
         }
-        if (rating != null && !hasReviewId) {
-            const data = await sendRequest<IReviews>({
-                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
-                method: "POST",
-                body: {
-                    comicId: id,
-                    authorId: currentIdUser,
-                    content: yourReviewComment,
-                    rated: rating,
-                },
-            });
-            if (data) {
-                fetchReviews();
-                toast({
-                    title: "Success!",
-                    description: "You have successfully reviewed",
-                    icon: <IconSuccess />,
+        setTimeout(async () => {
+            if (rating != null && !hasReviewId) {
+                const data = await sendRequest<IReviews>({
+                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
+                    method: "POST",
+                    body: {
+                        comicId: id,
+                        authorId: currentIdUser,
+                        content: yourReviewComment,
+                        rated: rating,
+                    },
                 });
-                setYourReviewComment("");
+                if (data) {
+                    fetchReviews();
+                    toast({
+                        title: "Success!",
+                        description: "You have successfully reviewed",
+                        icon: <IconSuccess />,
+                    });
+                    setYourReviewComment("");
+                }
             }
-        }
-        setIsSubmitting(false);
+            setIsSubmitting(false);
+        }, 1);
     };
 
     return (

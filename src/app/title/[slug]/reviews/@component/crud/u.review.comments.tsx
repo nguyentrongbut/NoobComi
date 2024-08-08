@@ -31,30 +31,32 @@ const UReviewComments = (props: any) => {
             description: "Updating review",
             icon: <IconLoading />,
         });
-        if (uRating != null) {
-            const data = await sendRequest<IReviews>({
-                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
-                method: "PATCH",
-                body: {
-                    comicId: id,
-                    authorId: currentIdUser,
-                    content: uReview,
-                    rated: uRating,
-                    updateAt: Date.now(),
-                },
-            });
-            if (data) {
-                setFormUpdate(false);
-                fetchReviews();
-                setHiddenReviewCurrent(true);
-                toast({
-                    title: "Success!",
-                    description: "Your review was successfully updated.",
-                    icon: <IconSuccess />,
+        setTimeout(async () => {
+            if (uRating != null) {
+                const data = await sendRequest<IReviews>({
+                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
+                    method: "PATCH",
+                    body: {
+                        comicId: id,
+                        authorId: currentIdUser,
+                        content: uReview,
+                        rated: uRating,
+                        updateAt: Date.now(),
+                    },
                 });
+                if (data) {
+                    setFormUpdate(false);
+                    fetchReviews();
+                    setHiddenReviewCurrent(true);
+                    toast({
+                        title: "Success!",
+                        description: "Your review was successfully updated.",
+                        icon: <IconSuccess />,
+                    });
+                }
             }
-        }
-        setIsSubmitting(false);
+            setIsSubmitting(false);
+        }, 1);
     };
 
     const handleCancel = () => {
