@@ -33,12 +33,12 @@ const DReviewComments = (props: any) => {
             method: "DELETE",
         });
         if (data) {
+            fetchReviews();
             toast({
                 title: "Success!",
                 description: "Your review was successfully deleted.",
                 icon: <IconSuccess />,
             });
-            fetchReviews();
         }
     };
 

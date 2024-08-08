@@ -40,12 +40,12 @@ const CReviewComments = (props: any) => {
                 },
             });
             if (data) {
+                fetchReviews();
                 toast({
                     title: "Success!",
                     description: "You have successfully reviewed",
                     icon: <IconSuccess />,
                 });
-                fetchReviews();
                 setYourReviewComment("");
             }
         }
