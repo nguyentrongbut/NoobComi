@@ -23,23 +23,23 @@ import IconLoading from "@/components/icon/icon.loading";
 const DReviewComments = (props: any) => {
     const { dId, fetchReviews } = props;
 
+    toast({
+        title: "Please wait...",
+        description: "Deleting review",
+        icon: <IconLoading />,
+    });
+
     const handleSubmit = async () => {
         const data = await sendRequest<IReviews>({
             url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${dId}`,
             method: "DELETE",
         });
-        if(!data) {
-            toast({
-                title: "Please wait...",
-                description: "Deleting review",
-                icon: <IconLoading/>
-            });
-        } else {
+        if (data) {
             fetchReviews();
             toast({
                 title: "Success!",
                 description: "Your review was successfully deleted.",
-                icon: <IconSuccess/>
+                icon: <IconSuccess />,
             });
         }
     };

@@ -24,6 +24,11 @@ const UReviewComments = (props: any) => {
     const [uReview, setUReview] = useState(currentReview);
 
     const handleSubmit = async () => {
+        toast({
+            title: "Please wait...",
+            description: "Updating review",
+            icon: <IconLoading />,
+        });
         if (uRating != null) {
             const data = await sendRequest<IReviews>({
                 url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
@@ -36,20 +41,14 @@ const UReviewComments = (props: any) => {
                     updateAt: Date.now(),
                 },
             });
-            if(!data) {
-                toast({
-                    title: "Please wait...",
-                    description: "Updating review",
-                    icon: <IconLoading/>
-                });
-            } else {
+            if (data) {
                 fetchReviews();
                 setHiddenReviewCurrent(true);
                 setFormUpdate(false);
                 toast({
                     title: "Success!",
                     description: "Your review was successfully updated.",
-                    icon: <IconSuccess/>
+                    icon: <IconSuccess />,
                 });
             }
         }
