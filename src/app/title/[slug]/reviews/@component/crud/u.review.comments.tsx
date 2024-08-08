@@ -40,6 +40,12 @@ const UReviewComments = (props: any) => {
             }
         }
     };
+
+    const handleCancel = () => {
+        setFormUpdate(false);
+        setHiddenReviewCurrent(true);
+    };
+
     return (
         <>
             <Rating rating={uRating} setRating={setURating}></Rating>
@@ -57,7 +63,13 @@ const UReviewComments = (props: any) => {
                     <div className="absolute left-0 bottom-0 w-full h-1/2 z-[1] bg-neutral-100"></div>
                 </label>
             </div>
-            <div className="flex justify-end mt-6">
+            <div className="flex justify-end mt-6 gap-2">
+                <Button
+                    className="bg-[rgb(229 229 229/1)] p-1 text-[rgb(64 64 64/1)] hover:bg-[rgb(212 212 212/1)]"
+                    onClick={handleCancel}
+                >
+                    Cancel
+                </Button>
                 <Button
                     className="flex gap-1 items-center bg-primary-color p-1.5"
                     onClick={handleSubmit}
