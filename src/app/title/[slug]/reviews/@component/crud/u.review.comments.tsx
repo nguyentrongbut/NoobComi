@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
+import { debounce } from "lodash";
 import { useState } from "react";
 
 const UReviewComments = (props: any) => {
@@ -42,17 +43,19 @@ const UReviewComments = (props: any) => {
                 },
             });
             if (data) {
+                setFormUpdate(false);
                 fetchReviews();
+                setHiddenReviewCurrent(true);
                 toast({
                     title: "Success!",
                     description: "Your review was successfully updated.",
                     icon: <IconSuccess />,
                 });
-                setHiddenReviewCurrent(true);
-                setFormUpdate(false);
             }
         }
     };
+
+    debounce(handleSubmit, 3000);
 
     const handleCancel = () => {
         setFormUpdate(false);

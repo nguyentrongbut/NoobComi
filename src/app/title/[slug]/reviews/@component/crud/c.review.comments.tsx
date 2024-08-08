@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
+import { debounce } from "lodash";
 import { useState } from "react";
 
 const CReviewComments = (props: any) => {
@@ -19,9 +20,9 @@ const CReviewComments = (props: any) => {
         toast({
             title: "Error!",
             description: "Please rating",
-            icon: <IconError className="text-red-600"/>,
+            icon: <IconError className="text-red-600" />,
         });
-        if(rating != null) {
+        if (rating != null) {
             toast({
                 title: "Please wait...",
                 description: "Posting review",
@@ -51,6 +52,7 @@ const CReviewComments = (props: any) => {
         }
     };
 
+    debounce(handleSubmit, 3000);
     return (
         <form
             onSubmit={(e) => e.preventDefault()}
