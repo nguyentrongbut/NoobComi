@@ -42,6 +42,7 @@ const UReviewComments = (props: any) => {
                 },
             });
             if (data) {
+                fetchReviews();
                 toast({
                     title: "Success!",
                     description: "Your review was successfully updated.",
@@ -49,7 +50,6 @@ const UReviewComments = (props: any) => {
                 });
                 setHiddenReviewCurrent(true);
                 setFormUpdate(false);
-                fetchReviews();
             }
         }
     };
