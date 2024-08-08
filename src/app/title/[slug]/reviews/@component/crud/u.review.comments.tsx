@@ -42,14 +42,14 @@ const UReviewComments = (props: any) => {
                 },
             });
             if (data) {
-                fetchReviews();
-                setHiddenReviewCurrent(true);
-                setFormUpdate(false);
                 toast({
                     title: "Success!",
                     description: "Your review was successfully updated.",
                     icon: <IconSuccess />,
                 });
+                setHiddenReviewCurrent(true);
+                setFormUpdate(false);
+                fetchReviews();
             }
         }
     };
