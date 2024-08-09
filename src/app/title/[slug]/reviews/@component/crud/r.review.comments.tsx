@@ -19,7 +19,12 @@ const RReviewComments = (props: any) => {
     const [reviews, setReviews] = useState<IReviews[]>([]);
     const [formUpdate, setFormUpdate] = useState(false);
     const [hiddenReviewCurrent, setHiddenReviewCurrent] = useState(true);
-
+    const hasReviewId = reviews.some((id) => id.author.id === currentIdUser);
+    const specialReview =
+        reviews.find((review) => review.authorId === currentIdUser) || null;
+    const otherReviews = reviews.filter(
+        (review) => review.authorId !== currentIdUser
+    );
     const fetchReviews = useCallback(async () => {
         const reviews = await sendRequest<IReviews[]>({
             url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews?comicId=${id}&_sort=id&_order=desc&_expand=author`,
@@ -34,14 +39,6 @@ const RReviewComments = (props: any) => {
     useEffect(() => {
         fetchReviews();
     }, [fetchReviews]);
-
-    const hasReviewId = reviews.some((id) => id.author.id === currentIdUser);
-
-    const specialReview =
-        reviews.find((review) => review.authorId === currentIdUser) || null;
-    const otherReviews = reviews.filter(
-        (review) => review.authorId !== currentIdUser
-    );
 
     return (
         <>
