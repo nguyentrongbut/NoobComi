@@ -1,4 +1,5 @@
 "use client";
+import React, { useRef, useState, useCallback } from "react";
 import Rating from "@/app/title/[slug]/reviews/@component/rating";
 import IconError from "@/components/icon/icon.error";
 import IconLoading from "@/components/icon/icon.loading";
@@ -8,69 +9,80 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
-import { useRef, useState } from "react";
 
-const CReviewComments = (props: any) => {
+const CReviewComments = React.memo((props: any) => {
     const { id, currentIdUser, fetchReviews, hasReviewId } = props;
     const [yourReviewComment, setYourReviewComment] = useState("");
     const [rating, setRating] = useState<number | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const isSubmittingRef = useRef(false);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = useCallback(
+        async (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
 
-        if (isSubmittingRef.current) return;
+            if (isSubmittingRef.current) return;
 
-        if (rating == null) {
-            toast({
-                title: "Error!",
-                description: "Please rating",
-                icon: <IconError className="text-red-600" />,
-            });
-        }
+            if (rating == null) {
+                toast({
+                    title: "Error!",
+                    description: "Please provide a rating",
+                    icon: <IconError className="text-red-600" />,
+                });
+                return;
+            }
 
-        setIsSubmitting(true);
-        if (rating != null) {
+            setIsSubmitting(true);
+            isSubmittingRef.current = true;
+
             toast({
                 title: "Please wait...",
                 description: "Posting review",
                 icon: <IconLoading />,
             });
-        }
 
-        if (rating != null && !hasReviewId) {
-            const data = await sendRequest<IReviews>({
-                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
-                method: "POST",
-                body: {
-                    comicId: id,
-                    authorId: currentIdUser,
-                    content: yourReviewComment,
-                    rated: rating,
-                },
-            });
-            if (data) {
-                await fetchReviews();
-                
-                setYourReviewComment("");
+            if (rating != null && !hasReviewId) {
+                const data = await sendRequest<IReviews>({
+                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
+                    method: "POST",
+                    body: {
+                        comicId: id,
+                        authorId: currentIdUser,
+                        content: yourReviewComment,
+                        rated: rating,
+                    },
+                });
+
+                if (data) {
+                    await fetchReviews();
+                    setYourReviewComment("");
+                    toast({
+                        title: "Success!",
+                        description: "You have successfully reviewed",
+                        icon: <IconSuccess />,
+                    });
+                }
             }
-        }
-        setIsSubmitting(false);
-        toast({
-            title: "Success!",
-            description: "You have successfully reviewed",
-            icon: <IconSuccess />,
-        });
-        isSubmittingRef.current = false;
-    };
-    
+
+            setIsSubmitting(false);
+            isSubmittingRef.current = false;
+        },
+        [
+            id,
+            currentIdUser,
+            fetchReviews,
+            hasReviewId,
+            rating,
+            yourReviewComment,
+        ]
+    );
+
     return (
-        <form onSubmit={handleSubmit} className={hasReviewId && "hidden"}>
+        <form onSubmit={handleSubmit} className={hasReviewId ? "hidden" : ""}>
             <Rating rating={rating} setRating={setRating}></Rating>
             <div className="relative">
                 <Textarea
-                    className="form-input min-h-[7rem] mt-5 bg-neutral-100 border border-[#a3a3a3] transition-all  focus:border-[var(--primary-color)] focus:outline-none p-3"
+                    className="form-input min-h-[7rem] mt-5 bg-neutral-100 border border-[#a3a3a3] transition-all focus:border-[var(--primary-color)] focus:outline-none p-3"
                     value={yourReviewComment}
                     onChange={(e) => setYourReviewComment(e.target.value)}
                     placeholder=" "
@@ -90,7 +102,7 @@ const CReviewComments = (props: any) => {
                     disabled={isSubmitting}
                     type="submit"
                 >
-                    {isSubmitting && rating !== null ? (
+                    {isSubmitting ? (
                         <IconLoading className="animate-spin" />
                     ) : (
                         <IconSend />
@@ -100,6 +112,7 @@ const CReviewComments = (props: any) => {
             </div>
         </form>
     );
-};
+});
 
+CReviewComments.displayName = "CReviewComments";
 export default CReviewComments;
