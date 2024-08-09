@@ -16,7 +16,8 @@ const CReviewComments = (props: any) => {
     const [rating, setRating] = useState<number | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         if (rating == null) {
             toast({
                 title: "Error!",
@@ -33,35 +34,34 @@ const CReviewComments = (props: any) => {
                 icon: <IconLoading />,
             });
         }
-        setTimeout(async () => {
-            if (rating != null && !hasReviewId) {
-                const data = await sendRequest<IReviews>({
-                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
-                    method: "POST",
-                    body: {
-                        comicId: id,
-                        authorId: currentIdUser,
-                        content: yourReviewComment,
-                        rated: rating,
-                    },
+
+        if (rating != null && !hasReviewId) {
+            const data = await sendRequest<IReviews>({
+                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
+                method: "POST",
+                body: {
+                    comicId: id,
+                    authorId: currentIdUser,
+                    content: yourReviewComment,
+                    rated: rating,
+                },
+            });
+            if (data) {
+                fetchReviews();
+                toast({
+                    title: "Success!",
+                    description: "You have successfully reviewed",
+                    icon: <IconSuccess />,
                 });
-                if (data) {
-                    fetchReviews();
-                    toast({
-                        title: "Success!",
-                        description: "You have successfully reviewed",
-                        icon: <IconSuccess />,
-                    });
-                    setYourReviewComment("");
-                }
+                setYourReviewComment("");
             }
-            setIsSubmitting(false);
-        }, 1);
+        }
+        setIsSubmitting(false);
     };
 
     return (
         <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
             className={hasReviewId && "hidden"}
         >
             <Rating rating={rating} setRating={setRating}></Rating>
@@ -82,12 +82,12 @@ const CReviewComments = (props: any) => {
             <div className="flex justify-end mt-6">
                 <Button
                     className={`flex gap-1 items-center bg-primary-color p-1.5 ${
-                        isSubmitting && "pointer-events-none"
+                        isSubmitting ? "pointer-events-none" : ""
                     }`}
-                    onClick={handleSubmit}
                     disabled={isSubmitting}
+                    type="submit"
                 >
-                    {isSubmitting ? (
+                    {isSubmitting && rating !== null ? (
                         <IconLoading className="animate-spin" />
                     ) : (
                         <IconSend />

@@ -51,23 +51,21 @@ const RReviewComments = (props: any) => {
                 fetchReviews={fetchReviews}
                 hasReviewId={hasReviewId}
             ></CReviewComments>
-            <form
-                onSubmit={(e) => e.preventDefault()}
-                className={formUpdate ? "" : "hidden"}
-            >
-                {specialReview && (
-                    <UReviewComments
-                        uId={specialReview?.id}
-                        currentIdUser={currentIdUser}
-                        id={id}
-                        fetchReviews={fetchReviews}
-                        setHiddenReviewCurrent={setHiddenReviewCurrent}
-                        setFormUpdate={setFormUpdate}
-                        currentRating={specialReview?.rated}
-                        currentReview={specialReview?.content}
-                    ></UReviewComments>
-                )}
-            </form>
+
+            {specialReview && (
+                <UReviewComments
+                    uId={specialReview?.id}
+                    currentIdUser={currentIdUser}
+                    id={id}
+                    fetchReviews={fetchReviews}
+                    setHiddenReviewCurrent={setHiddenReviewCurrent}
+                    formUpdate={formUpdate}
+                    setFormUpdate={setFormUpdate}
+                    currentRating={specialReview?.rated}
+                    currentReview={specialReview?.content}
+                ></UReviewComments>
+            )}
+
             <Separator
                 className={`mt-4 bg-neutral-300 ${currentIdUser && "hidden"}`}
             ></Separator>
