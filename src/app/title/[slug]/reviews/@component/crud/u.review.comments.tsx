@@ -108,6 +108,7 @@ const UReviewComments = React.memo((props: any) => {
                 <Button
                     className="bg-[rgb(229 229 229/1)] p-1 text-[rgb(64 64 64/1)] hover:bg-[rgb(212 212 212/1)]"
                     onClick={handleCancel}
+                    type="button"
                 >
                     Cancel
                 </Button>

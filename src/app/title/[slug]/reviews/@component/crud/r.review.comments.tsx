@@ -148,7 +148,7 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                                 <Separator className="mt-4 bg-neutral-300" />
                                 {reviews.length === 1 && (
                                     <p className="mt-4">
-                                        You're the only reviewer!
+                                        You&apos;re the only reviewer!
                                     </p>
                                 )}
                             </li>
