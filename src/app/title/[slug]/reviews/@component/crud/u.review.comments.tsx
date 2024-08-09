@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const UReviewComments = (props: any) => {
     const {
@@ -25,6 +25,7 @@ const UReviewComments = (props: any) => {
     const [uReview, setUReview] = useState(currentReview);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isCancel, setIsCancel] = useState(true);
+    const isSubmittingRef = useRef(false);
 
     const handleCancel = () => {
         setFormUpdate(false);
@@ -34,6 +35,9 @@ const UReviewComments = (props: any) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        
+        if (isSubmittingRef.current) return;
+
         setIsCancel(false);
         setIsSubmitting(true);
         if (!isCancel) {
@@ -57,7 +61,7 @@ const UReviewComments = (props: any) => {
             });
             if (data && !isCancel) {
                 setFormUpdate(false);
-                fetchReviews();
+                await fetchReviews();
                 setHiddenReviewCurrent(true);
                 toast({
                     title: "Success!",
@@ -67,6 +71,7 @@ const UReviewComments = (props: any) => {
             }
         }
         setIsSubmitting(false);
+        isSubmittingRef.current = false;
     };
 
     return (
