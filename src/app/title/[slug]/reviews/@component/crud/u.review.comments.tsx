@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const UReviewComments = (props: any) => {
     const {
@@ -25,6 +25,7 @@ const UReviewComments = (props: any) => {
     const [uReview, setUReview] = useState(currentReview);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isCancel, setIsCancel] = useState(true);
+    const isSubmittingRef = useRef(false);
 
     const handleCancel = () => {
         setFormUpdate(false);
@@ -34,6 +35,9 @@ const UReviewComments = (props: any) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        
+        if (isSubmittingRef.current) return;
+
         setIsCancel(false);
         setIsSubmitting(true);
         if (!isCancel) {
@@ -43,33 +47,31 @@ const UReviewComments = (props: any) => {
                 icon: <IconLoading />,
             });
         }
-        try {
-            if (uRating != null) {
-                const data = await sendRequest<IReviews>({
-                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
-                    method: "PATCH",
-                    body: {
-                        comicId: id,
-                        authorId: currentIdUser,
-                        content: uReview,
-                        rated: uRating,
-                        updateAt: Date.now(),
-                    },
+        if (uRating != null) {
+            const data = await sendRequest<IReviews>({
+                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
+                method: "PATCH",
+                body: {
+                    comicId: id,
+                    authorId: currentIdUser,
+                    content: uReview,
+                    rated: uRating,
+                    updateAt: Date.now(),
+                },
+            });
+            if (data && !isCancel) {
+                setFormUpdate(false);
+                fetchReviews();
+                setHiddenReviewCurrent(true);
+                toast({
+                    title: "Success!",
+                    description: "Your review was successfully updated.",
+                    icon: <IconSuccess />,
                 });
-                if (data && !isCancel) {
-                    setFormUpdate(false);
-                    fetchReviews();
-                    setHiddenReviewCurrent(true);
-                    toast({
-                        title: "Success!",
-                        description: "Your review was successfully updated.",
-                        icon: <IconSuccess />,
-                    });
-                }
             }
-        } finally {
-            setIsSubmitting(false);
         }
+        setIsSubmitting(false);
+        isSubmittingRef.current = false;
     };
 
     return (

@@ -35,33 +35,30 @@ const CReviewComments = (props: any) => {
             });
         }
 
-        try {
-            if (rating != null && !hasReviewId) {
-                const data = await sendRequest<IReviews>({
-                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
-                    method: "POST",
-                    body: {
-                        comicId: id,
-                        authorId: currentIdUser,
-                        content: yourReviewComment,
-                        rated: rating,
-                    },
+        if (rating != null && !hasReviewId) {
+            const data = await sendRequest<IReviews>({
+                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
+                method: "POST",
+                body: {
+                    comicId: id,
+                    authorId: currentIdUser,
+                    content: yourReviewComment,
+                    rated: rating,
+                },
+            });
+            if (data) {
+                fetchReviews();
+                toast({
+                    title: "Success!",
+                    description: "You have successfully reviewed",
+                    icon: <IconSuccess />,
                 });
-                if (data) {
-                    fetchReviews();
-                    toast({
-                        title: "Success!",
-                        description: "You have successfully reviewed",
-                        icon: <IconSuccess />,
-                    });
-                    setYourReviewComment("");
-                }
+                setYourReviewComment("");
             }
-        } finally {
-            setIsSubmitting(false);
         }
+        setIsSubmitting(false);
     };
-
+    
     return (
         <form onSubmit={handleSubmit} className={hasReviewId && "hidden"}>
             <Rating rating={rating} setRating={setRating}></Rating>
