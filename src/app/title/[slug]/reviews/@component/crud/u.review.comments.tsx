@@ -19,53 +19,58 @@ const UReviewComments = (props: any) => {
         setFormUpdate,
         currentRating,
         currentReview,
+        formUpdate,
     } = props;
     const [uRating, setURating] = useState(currentRating);
     const [uReview, setUReview] = useState(currentReview);
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleSubmit = async () => {
-        setIsSubmitting(true);
-        toast({
-            title: "Please wait...",
-            description: "Updating review",
-            icon: <IconLoading />,
-        });
-        setTimeout(async () => {
-            if (uRating != null) {
-                const data = await sendRequest<IReviews>({
-                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
-                    method: "PATCH",
-                    body: {
-                        comicId: id,
-                        authorId: currentIdUser,
-                        content: uReview,
-                        rated: uRating,
-                        updateAt: Date.now(),
-                    },
-                });
-                if (data) {
-                    setFormUpdate(false);
-                    fetchReviews();
-                    setHiddenReviewCurrent(true);
-                    toast({
-                        title: "Success!",
-                        description: "Your review was successfully updated.",
-                        icon: <IconSuccess />,
-                    });
-                }
-            }
-            setIsSubmitting(false);
-        }, 1);
-    };
+    const [isCancel, setIsCancel] = useState(true);
 
     const handleCancel = () => {
         setFormUpdate(false);
         setHiddenReviewCurrent(true);
+        setIsCancel(true);
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsCancel(false);
+        setIsSubmitting(true);
+        if (!isCancel) {
+            toast({
+                title: "Please wait...",
+                description: "Updating review",
+                icon: <IconLoading />,
+            });
+        }
+        if (uRating != null) {
+            const data = await sendRequest<IReviews>({
+                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
+                method: "PATCH",
+                body: {
+                    comicId: id,
+                    authorId: currentIdUser,
+                    content: uReview,
+                    rated: uRating,
+                    updateAt: Date.now(),
+                },
+            });
+            if (data && !isCancel) {
+                setFormUpdate(false);
+                fetchReviews();
+                setHiddenReviewCurrent(true);
+                toast({
+                    title: "Success!",
+                    description: "Your review was successfully updated.",
+                    icon: <IconSuccess />,
+                });
+            }
+        }
+        setIsSubmitting(false);
     };
 
     return (
-        <>
+        <form onSubmit={handleSubmit} className={formUpdate ? "" : "hidden"}>
             <Rating rating={uRating} setRating={setURating}></Rating>
             <div className="relative">
                 <Textarea
@@ -89,13 +94,12 @@ const UReviewComments = (props: any) => {
                     Cancel
                 </Button>
                 <Button
-                    className={`flex gap-1 items-center bg-primary-color p-1.5 ${
-                        isSubmitting && "pointer-events-none"
-                    }`}
-                    onClick={handleSubmit}
+                    className={`flex gap-1 items-center bg-primary-color p-1.5
+                    } ${isSubmitting ? "pointer-events-none" : ""}`}
                     disabled={isSubmitting}
+                    type="submit"
                 >
-                    {isSubmitting ? (
+                    {isSubmitting && uRating !== null ? (
                         <IconLoading className="animate-spin" />
                     ) : (
                         <IconSend />
@@ -103,7 +107,7 @@ const UReviewComments = (props: any) => {
                     <span>{isSubmitting ? "Submitting..." : "Submit"}</span>
                 </Button>
             </div>
-        </>
+        </form>
     );
 };
 
