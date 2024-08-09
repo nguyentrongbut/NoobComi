@@ -81,7 +81,7 @@ const UReviewComments = (props: any) => {
                 ></Textarea>
                 <label className="form-label absolute left-2 text-neutral-700 text-base pointer-events-none select-none top-3 px-1 transition-all">
                     <span className="relative z-[2] overflow-hidden whitespace-nowrap">
-                        Write a review
+                        Write a review update
                     </span>
                     <div className="absolute left-0 bottom-0 w-full h-1/2 z-[1] bg-neutral-100"></div>
                 </label>
