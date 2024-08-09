@@ -1,18 +1,19 @@
+import React, { useCallback } from "react";
 import IconUpdate from "@/components/icon/icon.update";
 
-const BtnUReview = (props: any) => {
-    const { setFormUpdate, setHiddenReviewCurrent } = props;
+const BtnUReview = React.memo(
+    ({ setFormUpdate, setHiddenReviewCurrent }: any) => {
+        const handleClick = useCallback(() => {
+            setFormUpdate(true);
+            setHiddenReviewCurrent(false);
+        }, [setFormUpdate, setHiddenReviewCurrent]);
 
-    const handleClick = () => {
-        setFormUpdate(true);
-        setHiddenReviewCurrent(false);
-    };
-
-    return (
-        <span className="p-1 cursor-pointer" onClick={handleClick}>
-            <IconUpdate className="size-5"></IconUpdate>
-        </span>
-    );
-};
+        return (
+            <span className="p-1 cursor-pointer" onClick={handleClick}>
+                <IconUpdate className="size-5" />
+            </span>
+        );
+    }
+);
 
 export default BtnUReview;

@@ -1,4 +1,5 @@
 "use client";
+import React, { useRef, useState, useCallback } from "react";
 import Rating from "@/app/title/[slug]/reviews/@component/rating";
 import IconLoading from "@/components/icon/icon.loading";
 import IconSend from "@/components/icon/icon.send";
@@ -7,9 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
-import { useRef, useState } from "react";
 
-const UReviewComments = (props: any) => {
+const UReviewComments = React.memo((props: any) => {
     const {
         uId,
         currentIdUser,
@@ -21,58 +21,71 @@ const UReviewComments = (props: any) => {
         currentReview,
         formUpdate,
     } = props;
+
     const [uRating, setURating] = useState(currentRating);
     const [uReview, setUReview] = useState(currentReview);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isCancel, setIsCancel] = useState(true);
     const isSubmittingRef = useRef(false);
 
-    const handleCancel = () => {
+    const handleCancel = useCallback(() => {
         setFormUpdate(false);
         setHiddenReviewCurrent(true);
-        setIsCancel(true);
-    };
+    }, [setFormUpdate, setHiddenReviewCurrent]);
 
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        
-        if (isSubmittingRef.current) return;
+    const handleSubmit = useCallback(
+        async (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
 
-        setIsCancel(false);
-        setIsSubmitting(true);
-        if (!isCancel) {
+            if (isSubmittingRef.current) return;
+
+            setIsSubmitting(true);
+            isSubmittingRef.current = true;
+
             toast({
                 title: "Please wait...",
                 description: "Updating review",
                 icon: <IconLoading />,
             });
-        }
-        if (uRating != null) {
-            const data = await sendRequest<IReviews>({
-                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
-                method: "PATCH",
-                body: {
-                    comicId: id,
-                    authorId: currentIdUser,
-                    content: uReview,
-                    rated: uRating,
-                    updateAt: Date.now(),
-                },
-            });
-            if (data && !isCancel) {
-                setFormUpdate(false);
-                await fetchReviews();
-                setHiddenReviewCurrent(true);
-                toast({
-                    title: "Success!",
-                    description: "Your review was successfully updated.",
-                    icon: <IconSuccess />,
+
+            if (uRating != null) {
+                const data = await sendRequest<IReviews>({
+                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
+                    method: "PATCH",
+                    body: {
+                        comicId: id,
+                        authorId: currentIdUser,
+                        content: uReview,
+                        rated: uRating,
+                        updateAt: Date.now(),
+                    },
                 });
+
+                if (data) {
+                    await fetchReviews();
+                    setFormUpdate(false);
+                    setHiddenReviewCurrent(true);
+                    toast({
+                        title: "Success!",
+                        description: "Your review was successfully updated.",
+                        icon: <IconSuccess />,
+                    });
+                }
             }
-        }
-        setIsSubmitting(false);
-        isSubmittingRef.current = false;
-    };
+
+            setIsSubmitting(false);
+            isSubmittingRef.current = false;
+        },
+        [
+            uId,
+            currentIdUser,
+            id,
+            uRating,
+            uReview,
+            fetchReviews,
+            setFormUpdate,
+            setHiddenReviewCurrent,
+        ]
+    );
 
     return (
         <form onSubmit={handleSubmit} className={formUpdate ? "" : "hidden"}>
@@ -99,12 +112,13 @@ const UReviewComments = (props: any) => {
                     Cancel
                 </Button>
                 <Button
-                    className={`flex gap-1 items-center bg-primary-color p-1.5
-                    } ${isSubmitting ? "pointer-events-none" : ""}`}
+                    className={`flex gap-1 items-center bg-primary-color p-1.5 ${
+                        isSubmitting ? "pointer-events-none" : ""
+                    }`}
                     disabled={isSubmitting}
                     type="submit"
                 >
-                    {isSubmitting && uRating !== null ? (
+                    {isSubmitting ? (
                         <IconLoading className="animate-spin" />
                     ) : (
                         <IconSend />
@@ -114,6 +128,6 @@ const UReviewComments = (props: any) => {
             </div>
         </form>
     );
-};
+});
 
 export default UReviewComments;
