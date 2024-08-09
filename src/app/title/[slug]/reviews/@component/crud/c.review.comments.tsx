@@ -16,8 +16,8 @@ const CReviewComments = (props: any) => {
     const [rating, setRating] = useState<number | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         if (rating == null) {
             toast({
                 title: "Error!",
@@ -35,35 +35,35 @@ const CReviewComments = (props: any) => {
             });
         }
 
-        if (rating != null && !hasReviewId) {
-            const data = await sendRequest<IReviews>({
-                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
-                method: "POST",
-                body: {
-                    comicId: id,
-                    authorId: currentIdUser,
-                    content: yourReviewComment,
-                    rated: rating,
-                },
-            });
-            if (data) {
-                fetchReviews();
-                toast({
-                    title: "Success!",
-                    description: "You have successfully reviewed",
-                    icon: <IconSuccess />,
+        try {
+            if (rating != null && !hasReviewId) {
+                const data = await sendRequest<IReviews>({
+                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
+                    method: "POST",
+                    body: {
+                        comicId: id,
+                        authorId: currentIdUser,
+                        content: yourReviewComment,
+                        rated: rating,
+                    },
                 });
-                setYourReviewComment("");
+                if (data) {
+                    fetchReviews();
+                    toast({
+                        title: "Success!",
+                        description: "You have successfully reviewed",
+                        icon: <IconSuccess />,
+                    });
+                    setYourReviewComment("");
+                }
             }
+        } finally {
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     return (
-        <form
-            onSubmit={handleSubmit}
-            className={hasReviewId && "hidden"}
-        >
+        <form onSubmit={handleSubmit} className={hasReviewId && "hidden"}>
             <Rating rating={rating} setRating={setRating}></Rating>
             <div className="relative">
                 <Textarea

@@ -43,30 +43,33 @@ const UReviewComments = (props: any) => {
                 icon: <IconLoading />,
             });
         }
-        if (uRating != null) {
-            const data = await sendRequest<IReviews>({
-                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
-                method: "PATCH",
-                body: {
-                    comicId: id,
-                    authorId: currentIdUser,
-                    content: uReview,
-                    rated: uRating,
-                    updateAt: Date.now(),
-                },
-            });
-            if (data && !isCancel) {
-                setFormUpdate(false);
-                fetchReviews();
-                setHiddenReviewCurrent(true);
-                toast({
-                    title: "Success!",
-                    description: "Your review was successfully updated.",
-                    icon: <IconSuccess />,
+        try {
+            if (uRating != null) {
+                const data = await sendRequest<IReviews>({
+                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
+                    method: "PATCH",
+                    body: {
+                        comicId: id,
+                        authorId: currentIdUser,
+                        content: uReview,
+                        rated: uRating,
+                        updateAt: Date.now(),
+                    },
                 });
+                if (data && !isCancel) {
+                    setFormUpdate(false);
+                    fetchReviews();
+                    setHiddenReviewCurrent(true);
+                    toast({
+                        title: "Success!",
+                        description: "Your review was successfully updated.",
+                        icon: <IconSuccess />,
+                    });
+                }
             }
+        } finally {
+            setIsSubmitting(false);
         }
-        setIsSubmitting(false);
     };
 
     return (
@@ -81,7 +84,7 @@ const UReviewComments = (props: any) => {
                 ></Textarea>
                 <label className="form-label absolute left-2 text-neutral-700 text-base pointer-events-none select-none top-3 px-1 transition-all">
                     <span className="relative z-[2] overflow-hidden whitespace-nowrap">
-                        Write a review update
+                        Write a review
                     </span>
                     <div className="absolute left-0 bottom-0 w-full h-1/2 z-[1] bg-neutral-100"></div>
                 </label>
