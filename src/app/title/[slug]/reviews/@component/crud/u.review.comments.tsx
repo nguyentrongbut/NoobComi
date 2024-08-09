@@ -61,7 +61,7 @@ const UReviewComments = (props: any) => {
             });
             if (data && !isCancel) {
                 setFormUpdate(false);
-                fetchReviews();
+                await fetchReviews();
                 setHiddenReviewCurrent(true);
                 toast({
                     title: "Success!",
