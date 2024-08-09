@@ -17,55 +17,65 @@ const CReviewComments = React.memo((props: any) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const isSubmittingRef = useRef(false);
 
-    const handleSubmit = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const handleSubmit = useCallback(
+        async (e: React.FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
 
-        if (isSubmittingRef.current) return;
+            if (isSubmittingRef.current) return;
 
-        if (rating == null) {
-            toast({
-                title: "Error!",
-                description: "Please provide a rating",
-                icon: <IconError className="text-red-600" />,
-            });
-            return; 
-        }
-
-        setIsSubmitting(true);
-        isSubmittingRef.current = true;
-
-        toast({
-            title: "Please wait...",
-            description: "Posting review",
-            icon: <IconLoading />,
-        });
-
-        if (rating != null && !hasReviewId) {
-            const data = await sendRequest<IReviews>({
-                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
-                method: "POST",
-                body: {
-                    comicId: id,
-                    authorId: currentIdUser,
-                    content: yourReviewComment,
-                    rated: rating,
-                },
-            });
-
-            if (data) {
-                await fetchReviews();
-                setYourReviewComment(""); 
+            if (rating == null) {
                 toast({
-                    title: "Success!",
-                    description: "You have successfully reviewed",
-                    icon: <IconSuccess />,
+                    title: "Error!",
+                    description: "Please provide a rating",
+                    icon: <IconError className="text-red-600" />,
                 });
+                return;
             }
-        }
 
-        setIsSubmitting(false);
-        isSubmittingRef.current = false;
-    }, [id, currentIdUser, fetchReviews, hasReviewId, rating, yourReviewComment]);
+            setIsSubmitting(true);
+            isSubmittingRef.current = true;
+
+            toast({
+                title: "Please wait...",
+                description: "Posting review",
+                icon: <IconLoading />,
+            });
+
+            if (rating != null && !hasReviewId) {
+                const data = await sendRequest<IReviews>({
+                    url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
+                    method: "POST",
+                    body: {
+                        comicId: id,
+                        authorId: currentIdUser,
+                        content: yourReviewComment,
+                        rated: rating,
+                    },
+                });
+
+                if (data) {
+                    await fetchReviews();
+                    setYourReviewComment("");
+                    toast({
+                        title: "Success!",
+                        description: "You have successfully reviewed",
+                        icon: <IconSuccess />,
+                    });
+                }
+            }
+
+            setIsSubmitting(false);
+            isSubmittingRef.current = false;
+        },
+        [
+            id,
+            currentIdUser,
+            fetchReviews,
+            hasReviewId,
+            rating,
+            yourReviewComment,
+        ]
+    );
 
     return (
         <form onSubmit={handleSubmit} className={hasReviewId ? "hidden" : ""}>
@@ -86,11 +96,17 @@ const CReviewComments = React.memo((props: any) => {
             </div>
             <div className="flex justify-end mt-6">
                 <Button
-                    className={`flex gap-1 items-center bg-primary-color p-1.5 ${isSubmitting ? "pointer-events-none" : ""}`}
+                    className={`flex gap-1 items-center bg-primary-color p-1.5 ${
+                        isSubmitting ? "pointer-events-none" : ""
+                    }`}
                     disabled={isSubmitting}
                     type="submit"
                 >
-                    {isSubmitting ? <IconLoading className="animate-spin" /> : <IconSend />}
+                    {isSubmitting ? (
+                        <IconLoading className="animate-spin" />
+                    ) : (
+                        <IconSend />
+                    )}
                     <span>{isSubmitting ? "Submitting..." : "Submit"}</span>
                 </Button>
             </div>
@@ -98,4 +114,5 @@ const CReviewComments = React.memo((props: any) => {
     );
 });
 
+CReviewComments.displayName = "CReviewComments";
 export default CReviewComments;

@@ -131,4 +131,5 @@ const UReviewComments = React.memo((props: any) => {
     );
 });
 
+UReviewComments.displayName = "UReviewComments";
 export default UReviewComments;

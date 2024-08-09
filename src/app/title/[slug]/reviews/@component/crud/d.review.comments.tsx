@@ -80,4 +80,5 @@ const DReviewComments = React.memo((props: any) => {
     );
 });
 
+DReviewComments.displayName = "DReviewComments";
 export default DReviewComments;

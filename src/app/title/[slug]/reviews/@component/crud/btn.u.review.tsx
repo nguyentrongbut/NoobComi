@@ -16,4 +16,5 @@ const BtnUReview = React.memo(
     }
 );
 
+BtnUReview.displayName = "BtnUReview";
 export default BtnUReview;

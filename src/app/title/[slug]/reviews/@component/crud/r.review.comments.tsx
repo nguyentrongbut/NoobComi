@@ -194,4 +194,5 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
     );
 });
 
+RReviewComments.displayName = "RReviewComments";
 export default RReviewComments;
