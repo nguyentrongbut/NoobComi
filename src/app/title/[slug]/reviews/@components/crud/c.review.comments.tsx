@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState, useCallback } from "react";
-import Rating from "@/app/title/[slug]/reviews/@component/rating";
+import Rating from "@/app/title/[slug]/reviews/@components/rating";
 import IconError from "@/components/icon/icon.error";
 import IconLoading from "@/components/icon/icon.loading";
 import IconSend from "@/components/icon/icon.send";

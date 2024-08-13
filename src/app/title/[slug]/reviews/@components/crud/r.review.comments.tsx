@@ -2,15 +2,15 @@
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import RatingReadOnly from "@/app/title/[slug]/reviews/@component/rating.read.only";
-import CReviewComments from "@/app/title/[slug]/reviews/@component/crud/c.review.comments";
-import UReviewComments from "@/app/title/[slug]/reviews/@component/crud/u.review.comments";
-import DReviewComments from "@/app/title/[slug]/reviews/@component/crud/d.review.comments";
+import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
+import CReviewComments from "@/app/title/[slug]/reviews/@components/crud/c.review.comments";
+import UReviewComments from "@/app/title/[slug]/reviews/@components/crud/u.review.comments";
+import DReviewComments from "@/app/title/[slug]/reviews/@components/crud/d.review.comments";
 import { sendRequest } from "@/utils/api";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import BtnUReview from "@/app/title/[slug]/reviews/@component/crud/btn.u.review";
+import BtnUReview from "@/app/title/[slug]/reviews/@components/crud/btn.u.review";
 
 dayjs.extend(relativeTime);
 
@@ -21,7 +21,7 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
 
     const fetchReviews = useCallback(async () => {
         const reviews = await sendRequest<IReviews[]>({
-            url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews?comicId=${id}&_sort=id&_order=desc&_expand=author`,
+            url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews?comicId=${id}&_sort=updatedAt&_order=desc&_expand=author`,
             method: "GET",
             nextOption: {
                 cache: "no-store",
@@ -125,7 +125,7 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                                                 />
                                                 <div className="text-neutral-500 whitespace-nowrap text-sm ml-2 mt-0.5">
                                                     {dayjs(
-                                                        specialReview.updateAt
+                                                        specialReview.updatedAt
                                                     ).fromNow()}
                                                 </div>
                                             </div>
@@ -178,7 +178,7 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                                     <div className="flex -ml-0.5">
                                         <RatingReadOnly stars={review.rated} />
                                         <div className="text-neutral-500 whitespace-nowrap text-sm mt-0.5 ml-2">
-                                            {dayjs(review.updateAt).fromNow()}
+                                            {dayjs(review.updatedAt).fromNow()}
                                         </div>
                                     </div>
                                     <p>{review.content}</p>
@@ -187,7 +187,10 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                         ))}
                     </ul>
                 ) : (
-                    <div className="mt-4">No Reviews</div>
+                    <>
+                        <Separator className="mt-4 bg-neutral-300" />
+                        <div className="mt-4">No Reviews</div>
+                    </>
                 )}
             </section>
         </>
