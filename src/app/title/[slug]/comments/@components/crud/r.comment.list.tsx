@@ -81,12 +81,15 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                         <p className="mt-1 mb-2">
                                             {comment?.message}
                                         </p>
-                                        <div className="flex items-center text-neutral-700 text-xs sm:text-sm font-medium">
+                                        <div className="flex items-center text-neutral-700 text-xs sm:text-sm font-medium gap-2">
                                             <div className="p-[5px] cursor-pointer flex items-center gap-1 hover:bg-neutral-100 rounded-md">
                                                 <IconHeart className="size-5"></IconHeart>
                                                 <span>React</span>
                                             </div>
                                             <CCommentIcon></CCommentIcon>
+                                            <div className="cursor-pointer p-1 rounded-full hover:bg-neutral-100 ">
+                                                <IconDot></IconDot>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -115,9 +118,6 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                     } overflow-hidden transition-max-h`}
                                 />
                             </div>
-                        </div>
-                        <div className="mt-4 cursor-pointer ml-auto p-1 rounded-full hover:bg-neutral-100 mb-auto">
-                            <IconDot></IconDot>
                         </div>
                     </div>
                 );
