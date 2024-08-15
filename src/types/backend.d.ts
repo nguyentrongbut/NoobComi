@@ -81,5 +81,14 @@ declare global {
     interface RCommentListProps {
         comments: CommentType[];
         parentId?: number | null;
+        className?: sting
+    }
+
+    interface IUser {
+        id: number,
+        name: string,
+        country: string,
+        avatar: string,
+        banner: string
     }
 }

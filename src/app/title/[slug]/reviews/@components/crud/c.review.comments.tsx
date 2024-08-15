@@ -82,7 +82,7 @@ const CReviewComments = React.memo((props: any) => {
             <Rating rating={rating} setRating={setRating}></Rating>
             <div className="relative">
                 <Textarea
-                    className="form-input min-h-[7rem] mt-5 bg-neutral-100 border border-[#a3a3a3] transition-all focus:border-[var(--primary-color)] focus:outline-none p-3"
+                    className="form-input min-h-[7rem] mt-5 bg-neutral-100 border border-[#a3a3a3] focus:border-[var(--primary-color)] focus:outline-none p-3"
                     value={yourReviewComment}
                     onChange={(e) => setYourReviewComment(e.target.value)}
                     placeholder=" "

@@ -9,7 +9,7 @@ const CommentsTab = (props: any) => {
     const currentIdUser = 9;
     return (
         <TabContent>
-            <RComment id={id}></RComment>
+            <RComment id={id} currentIdUser={currentIdUser}></RComment>
         </TabContent>
     );
 };
