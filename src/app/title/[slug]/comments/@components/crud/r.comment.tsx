@@ -24,12 +24,18 @@ const RComment = ({ id, currentIdUser }: any) => {
 
     return (
         <>
-        <CComment id={id} currentIdUser={currentIdUser} fetchComments={fetchComments}></CComment>
-        {comments.length >= 1 ? (
-        <RCommentList comments={comments} />
-    ) : (
-        <div className="my-6 text-center text-neutral-700">No Comments</div>
-    )}
+            <CComment
+                id={id}
+                currentIdUser={currentIdUser}
+                fetchComments={fetchComments}
+            ></CComment>
+            {comments.length >= 1 ? (
+                <RCommentList comments={comments} />
+            ) : (
+                <div className="my-6 text-center text-neutral-700">
+                    No Comments
+                </div>
+            )}
         </>
     );
 };

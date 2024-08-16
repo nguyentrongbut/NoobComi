@@ -8,6 +8,8 @@ import IconComments from "@/components/icon/icon.comments";
 import { useState } from "react";
 import IconDot from "@/components/icon/icon.dot";
 import CCommentIcon from "@/app/title/[slug]/comments/@components/crud/c.comment.icon";
+import BtnCCommentIcon from "@/app/title/[slug]/comments/@components/crud/btn.c.comment.icon";
+import CComment from "@/app/title/[slug]/comments/@components/crud/c.comment";
 
 dayjs.extend(relativeTime);
 
@@ -19,9 +21,19 @@ const RCommentList: React.FC<RCommentListProps> = ({
     const [hiddenComments, setHiddenComments] = useState<{
         [key: number]: boolean;
     }>({});
+    const [hiddenForm, setHiddenForm] = useState<{
+        [key: number]: boolean;
+    }>({});
 
     const toggleVisibility = (id: number) => {
         setHiddenComments((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }));
+    };
+
+    const toggleFormVisibility = (id: number) => {
+        setHiddenForm((prev) => ({
             ...prev,
             [id]: !prev[id],
         }));
@@ -86,7 +98,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                 <IconHeart className="size-5"></IconHeart>
                                                 <span>React</span>
                                             </div>
-                                            <CCommentIcon></CCommentIcon>
+                                            <BtnCCommentIcon toggleFormVisibility={toggleFormVisibility} idComment={comment.id}></BtnCCommentIcon>
                                             <div className="cursor-pointer p-1 rounded-full hover:bg-neutral-100 ">
                                                 <IconDot></IconDot>
                                             </div>
@@ -107,6 +119,11 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                         </button>
                                     )}
                                 </div>
+                                {hiddenForm[comment.id] && (
+                                    <div className="mt-4 ml-14">
+                                        <CComment />
+                                    </div>
+                                )}
 
                                 <RCommentList
                                     comments={comments}
