@@ -6,8 +6,9 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import IconHeart from "@/components/icon/icon.heart";
 import { useState } from "react";
 import IconDot from "@/components/icon/icon.dot";
-import CCommentIcon from "@/app/title/[slug]/comments/@components/crud/c.comment.icon";
-import BtnCCommentIcon from "@/app/title/[slug]/comments/@components/crud/btn.c.comment.icon";
+import CCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/c.comment.icon";
+import BtnCCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/btn.c.comment.icon";
+
 
 dayjs.extend(relativeTime);
 
