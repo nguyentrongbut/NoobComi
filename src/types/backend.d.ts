@@ -82,6 +82,9 @@ declare global {
         comments: CommentType[];
         parentId?: number | null;
         className?: string
+        currentIdUser?:number
+        fetchComments?: () => void
+        id?: number
     }
 
     interface IUser {

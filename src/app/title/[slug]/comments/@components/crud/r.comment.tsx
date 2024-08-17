@@ -30,7 +30,7 @@ const RComment = ({ id, currentIdUser }: any) => {
                 fetchComments={fetchComments}
             ></CComment>
             {comments.length >= 1 ? (
-                <RCommentList comments={comments} />
+                <RCommentList comments={comments} currentIdUser={currentIdUser} fetchComments={fetchComments} id={id}/>
             ) : (
                 <div className="my-6 text-center text-neutral-700">
                     No Comments

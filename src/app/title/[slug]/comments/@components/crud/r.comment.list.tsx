@@ -4,12 +4,10 @@ import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import IconHeart from "@/components/icon/icon.heart";
-import IconComments from "@/components/icon/icon.comments";
 import { useState } from "react";
 import IconDot from "@/components/icon/icon.dot";
 import CCommentIcon from "@/app/title/[slug]/comments/@components/crud/c.comment.icon";
 import BtnCCommentIcon from "@/app/title/[slug]/comments/@components/crud/btn.c.comment.icon";
-import CComment from "@/app/title/[slug]/comments/@components/crud/c.comment";
 
 dayjs.extend(relativeTime);
 
@@ -17,6 +15,9 @@ const RCommentList: React.FC<RCommentListProps> = ({
     comments,
     parentId = null,
     className,
+    currentIdUser,
+    fetchComments,
+    id
 }) => {
     const [hiddenComments, setHiddenComments] = useState<{
         [key: number]: boolean;
@@ -98,13 +99,32 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                 <IconHeart className="size-5"></IconHeart>
                                                 <span>React</span>
                                             </div>
-                                            <BtnCCommentIcon toggleFormVisibility={toggleFormVisibility} idComment={comment.id}></BtnCCommentIcon>
+                                            <BtnCCommentIcon
+                                                toggleFormVisibility={
+                                                    toggleFormVisibility
+                                                }
+                                                idComment={comment.id}
+                                            ></BtnCCommentIcon>
                                             <div className="cursor-pointer p-1 rounded-full hover:bg-neutral-100 ">
                                                 <IconDot></IconDot>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                {hiddenForm[comment.id] && (
+                                    <div className="mt-4 ml-14">
+                                        <CCommentIcon
+                                            toggleFormVisibility={
+                                                toggleFormVisibility
+                                            }
+                                            yourParentId={comment.id}
+                                            currentIdUser={currentIdUser}
+                                            fetchComments={fetchComments}
+                                            id={id}
+                                        ></CCommentIcon>
+                                    </div>
+                                )}
                                 <div className="ml-14 mt-2">
                                     {childComments.length > 0 && (
                                         <button
@@ -119,12 +139,6 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                         </button>
                                     )}
                                 </div>
-                                {hiddenForm[comment.id] && (
-                                    <div className="mt-4 ml-14">
-                                        <CComment />
-                                    </div>
-                                )}
-
                                 <RCommentList
                                     comments={comments}
                                     parentId={comment?.id}
