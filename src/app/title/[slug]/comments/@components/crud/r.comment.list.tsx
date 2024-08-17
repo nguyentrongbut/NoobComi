@@ -147,6 +147,9 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                             ? "max-h-0"
                                             : "max-h-[1000px]"
                                     } overflow-hidden transition-max-h`}
+                                    currentIdUser={currentIdUser}
+                                    fetchComments={fetchComments}
+                                    id={id}
                                 />
                             </div>
                         </div>

@@ -33,7 +33,7 @@ const CComment = (props: any) => {
                 url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/comments`,
                 method: "POST",
                 body: {
-                    comicId: id,
+                    comicId: +id,
                     authorId: currentIdUser,
                     message: yourComment,
                     parentId: null,
