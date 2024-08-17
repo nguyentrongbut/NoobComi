@@ -5,9 +5,10 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import IconHeart from "@/components/icon/icon.heart";
 import { useState } from "react";
-import IconDot from "@/components/icon/icon.dot";
 import CCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/c.comment.icon";
 import BtnCCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/btn.c.comment.icon";
+import IconDotDropdown from "@/app/title/[slug]/comments/@components/crud/r/icon.dot.dropdown";
+
 
 
 dayjs.extend(relativeTime);
@@ -106,9 +107,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                 }
                                                 idComment={comment.id}
                                             ></BtnCCommentIcon>
-                                            <div className="cursor-pointer p-1 rounded-full hover:bg-neutral-100 ">
-                                                <IconDot></IconDot>
-                                            </div>
+                                            <IconDotDropdown></IconDotDropdown>
                                         </div>
                                     </div>
                                 </div>

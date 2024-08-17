@@ -1,5 +1,5 @@
 import TabContent from "@/app/title/@component/tab.content.wrapper";
-import RComment from "@/app/title/[slug]/comments/@components/crud/r.comment";
+import RComment from "@/app/title/[slug]/comments/@components/crud/r/r.comment";
 
 const CommentsTab = (props: any) => {
     const { params } = props;

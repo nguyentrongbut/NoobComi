@@ -1,7 +1,7 @@
 "use client";
 
 import CComment from "@/app/title/[slug]/comments/@components/crud/c/c.comment";
-import RCommentList from "@/app/title/[slug]/comments/@components/crud/r.comment.list";
+import RCommentList from "@/app/title/[slug]/comments/@components/crud/r/r.comment.list";
 import { sendRequest } from "@/utils/api";
 
 import { useCallback, useEffect, useState } from "react";
