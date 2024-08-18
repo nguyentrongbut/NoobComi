@@ -14,7 +14,6 @@ const CComment = (props: any) => {
     const [currentUser, setCurrentUser] = useState<IUser | null>(null);
     const [yourComment, setYourComment] = useState("");
 
-    const parentId = yourParentId || null;
     useEffect(() => {
         const fetchData = async () => {
             const user = await sendRequest<IUser>({
