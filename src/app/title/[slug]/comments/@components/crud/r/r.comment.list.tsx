@@ -7,8 +7,7 @@ import IconHeart from "@/components/icon/icon.heart";
 import { useState } from "react";
 import CCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/c.comment.icon";
 import BtnCCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/btn.c.comment.icon";
-import IconDotDropdown from "@/app/title/[slug]/comments/@components/crud/r/icon.dot.dropdown";
-
+import IconDotDropdown from "@/app/title/[slug]/comments/@components/crud/icon.dot.dropdown";
 
 
 dayjs.extend(relativeTime);
@@ -107,7 +106,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                 }
                                                 idComment={comment.id}
                                             ></BtnCCommentIcon>
-                                            <IconDotDropdown></IconDotDropdown>
+                                            <IconDotDropdown commentId={comment?.id} fetchComments={fetchComments}></IconDotDropdown>
                                         </div>
                                     </div>
                                 </div>

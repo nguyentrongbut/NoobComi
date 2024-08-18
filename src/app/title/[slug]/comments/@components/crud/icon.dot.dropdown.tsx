@@ -25,7 +25,8 @@ import {
 import Image from "next/image";
 import ImgQuestion from "@/../public/images/question.png";
 
-const IconDotDropdown = () => {
+const IconDotDropdown = (props: any) => {
+    const { commentId, fetchComments } = props;
     const removePointerENone = () => {
         document.body.classList.add("!pointer-events-auto");
     };
@@ -77,8 +78,14 @@ const IconDotDropdown = () => {
                     </AlertDialogTitle>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogAction className="bg-red-400 hover:bg-red-500">
-                        <DComment></DComment>
+                    <AlertDialogAction
+                        className="bg-red-400 hover:bg-red-500"
+                        onClick={removePointerENone}
+                    >
+                        <DComment
+                            commentId={commentId}
+                            fetchComments={fetchComments}
+                        ></DComment>
                     </AlertDialogAction>
                     <AlertDialogCancel onClick={removePointerENone}>
                         Cancel
