@@ -181,6 +181,13 @@
         background-color: white;
     }
 
+    .form-input-report:not(:placeholder-shown) + .form-label-report,
+    .form-input-report:focus + .form-label-report {
+        top: 8px;
+        font-size: 12px;
+        background-color: white;
+    }
+
     .transition-max-h {
         transition: max-height 0.3s ease-in-out;
     }
