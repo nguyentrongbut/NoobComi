@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const CComment = (props: any) => {
-    const { currentIdUser, id, fetchComments, yourParentId } = props;
+    const { currentIdUser, id, fetchComments, yourParentId, setLoading } = props;
     const [currentUser, setCurrentUser] = useState<IUser | null>(null);
     const [yourComment, setYourComment] = useState("");
 
@@ -27,6 +27,7 @@ const CComment = (props: any) => {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true)
         if (yourComment !== "") {
             const data = await sendRequest<CommentType>({
                 url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/comments`,
@@ -41,6 +42,7 @@ const CComment = (props: any) => {
             if (data) {
                 await fetchComments();
                 setYourComment("");
+                setLoading(false)
             }
         }
     };

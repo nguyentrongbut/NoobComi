@@ -8,13 +8,14 @@ import { sendRequest } from "@/utils/api";
 import { useState } from "react";
 
 const UComment = (props: any) => {
-    const {commentId, toggleFormEditVisibility, messageComment, fetchComments} = props;
+    const {commentId, toggleFormEditVisibility, messageComment, fetchComments, setLoading} = props;
     const [uComment, setUComment] = useState(messageComment)
     const handleCancel = () => {
         toggleFormEditVisibility(commentId)
     };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setLoading(true)
         if (uComment !== "") {
             const data = await sendRequest<CommentType>({
                 url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/comments/${commentId}`,
@@ -28,6 +29,7 @@ const UComment = (props: any) => {
                 await fetchComments();
                 setUComment("");
                 handleCancel();
+                setLoading(false)
             }
         }
     };

@@ -29,7 +29,7 @@ import IconFlag from "@/components/icon/icon.flag";
 import BtnUComment from "@/app/title/[slug]/comments/@components/crud/u/btn.u.comment";
 
 const IconDotDropdown = (props: any) => {
-    const { commentId, fetchComments, currentIdUser, commentUserId, toggleFormEditVisibility } = props;
+    const { commentId, fetchComments, currentIdUser, commentUserId, toggleFormEditVisibility, setLoading } = props;
     const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const removePointerENone = () => {
@@ -138,6 +138,7 @@ const IconDotDropdown = (props: any) => {
                             <DComment
                                 commentId={commentId}
                                 fetchComments={fetchComments}
+                                setLoading={setLoading}
                             ></DComment>
                         </AlertDialogAction>
                         <AlertDialogCancel onClick={removePointerENone} className="text-base">

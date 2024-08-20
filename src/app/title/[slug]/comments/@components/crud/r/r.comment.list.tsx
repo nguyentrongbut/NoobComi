@@ -19,6 +19,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
     currentIdUser,
     fetchComments,
     id,
+    setLoading
 }) => {
     const [hiddenComments, setHiddenComments] = useState<{
         [key: number]: boolean;
@@ -112,6 +113,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                     comment?.message
                                                 }
                                                 fetchComments={fetchComments}
+                                                setLoading={setLoading}
                                             ></UComment>
                                         ) : (
                                             <div>
@@ -143,6 +145,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                         toggleFormEditVisibility={
                                                             toggleFormEditVisibility
                                                         }
+                                                        setLoading={setLoading}
                                                     ></IconDotDropdown>
                                                 </div>
                                             </div>
