@@ -19,7 +19,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
     currentIdUser,
     fetchComments,
     id,
-    setLoading
+    setLoading,
 }) => {
     const [hiddenComments, setHiddenComments] = useState<{
         [key: number]: boolean;
@@ -191,6 +191,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                     currentIdUser={currentIdUser}
                                     fetchComments={fetchComments}
                                     id={id}
+                                    setLoading={setLoading}
                                 />
                             </div>
                         </div>
