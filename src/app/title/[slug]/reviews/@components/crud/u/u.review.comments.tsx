@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState, useCallback } from "react";
-import Rating from "@/app/title/[slug]/reviews/@component/rating";
+import Rating from "@/app/title/[slug]/reviews/@components/rating";
 import IconLoading from "@/components/icon/icon.loading";
 import IconSend from "@/components/icon/icon.send";
 import IconSuccess from "@/components/icon/icon.success";
@@ -52,11 +52,11 @@ const UReviewComments = React.memo((props: any) => {
                     url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
                     method: "PATCH",
                     body: {
-                        comicId: id,
-                        authorId: currentIdUser,
+                        comicId: +id,
+                        authorId: +currentIdUser,
                         content: uReview,
                         rated: uRating,
-                        updateAt: Date.now(),
+                        updatedAt: Date.now(),
                     },
                 });
 
@@ -92,7 +92,7 @@ const UReviewComments = React.memo((props: any) => {
             <Rating rating={uRating} setRating={setURating}></Rating>
             <div className="relative">
                 <Textarea
-                    className="form-input min-h-[7rem] mt-5 bg-neutral-100 border border-[#a3a3a3] transition-all  focus:border-[var(--primary-color)] focus:outline-none p-3"
+                    className="form-input min-h-[7rem] mt-5 bg-neutral-100 border border-[#a3a3a3] focus:border-[var(--primary-color)] focus:outline-none p-3"
                     value={uReview}
                     onChange={(e) => setUReview(e.target.value)}
                     placeholder=" "

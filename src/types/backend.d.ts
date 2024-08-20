@@ -51,7 +51,7 @@ declare global {
         content: string,
         rated: number,
         createdAt: number,
-        updateAt: number,
+        updatedAt: number,
         author: {
             id: number,
             name: string,
@@ -59,5 +59,40 @@ declare global {
             avatar: string,
             banner: string
         }
+    }
+
+    interface CommentType {
+        id: number;
+        message: string;
+        createdAt: string;
+        updatedAt: string;
+        likeCount: number;
+        likedByMe: boolean;
+        parentId: number | null;
+        author: {
+            id: number,
+            name: string,
+            country: string,
+            avatar: string,
+            banner: string
+        }
+    }
+
+    interface RCommentListProps {
+        comments: CommentType[];
+        parentId?: number | null;
+        className?: string
+        currentIdUser?:number
+        fetchComments?: () => void
+        setLoading?:  Dispatch<SetStateAction<boolean>>
+        id?: number
+    }
+
+    interface IUser {
+        id: number,
+        name: string,
+        country: string,
+        avatar: string,
+        banner: string
     }
 }

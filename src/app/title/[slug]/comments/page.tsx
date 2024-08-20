@@ -1,9 +1,15 @@
 import TabContent from "@/app/title/@component/tab.content.wrapper";
+import RComment from "@/app/title/[slug]/comments/@components/crud/r/r.comment";
 
-const CommentsTab = () => {
+const CommentsTab = (props: any) => {
+    const { params } = props;
+    const temp = params?.slug?.split(".html" ?? []);
+    const temp1 = temp[0]?.split("-" ?? []) as string[];
+    const id = temp1[temp1.length - 1];
+    const currentIdUser = 9;
     return (
         <TabContent>
-            <div></div>
+            <RComment id={id} currentIdUser={currentIdUser}></RComment>
         </TabContent>
     );
 };

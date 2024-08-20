@@ -1,6 +1,6 @@
 "use client";
 import React, { useRef, useState, useCallback } from "react";
-import Rating from "@/app/title/[slug]/reviews/@component/rating";
+import Rating from "@/app/title/[slug]/reviews/@components/rating";
 import IconError from "@/components/icon/icon.error";
 import IconLoading from "@/components/icon/icon.loading";
 import IconSend from "@/components/icon/icon.send";
@@ -46,10 +46,10 @@ const CReviewComments = React.memo((props: any) => {
                     url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews`,
                     method: "POST",
                     body: {
-                        comicId: id,
-                        authorId: currentIdUser,
+                        comicId: +id,
+                        authorId: +currentIdUser,
                         content: yourReviewComment,
-                        rated: rating,
+                        rated: +rating,
                     },
                 });
 
@@ -82,7 +82,7 @@ const CReviewComments = React.memo((props: any) => {
             <Rating rating={rating} setRating={setRating}></Rating>
             <div className="relative">
                 <Textarea
-                    className="form-input min-h-[7rem] mt-5 bg-neutral-100 border border-[#a3a3a3] transition-all focus:border-[var(--primary-color)] focus:outline-none p-3"
+                    className="form-input min-h-[7rem] mt-5 bg-neutral-100 border border-[#a3a3a3] focus:border-[var(--primary-color)] focus:outline-none p-3"
                     value={yourReviewComment}
                     onChange={(e) => setYourReviewComment(e.target.value)}
                     placeholder=" "

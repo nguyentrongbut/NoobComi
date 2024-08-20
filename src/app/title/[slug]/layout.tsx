@@ -11,7 +11,7 @@ import IconComment from "@/components/icon/icon.comment";
 import { Button } from "@/components/ui/button";
 import IconShare from "@/components/icon/icon.share";
 import Tab from "@/app/title/@component/tab";
-import RatingReadOnly from "@/app/title/[slug]/reviews/@component/rating.read.only";
+import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
 
 type Props = {
     params: { slug: string };
