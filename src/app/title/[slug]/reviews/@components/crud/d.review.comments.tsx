@@ -30,7 +30,7 @@ const DReviewComments = React.memo((props: any) => {
         });
 
         const data = await sendRequest<IReviews>({
-            url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${dId}`,
+            url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${+dId}`,
             method: "DELETE",
         });
 

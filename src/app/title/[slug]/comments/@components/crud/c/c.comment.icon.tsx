@@ -83,6 +83,7 @@ const CCommentIcon = (props: any) => {
                     placeholder="Express your thoughts"
                     value={yourComment}
                     onChange={(e) => setYourComment(e.target.value)}
+                    autoFocus
                 ></Textarea>
                 <Separator className="my-2"></Separator>
                 <div className="flex justify-between items-center">

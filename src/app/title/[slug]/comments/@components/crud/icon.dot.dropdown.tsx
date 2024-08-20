@@ -9,7 +9,6 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
@@ -25,14 +24,14 @@ import {
 import Image from "next/image";
 import ImgQuestion from "@/../public/images/question.png";
 import { useState } from "react";
-import ReportForm from "@/app/title/[slug]/comments/@components/report.form";
 import { Textarea } from "@/components/ui/textarea";
 import IconFlag from "@/components/icon/icon.flag";
+import BtnUComment from "@/app/title/[slug]/comments/@components/crud/u/btn.u.comment";
 
 const IconDotDropdown = (props: any) => {
+    const { commentId, fetchComments, currentIdUser, commentUserId, toggleFormEditVisibility } = props;
     const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
-    const { commentId, fetchComments } = props;
     const removePointerENone = () => {
         document.body.classList.add("!pointer-events-auto");
     };
@@ -57,22 +56,23 @@ const IconDotDropdown = (props: any) => {
                             <span>Report</span>
                         </Button>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="cursor-pointer p-0 flex justify-center hover:bg-neutral-200/50 border-b-[#e5e7eb]">
-                        <Button className="flex justify-start gap-2 bg-transparent text-black px-4 pt-2 w-full text-sm sm:text-base font-normal">
-                            <IconUpdate></IconUpdate>
-                            <span>Edit</span>
-                        </Button>
-                    </DropdownMenuItem>
+                    {currentIdUser === commentUserId && (
+                        <>
+                            <DropdownMenuItem className="cursor-pointer p-0 flex justify-center hover:bg-neutral-200/50 border-b-[#e5e7eb]">
+                                <BtnUComment toggleFormEditVisibility={toggleFormEditVisibility} commentId={commentId}></BtnUComment>
+                            </DropdownMenuItem>
 
-                    <DropdownMenuItem
-                        onClick={() => setIsDeleteDialogOpen(true)}
-                        className="cursor-pointer p-0 flex justify-center hover:bg-neutral-200/50"
-                    >
-                        <Button className="flex justify-start gap-2 bg-transparent text-black px-4 pt-2 w-full text-sm sm:text-base font-normal">
-                            <IconDelete></IconDelete>
-                            <span>Delete</span>
-                        </Button>
-                    </DropdownMenuItem>
+                            <DropdownMenuItem
+                                onClick={() => setIsDeleteDialogOpen(true)}
+                                className="cursor-pointer p-0 flex justify-center hover:bg-neutral-200/50"
+                            >
+                                <Button className="flex justify-start gap-2 bg-transparent text-black px-4 pt-2 w-full text-sm sm:text-base font-normal">
+                                    <IconDelete></IconDelete>
+                                    <span>Delete</span>
+                                </Button>
+                            </DropdownMenuItem>
+                        </>
+                    )}
                 </DropdownMenuContent>
             </DropdownMenu>
 
@@ -80,10 +80,11 @@ const IconDotDropdown = (props: any) => {
                 open={isReportDialogOpen}
                 onOpenChange={() => setIsReportDialogOpen(!isReportDialogOpen)}
             >
-                <AlertDialogTrigger asChild></AlertDialogTrigger>
-                <AlertDialogContent>
+                <AlertDialogContent className="gap-0 sm:px-8">
                     <AlertDialogHeader>
-                        <AlertDialogTitle className="font-medium text-lg">Report this comment</AlertDialogTitle>
+                        <AlertDialogTitle className="font-medium text-lg mt-0">
+                            Report this comment
+                        </AlertDialogTitle>
                     </AlertDialogHeader>
                     <div className="relative">
                         <Textarea
@@ -97,11 +98,14 @@ const IconDotDropdown = (props: any) => {
                             <div className="absolute left-0 bottom-0 w-full h-1/2 z-[1] bg-neutral-100"></div>
                         </label>
                     </div>
-                    <AlertDialogFooter>
+                    <AlertDialogFooter className="mt-6">
                         <AlertDialogCancel onClick={removePointerENone}>
                             Cancel
                         </AlertDialogCancel>
-                        <AlertDialogAction onClick={removePointerENone} className="bg-primary-color">
+                        <AlertDialogAction
+                            onClick={removePointerENone}
+                            className="bg-primary-color"
+                        >
                             Submit
                         </AlertDialogAction>
                     </AlertDialogFooter>
@@ -122,13 +126,13 @@ const IconDotDropdown = (props: any) => {
                             height={192}
                             className="size-48 mx-auto"
                         />
-                        <AlertDialogTitle>
+                        <AlertDialogTitle className="font-medium text-lg sm:text-xl">
                             Are you sure you want to delete this comment?
                         </AlertDialogTitle>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogAction
-                            className="bg-red-400 hover:bg-red-500"
+                            className="bg-red-400 hover:bg-red-500 p-0 text-base"
                             onClick={removePointerENone}
                         >
                             <DComment
@@ -136,7 +140,7 @@ const IconDotDropdown = (props: any) => {
                                 fetchComments={fetchComments}
                             ></DComment>
                         </AlertDialogAction>
-                        <AlertDialogCancel onClick={removePointerENone}>
+                        <AlertDialogCancel onClick={removePointerENone} className="text-base">
                             Cancel
                         </AlertDialogCancel>
                     </AlertDialogFooter>

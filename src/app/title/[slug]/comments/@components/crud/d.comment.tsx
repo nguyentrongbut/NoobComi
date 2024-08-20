@@ -14,7 +14,7 @@ const DComment = (props: any) => {
         }
     };
     return (
-        <span className="flex items-center gap-2" onClick={deleteComment}>
+        <span className="flex items-center gap-2 px-2 py-2" onClick={deleteComment}>
             <IconDelete className="size-6"></IconDelete>
             <span>Delete</span>
         </span>

@@ -8,7 +8,7 @@ import { useState } from "react";
 import CCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/c.comment.icon";
 import BtnCCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/btn.c.comment.icon";
 import IconDotDropdown from "@/app/title/[slug]/comments/@components/crud/icon.dot.dropdown";
-
+import UComment from "@/app/title/[slug]/comments/@components/crud/u/u.comment";
 
 dayjs.extend(relativeTime);
 
@@ -18,12 +18,15 @@ const RCommentList: React.FC<RCommentListProps> = ({
     className,
     currentIdUser,
     fetchComments,
-    id
+    id,
 }) => {
     const [hiddenComments, setHiddenComments] = useState<{
         [key: number]: boolean;
     }>({});
     const [hiddenForm, setHiddenForm] = useState<{
+        [key: number]: boolean;
+    }>({});
+    const [hiddenFormEdit, setHiddenFormEdit] = useState<{
         [key: number]: boolean;
     }>({});
 
@@ -36,6 +39,13 @@ const RCommentList: React.FC<RCommentListProps> = ({
 
     const toggleFormVisibility = (id: number) => {
         setHiddenForm((prev) => ({
+            ...prev,
+            [id]: !prev[id],
+        }));
+    };
+
+    const toggleFormEditVisibility = (id: number) => {
+        setHiddenFormEdit((prev) => ({
             ...prev,
             [id]: !prev[id],
         }));
@@ -77,7 +87,7 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                             </AvatarFallback>
                                         </Avatar>
                                     </Link>
-                                    <div>
+                                    <div className="w-full">
                                         <Link href="/" className="font-medium">
                                             {comment?.author.name}
                                         </Link>
@@ -92,22 +102,51 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                 ).fromNow()}
                                             </span>
                                         </div>
-                                        <p className="mt-1 mb-2">
-                                            {comment?.message}
-                                        </p>
-                                        <div className="flex items-center text-neutral-700 text-xs sm:text-sm font-medium gap-2">
-                                            <div className="p-[5px] cursor-pointer flex items-center gap-1 hover:bg-neutral-100 rounded-md">
-                                                <IconHeart className="size-5"></IconHeart>
-                                                <span>React</span>
-                                            </div>
-                                            <BtnCCommentIcon
-                                                toggleFormVisibility={
-                                                    toggleFormVisibility
+                                        {hiddenFormEdit[comment.id] ? (
+                                            <UComment
+                                                commentId={comment?.id}
+                                                toggleFormEditVisibility={
+                                                    toggleFormEditVisibility
                                                 }
-                                                idComment={comment.id}
-                                            ></BtnCCommentIcon>
-                                            <IconDotDropdown commentId={comment?.id} fetchComments={fetchComments}></IconDotDropdown>
-                                        </div>
+                                                messageComment={
+                                                    comment?.message
+                                                }
+                                                fetchComments={fetchComments}
+                                            ></UComment>
+                                        ) : (
+                                            <div>
+                                                <p className="mt-1 mb-2">
+                                                    {comment?.message}
+                                                </p>
+                                                <div className="flex items-center text-neutral-700 text-xs sm:text-sm font-medium gap-2">
+                                                    <div className="p-[5px] cursor-pointer flex items-center gap-1 hover:bg-neutral-100 rounded-md">
+                                                        <IconHeart className="size-5"></IconHeart>
+                                                        <span>React</span>
+                                                    </div>
+                                                    <BtnCCommentIcon
+                                                        toggleFormVisibility={
+                                                            toggleFormVisibility
+                                                        }
+                                                        idComment={comment.id}
+                                                    ></BtnCCommentIcon>
+                                                    <IconDotDropdown
+                                                        commentId={comment?.id}
+                                                        fetchComments={
+                                                            fetchComments
+                                                        }
+                                                        currentIdUser={
+                                                            currentIdUser
+                                                        }
+                                                        commentUserId={
+                                                            comment?.author?.id
+                                                        }
+                                                        toggleFormEditVisibility={
+                                                            toggleFormEditVisibility
+                                                        }
+                                                    ></IconDotDropdown>
+                                                </div>
+                                            </div>
+                                        )}
                                     </div>
                                 </div>
 

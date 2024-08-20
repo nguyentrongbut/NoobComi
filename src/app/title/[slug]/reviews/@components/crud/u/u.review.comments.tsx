@@ -52,11 +52,11 @@ const UReviewComments = React.memo((props: any) => {
                     url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews/${uId}`,
                     method: "PATCH",
                     body: {
-                        comicId: id,
-                        authorId: currentIdUser,
+                        comicId: +id,
+                        authorId: +currentIdUser,
                         content: uReview,
                         rated: uRating,
-                        updateAt: Date.now(),
+                        updatedAt: Date.now(),
                     },
                 });
 
