@@ -94,5 +94,6 @@ declare global {
         country: string,
         avatar: string,
         banner: string
+        vip: boolean
     }
 }
