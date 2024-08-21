@@ -167,7 +167,7 @@ const ChapterTab = (props: any) => {
                                                                     className="w-full aspect-[3/2] object-cover h-full bg-neutral-200"
                                                                 />
                                                                 {chapter?.vip !==
-                                                                    currentUser?.vip && (
+                                                                    currentUser?.vip && chapter?.vip && (
                                                                     <div>
                                                                         <div className="p-1.5 bg-white/80 rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10">
                                                                             <IconLock />
@@ -181,14 +181,15 @@ const ChapterTab = (props: any) => {
                                                                     chapter?.content
                                                                 }
                                                                 {chapter?.vip !==
-                                                                    currentUser?.vip && (
-                                                                    <div className="flex gap-1 rounded-full items-center primary-color border sm:py-[0.125rem] h-4 sm:h-6 sm:px-2 justify-center border-primary-color">
-                                                                        <IconLock className="size-4" />
-                                                                        <span className="font-medium text-sm">
-                                                                            Vip
-                                                                        </span>
-                                                                    </div>
-                                                                )}
+                                                                    currentUser?.vip &&
+                                                                    chapter?.vip && (
+                                                                        <div className="flex gap-1 rounded-full items-center primary-color border sm:py-[0.125rem] h-4 sm:h-6 sm:px-2 justify-center border-primary-color">
+                                                                            <IconLock className="size-4" />
+                                                                            <span className="font-medium text-sm">
+                                                                                Vip
+                                                                            </span>
+                                                                        </div>
+                                                                    )}
                                                             </figcaption>
                                                         </figure>
                                                         <div className="mt-auto flex gap-4 text-sm mx-3 mb-3">
