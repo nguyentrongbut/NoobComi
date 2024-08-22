@@ -22,7 +22,7 @@ const TopSlider = (props: any) => {
     const [isEnd, setIsEnd] = useState(false);
 
     return (
-        <section className="wrapper my-4 sm:my-8 lg:my-12">
+        <section className="wrapper my-6 sm:my-8 lg:my-12">
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold flex-grow">
                     <Link href="/search">{title}</Link>
