@@ -117,12 +117,14 @@
             width: calc(100% - 60px);
         }
     }
+    @media (max-width: 630px) {
+        .wrapper {
+            width: calc(100% - 32px);
+        }
+    }
     @media (max-width: 450px) {
         .mw-400 {
             display: none;
-        }
-        .wrapper {
-            width: calc(100% - 20px);
         }
     }
     .transition-w-b {

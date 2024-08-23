@@ -52,7 +52,7 @@ const ChapterTab = (props: any) => {
                 <>
                     {toggleFilter ? (
                         <Button
-                            className="flex justify-between hover:bg-[#f7f7f7] bg-white text-black gap-2 text-base rounded-md mb-4 lg:-mt-2"
+                            className="flex justify-between hover:bg-[#f7f7f7] bg-white text-black gap-2 text-sm sm:text-base rounded-md mb-4 lg:-mt-2 p-2"
                             onClick={() => setToggleFilter(false)}
                         >
                             <IconFilter2></IconFilter2>
@@ -60,7 +60,7 @@ const ChapterTab = (props: any) => {
                         </Button>
                     ) : (
                         <Button
-                            className="flex justify-between hover:bg-[#f7f7f7] bg-white text-black gap-2 text-base rounded-md mb-4 lg:-mt-2"
+                            className="flex justify-between hover:bg-[#f7f7f7] bg-white text-black gap-2 text-sm sm:text-base rounded-md mb-4 lg:-mt-2 p-2"
                             onClick={() => setToggleFilter(true)}
                         >
                             <IconAscending></IconAscending>
