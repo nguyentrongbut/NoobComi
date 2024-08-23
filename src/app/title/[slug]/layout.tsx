@@ -93,7 +93,7 @@ export default async function RootLayout({
                             width={230}
                             height={320}
                             loading="eager"
-                            className="object-cover min-h-0 h-48 sm:h-80 rounded-md aspect-[5/7] ring-4 ring-black w-[137px] sm:w-auto mx-auto"
+                            className="object-cover min-h-0 h-48 sm:h-80 rounded-md aspect-[5/7] ring-4 ring-black w-[137px] sm:w-auto mx-auto sm:mx-0"
                         ></Image>
 
                         <div className="sm:grid grid-rows-[10rem_1fr_auto]">
