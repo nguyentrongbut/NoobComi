@@ -18,7 +18,7 @@ const Tab = (props: any) => {
     return (
         <section className="bg-white">
             <div className="wrapper">
-                <nav className="flex text-sm sm:text-base px-4 sm:px-0 select-none">
+                <nav className="flex text-sm sm:text-base select-none">
                     {tabTitle.map((item) => {
                         const isActive =
                             item.href === "/"
