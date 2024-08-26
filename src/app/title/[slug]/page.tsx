@@ -8,7 +8,7 @@ const ChaptersTab = async (props: any) => {
     const temp1 = temp[0]?.split("-" ?? []) as string[];
     const id = temp1[temp1.length - 1];
 
-    const currentIdUser = 9;
+    const currentIdUser = 8;
     const currentUser = await sendRequest<IUser>({
         url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/authors/${currentIdUser}`,
         method: "GET",

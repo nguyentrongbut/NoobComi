@@ -84,66 +84,66 @@ const ChapterTab = (props: any) => {
                                         <li className="cursor-pointer">
                                             <Link
                                                 href="/"
-                                                className="flex w-full justify-between bg-neutral-100 rounded-md hover:bg-[#e5e5e5]"
+                                                className="flex gap-2 bg-neutral-100 rounded-md hover:bg-[#e5e5e5]"
                                             >
-                                                <figure className="flex gap-4">
-                                                    <div className="rounded-md overflow-hidden h-20 relative">
-                                                        <Image
-                                                            src={chapter?.cover}
-                                                            alt={
-                                                                chapter?.content
-                                                            }
-                                                            width={108}
-                                                            height={72}
-                                                            loading="eager"
-                                                            className="w-full aspect-[3/2] object-cover h-full bg-neutral-200"
-                                                        />
-                                                    </div>
-                                                    <figcaption className="mt-2 font-bold gap-2.5 flex">
+                                                <div className="relative sm:max-w-[108px] sm:max-h-[72px] max-w-[96px] max-h-[64px]">
+                                                    <Image
+                                                        src={chapter?.cover}
+                                                        alt={chapter?.content}
+                                                        width={108}
+                                                        height={72}
+                                                        loading="eager"
+                                                        className="w-full aspect-[3/2] h-full object-cover bg-neutral-200 rounded-md"
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col flex-grow">
+                                                    <div className="mt-2 font-bold gap-2.5 line-clamp-1 text-sm sm:text-base mr-1">
                                                         {chapter?.content}
-                                                    </figcaption>
-                                                </figure>
-                                                <div className="mt-auto flex gap-4 text-sm mx-3 mb-3">
-                                                    <span
-                                                        className="flex gap-1 items-center"
-                                                        title={chapter?.views?.toString()}
-                                                    >
-                                                        <IconEye className="size-4" />
-                                                        <span>
-                                                            {chapter?.views}
+                                                    </div>
+                                                    <div className="mt-auto flex gap-2 sm:gap-4 text-sm mx-3 mb-1.5 sm:mb-3 justify-end">
+                                                        <span
+                                                            className="flex gap-1 items-center"
+                                                            title={chapter?.views?.toString()}
+                                                        >
+                                                            <IconEye className="size-4" />
+                                                            <span>
+                                                                {chapter?.views}
+                                                            </span>
                                                         </span>
-                                                    </span>
-                                                    <span
-                                                        className="flex gap-1 items-center"
-                                                        title={chapter?.likes?.toString()}
-                                                    >
-                                                        <IconHeart className="size-4" />
-                                                        <span>
-                                                            {chapter?.likes}
+                                                        <span
+                                                            className="flex gap-1 items-center"
+                                                            title={chapter?.likes?.toString()}
+                                                        >
+                                                            <IconHeart className="size-4" />
+                                                            <span>
+                                                                {chapter?.likes}
+                                                            </span>
                                                         </span>
-                                                    </span>
-                                                    <span
-                                                        className="flex gap-1 items-center"
-                                                        title={chapter?.comments?.toString()}
-                                                    >
-                                                        <IconComment className="size-4" />
-                                                        <span>
-                                                            {chapter?.comments}
+                                                        <span
+                                                            className="flex gap-1 items-center"
+                                                            title={chapter?.comments?.toString()}
+                                                        >
+                                                            <IconComment className="size-4" />
+                                                            <span>
+                                                                {
+                                                                    chapter?.comments
+                                                                }
+                                                            </span>
                                                         </span>
-                                                    </span>
-                                                    <span
-                                                        className="flex gap-1 items-center"
-                                                        title={dayjs(
-                                                            chapter?.createdAt
-                                                        ).fromNow()}
-                                                    >
-                                                        <IconOclock />
-                                                        <span>
-                                                            {dayjs(
+                                                        <span
+                                                            className="flex gap-1 items-center"
+                                                            title={dayjs(
                                                                 chapter?.createdAt
                                                             ).fromNow()}
+                                                        >
+                                                            <IconOclock />
+                                                            <span className="line-clamp-1">
+                                                                {dayjs(
+                                                                    chapter?.createdAt
+                                                                ).fromNow()}
+                                                            </span>
                                                         </span>
-                                                    </span>
+                                                    </div>
                                                 </div>
                                             </Link>
                                         </li>
@@ -151,94 +151,99 @@ const ChapterTab = (props: any) => {
                                         <AlertDialog>
                                             <AlertDialogTrigger asChild>
                                                 <li className="cursor-pointer">
-                                                    <div className="flex w-full justify-between bg-neutral-100 rounded-md hover:bg-[#e5e5e5]">
-                                                        <figure className="flex gap-4">
-                                                            <div className="rounded-md overflow-hidden h-20 relative">
-                                                                <Image
-                                                                    src={
-                                                                        chapter?.cover
-                                                                    }
-                                                                    alt={
-                                                                        chapter?.content
-                                                                    }
-                                                                    width={108}
-                                                                    height={72}
-                                                                    loading="eager"
-                                                                    className="w-full aspect-[3/2] object-cover h-full bg-neutral-200"
-                                                                />
-                                                                {chapter?.vip !==
-                                                                    currentUser?.vip && chapter?.vip && (
+                                                    <div className="flex gap-2 bg-neutral-100 rounded-md hover:bg-[#e5e5e5]">
+                                                        <div className="relative sm:max-w-[108px] sm:max-h-[72px] max-w-[96px] max-h-[64px]">
+                                                            <Image
+                                                                src={
+                                                                    chapter?.cover
+                                                                }
+                                                                alt={
+                                                                    chapter?.content
+                                                                }
+                                                                width={108}
+                                                                height={72}
+                                                                loading="eager"
+                                                                className="w-full aspect-[3/2] h-full object-cover bg-neutral-200 rounded-md"
+                                                            />
+                                                            {chapter?.vip !==
+                                                                currentUser?.vip &&
+                                                                chapter?.vip && (
                                                                     <div>
                                                                         <div className="p-1.5 bg-white/80 rounded-full absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 z-10">
                                                                             <IconLock />
                                                                         </div>
-                                                                        <div className="absolute w-full h-full inset-0 bg-black/50" />
+                                                                        <div className="absolute w-full h-full inset-0 bg-black/50 rounded-md" />
                                                                     </div>
                                                                 )}
-                                                            </div>
-                                                            <figcaption className="mt-2 font-bold gap-2.5 flex">
-                                                                {
-                                                                    chapter?.content
-                                                                }
+                                                        </div>
+                                                        <div className="flex flex-col flex-grow">
+                                                            <div className="flex items-center mt-2 gap-3 sm:gap-4">
+                                                                <div className="font-bold gap-2.5 line-clamp-1 text-sm sm:text-base mr-1">
+                                                                    {
+                                                                        chapter?.content
+                                                                    }
+                                                                </div>
+
                                                                 {chapter?.vip !==
                                                                     currentUser?.vip &&
                                                                     chapter?.vip && (
-                                                                        <div className="flex gap-1 rounded-full items-center primary-color border sm:py-[0.125rem] h-4 sm:h-6 sm:px-2 justify-center border-primary-color">
+                                                                        <div className="flex gap-1 rounded-full items-center primary-color border sm:py-[0.125rem] h-4 sm:h-6 sm:px-2 justify-center sm:border-primary-color border-transparent mr-2">
                                                                             <IconLock className="size-4" />
-                                                                            <span className="font-medium text-sm">
+                                                                            <span className="font-medium text-sm hidden sm:block">
                                                                                 Vip
                                                                             </span>
                                                                         </div>
                                                                     )}
-                                                            </figcaption>
-                                                        </figure>
-                                                        <div className="mt-auto flex gap-4 text-sm mx-3 mb-3">
-                                                            <span
-                                                                className="flex gap-1 items-center"
-                                                                title={chapter?.views?.toString()}
-                                                            >
-                                                                <IconEye className="size-4" />
-                                                                <span>
-                                                                    {
-                                                                        chapter?.views
-                                                                    }
+                                                            </div>
+
+                                                            <div className="mt-auto flex gap-2 sm:gap-4 text-sm mx-3 mb-1.5 sm:mb-3 justify-end">
+                                                                <span
+                                                                    className="flex gap-1 items-center"
+                                                                    title={chapter?.views?.toString()}
+                                                                >
+                                                                    <IconEye className="size-4" />
+                                                                    <span>
+                                                                        {
+                                                                            chapter?.views
+                                                                        }
+                                                                    </span>
                                                                 </span>
-                                                            </span>
-                                                            <span
-                                                                className="flex gap-1 items-center"
-                                                                title={chapter?.likes?.toString()}
-                                                            >
-                                                                <IconHeart className="size-4" />
-                                                                <span>
-                                                                    {
-                                                                        chapter?.likes
-                                                                    }
+                                                                <span
+                                                                    className="flex gap-1 items-center"
+                                                                    title={chapter?.likes?.toString()}
+                                                                >
+                                                                    <IconHeart className="size-4" />
+                                                                    <span>
+                                                                        {
+                                                                            chapter?.likes
+                                                                        }
+                                                                    </span>
                                                                 </span>
-                                                            </span>
-                                                            <span
-                                                                className="flex gap-1 items-center"
-                                                                title={chapter?.comments?.toString()}
-                                                            >
-                                                                <IconComment className="size-4" />
-                                                                <span>
-                                                                    {
-                                                                        chapter?.comments
-                                                                    }
+                                                                <span
+                                                                    className="flex gap-1 items-center"
+                                                                    title={chapter?.comments?.toString()}
+                                                                >
+                                                                    <IconComment className="size-4" />
+                                                                    <span>
+                                                                        {
+                                                                            chapter?.comments
+                                                                        }
+                                                                    </span>
                                                                 </span>
-                                                            </span>
-                                                            <span
-                                                                className="flex gap-1 items-center"
-                                                                title={dayjs(
-                                                                    chapter?.createdAt
-                                                                ).fromNow()}
-                                                            >
-                                                                <IconOclock />
-                                                                <span>
-                                                                    {dayjs(
+                                                                <span
+                                                                    className="flex gap-1 items-center"
+                                                                    title={dayjs(
                                                                         chapter?.createdAt
                                                                     ).fromNow()}
+                                                                >
+                                                                    <IconOclock />
+                                                                    <span className="line-clamp-1">
+                                                                        {dayjs(
+                                                                            chapter?.createdAt
+                                                                        ).fromNow()}
+                                                                    </span>
                                                                 </span>
-                                                            </span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </li>
