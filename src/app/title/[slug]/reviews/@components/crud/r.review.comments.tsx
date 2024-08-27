@@ -106,20 +106,42 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                                                 </AvatarFallback>
                                             </Avatar>
                                         </Link>
-                                        <div className="flex flex-col gap-1">
-                                            <Link href="/author">
-                                                <h3 className="font-medium line-clamp-1 break-all">
-                                                    {specialReview.author?.name}
-                                                    <span className="text-sm opacity-70 ml-1">
-                                                        @
+                                        <div className="flex flex-col gap-1 w-full">
+                                            <div className="flex justify-between items-center">
+                                                <Link href="/author">
+                                                    <h3 className="font-medium line-clamp-1 break-all">
                                                         {
                                                             specialReview.author
                                                                 ?.name
                                                         }
-                                                    </span>
-                                                </h3>
-                                            </Link>
-                                            <div className="flex -ml-0.5">
+                                                        <span className="text-sm opacity-70 ml-1">
+                                                            @
+                                                            {
+                                                                specialReview
+                                                                    .author
+                                                                    ?.name
+                                                            }
+                                                        </span>
+                                                    </h3>
+                                                </Link>
+                                                <div className="flex">
+                                                    <BtnUReview
+                                                        setFormUpdate={
+                                                            setFormUpdate
+                                                        }
+                                                        setHiddenReviewCurrent={
+                                                            setHiddenReviewCurrent
+                                                        }
+                                                    />
+                                                    <DReviewComments
+                                                        dId={specialReview.id}
+                                                        fetchReviews={
+                                                            fetchReviews
+                                                        }
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="flex -ml-0.5 -mt-1">
                                                 <RatingReadOnly
                                                     stars={specialReview.rated}
                                                 />
@@ -130,18 +152,6 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                                                 </div>
                                             </div>
                                             <p>{specialReview.content}</p>
-                                        </div>
-                                        <div className="flex ml-auto items-start">
-                                            <BtnUReview
-                                                setFormUpdate={setFormUpdate}
-                                                setHiddenReviewCurrent={
-                                                    setHiddenReviewCurrent
-                                                }
-                                            />
-                                            <DReviewComments
-                                                dId={specialReview.id}
-                                                fetchReviews={fetchReviews}
-                                            />
                                         </div>
                                     </div>
                                 </div>

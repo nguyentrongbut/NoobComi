@@ -93,11 +93,11 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                             {comment?.author.name}
                                         </Link>
                                         <div className="opacity-70 text-xs sm:text-sm flex gap-1">
-                                            <Link href="/">
+                                            <Link href="/" className="line-clamp-1">
                                                 {`@${comment?.author?.name}`}
                                             </Link>
                                             <span>•</span>
-                                            <span>
+                                            <span className="line-clamp-1">
                                                 {dayjs(
                                                     comment?.updatedAt
                                                 ).fromNow()}
