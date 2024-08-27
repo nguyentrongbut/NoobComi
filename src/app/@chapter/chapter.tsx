@@ -96,7 +96,7 @@ const ChapterTab = (props: any) => {
                                                         className="w-full aspect-[3/2] h-full object-cover bg-neutral-200 rounded-md"
                                                     />
                                                 </div>
-                                                <div className="flex flex-col flex-grow">
+                                                <div className="flex flex-col w-full">
                                                     <div className="mt-2 font-bold gap-2.5 line-clamp-1 text-sm sm:text-base mr-1">
                                                         {chapter?.content}
                                                     </div>
@@ -176,7 +176,7 @@ const ChapterTab = (props: any) => {
                                                                     </div>
                                                                 )}
                                                         </div>
-                                                        <div className="flex flex-col flex-grow">
+                                                        <div className="flex flex-col w-full">
                                                             <div className="flex items-center mt-2 gap-3 sm:gap-4">
                                                                 <div className="font-bold gap-2.5 line-clamp-1 text-sm sm:text-base mr-1">
                                                                     {
