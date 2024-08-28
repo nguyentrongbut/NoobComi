@@ -86,19 +86,19 @@ export default async function RootLayout({
                     <div className="absolute inset-0 banner-overlay--title aspect-[3.5/1] min-h-40"></div>
                 </div>
                 <div className="relative h-auto sm:h-80 -mt-24 sm:-mt-40">
-                    <div className="wrapper relative left-0 flex flex-col sm:flex-row justify-center sm:justify-start space-x-4">
+                    <div className="wrapper relative left-0 flex flex-col sm:flex-row justify-center sm:justify-start space-x-0 sm:space-x-4">
                         <Image
                             src={data?.cover}
                             alt={data?.title}
                             width={230}
                             height={320}
                             loading="eager"
-                            className="object-cover min-h-0 h-48 sm:h-80 rounded-md aspect-[5/7] ring-4 ring-black w-[137px] sm:w-auto mx-auto"
+                            className="object-cover min-h-0 h-48 sm:h-80 rounded-md aspect-[5/7] ring-4 ring-black w-[137px] sm:w-auto mx-auto sm:mx-0"
                         ></Image>
 
                         <div className="sm:grid grid-rows-[10rem_1fr_auto]">
                             <div></div>
-                            <div>
+                            <div className="px-2">
                                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mt-4 sm:mt-2 xl:mt-4 sm:line-clamp-3 md:line-clamp-2 xl:line-clamp-1 text-center sm:text-start">
                                     {data?.title}
                                 </h2>
