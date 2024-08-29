@@ -9,9 +9,9 @@ import IconHeart from "@/components/icon/icon.heart";
 import IconEye from "@/components/icon/icon.eye";
 import IconComment from "@/components/icon/icon.comment";
 import { Button } from "@/components/ui/button";
-import IconShare from "@/components/icon/icon.share";
 import Tab from "@/app/title/@component/tab";
 import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
+import BtnShare from "@/app/title/@component/btn.share";
 
 type Props = {
     params: { slug: string };
@@ -182,10 +182,7 @@ export default async function RootLayout({
                             <IconHeart></IconHeart>
                             <span className="ml-1">Support</span>
                         </Button>
-                        <Button className="flex primary-color hover:bg-blue-100 bg-white p-2 font-medium sm:text-base">
-                            <IconShare></IconShare>
-                            <span className="ml-1">Share</span>
-                        </Button>
+                        <BtnShare title={data.title} cover={data.cover} totalFollow={data.follow} totalLike={data.likes} totalView={data.views} totalComment={data.totalComment} author={data.author.name} params={params}></BtnShare>
                         <Button className="sm:flex primary-color hover:bg-blue-100 bg-white font-medium p-0 text-base hidden">
                             <Link
                                 href={`/title/${params}/reviews`}
