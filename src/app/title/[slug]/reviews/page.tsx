@@ -1,6 +1,10 @@
 import TabContent from "@/app/title/@component/tab.content.wrapper";
+<<<<<<< HEAD
 import RReviewComments from "@/app/title/[slug]/reviews/@component/crud/r.review.comments";
 import { sendRequest } from "@/utils/api";
+=======
+import RReviewComments from "@/app/title/[slug]/reviews/@components/crud/r.review.comments";
+>>>>>>> aecc83819a7ba90d04efdd55f4556534720dd068
 
 const ReviewsTab = async (props: any) => {
     const { params } = props;

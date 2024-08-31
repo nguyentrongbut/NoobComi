@@ -1,3 +1,4 @@
+'use client'
 import React, { useCallback } from "react";
 import IconUpdate from "@/components/icon/icon.update";
 

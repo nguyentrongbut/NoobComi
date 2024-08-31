@@ -11,7 +11,7 @@ import IconComment from "@/components/icon/icon.comment";
 import { Button } from "@/components/ui/button";
 import IconShare from "@/components/icon/icon.share";
 import Tab from "@/app/title/@component/tab";
-import RatingReadOnly from "@/app/title/[slug]/reviews/@component/rating.read.only";
+import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
 
 type Props = {
     params: { slug: string };
@@ -81,69 +81,80 @@ export default async function RootLayout({
                         alt={data.title}
                         loading="eager"
                         priority={true}
-                        className="w-full object-cover h-full object-center"
+                        className="w-full object-cover sm:h-full object-center aspect-[3.5/1] min-h-40"
                     ></Image>
-                    <div className="absolute inset-0 banner-overlay--title"></div>
+                    <div className="absolute inset-0 banner-overlay--title aspect-[3.5/1] min-h-40"></div>
                 </div>
-                <div className="relative h-52 sm:h-80 -mt-24 sm:-mt-40">
-                    <div className="wrapper relative left-0 flex justify-center sm:justify-start space-x-4">
+                <div className="relative h-auto sm:h-80 -mt-24 sm:-mt-40">
+                    <div className="wrapper relative left-0 flex flex-col sm:flex-row justify-center sm:justify-start space-x-0 sm:space-x-4">
                         <Image
                             src={data?.cover}
                             alt={data?.title}
                             width={230}
                             height={320}
                             loading="eager"
-                            className="object-cover min-h-0 h-48 sm:h-80 rounded-md aspect-[5/7] ring-4 ring-black"
+                            className="object-cover min-h-0 h-48 sm:h-80 rounded-md aspect-[5/7] ring-4 ring-black w-[137px] sm:w-auto mx-auto sm:mx-0"
                         ></Image>
-                        <div className="hidden sm:grid grid-rows-[10rem_1fr_auto]">
+
+                        <div className="sm:grid grid-rows-[10rem_1fr_auto]">
                             <div></div>
-                            <h2
-                                className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold whitespace-nowrap overflow-hidden text-ellipsis mt-2 xl:mt-4"
-                                title={data?.title}
-                            >
-                                {data?.title}
-                            </h2>
-                            <ul className="flex text-base space-x-4 justify-start">
-                                <li className="flex whitespace-nowrap items-center shadow rounded-full py-0.5 px-2 border border-[#a3a3a3] hover:border-[#737373] transition-[border]">
-                                    <IconAuthor className="flex-shrink-0 primary-color"></IconAuthor>
-                                    <Link href="/author" className="ml-2">
+                            <div className="px-2">
+                                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mt-4 sm:mt-2 xl:mt-4 sm:line-clamp-3 md:line-clamp-2 xl:line-clamp-1 text-center sm:text-start">
+                                    {data?.title}
+                                </h2>
+                            </div>
+                            <ul className="flex text-base space-x-4 justify-start sm:flex-row flex-col items-center">
+                                <li className="flex gap-2 sm:gap-0 whitespace-nowrap items-center sm:shadow rounded-full py-0.5 px-2 sm:border sm:border-[#a3a3a3] sm:hover:border-[#737373] transition-[border] text-center mx-auto sm:mx-0 mt-3 sm:mt-0">
+                                    <IconAuthor className="flex-shrink-0 primary-color sm:hidden lg:block"></IconAuthor>
+                                    <Link
+                                        href="/author"
+                                        className="lg:ml-2 sm:w-16 sm:overflow-hidden sm:text-ellipsis sm:whitespace-nowrap lg:w-auto lg:overflow-auto xl:whitespace-normal font-medium text-sm sm:text-base sm:font-normal"
+                                    >
                                         {data?.author?.name}
                                     </Link>
                                 </li>
-                                <li className="flex items-center gap-4">
-                                    <span
-                                        className="flex gap-2 items-center"
-                                        title={data?.follow?.toString()}
-                                    >
-                                        <IconSave className="primary-color"></IconSave>
-                                        <span>
-                                            {formatNumber(data?.follow)}
+                                <li className="flex sm:flex-row flex-col-reverse items-center sm:gap-4 gap-2 mt-3 sm:mt-0">
+                                    <div className="flex items-center gap-4 justify-center sm:justify-normal">
+                                        <span
+                                            className="flex gap-2 items-center text-sm sm:text-base"
+                                            title={data?.follow?.toString()}
+                                        >
+                                            <IconSave className="primary-color size-5 sm:size-6"></IconSave>
+                                            <span>
+                                                {formatNumber(data?.follow)}
+                                            </span>
                                         </span>
-                                    </span>
-                                    <span
-                                        className="flex gap-2 items-center"
-                                        title={data?.likes?.toString()}
-                                    >
-                                        <IconHeart className="primary-color"></IconHeart>
-                                        <span>{formatNumber(data?.likes)}</span>
-                                    </span>
-                                    <span
-                                        className="flex gap-2 items-center"
-                                        title={data?.views?.toString()}
-                                    >
-                                        <IconEye className="primary-color"></IconEye>
-                                        <span>{formatNumber(data?.views)}</span>
-                                    </span>
-                                    <span
-                                        className="flex gap-2 items-center"
-                                        title={data?.totalComment?.toString()}
-                                    >
-                                        <IconComment className="primary-color"></IconComment>
-                                        <span>
-                                            {formatNumber(data?.totalComment)}
+                                        <span
+                                            className="flex gap-2 items-center text-sm sm:text-base"
+                                            title={data?.likes?.toString()}
+                                        >
+                                            <IconHeart className="primary-color size-5 sm:size-6"></IconHeart>
+                                            <span>
+                                                {formatNumber(data?.likes)}
+                                            </span>
                                         </span>
-                                    </span>
-                                    <span className="-mt-0.5 flex items-center gap-2">
+                                        <span
+                                            className="flex gap-2 items-center text-sm sm:text-base"
+                                            title={data?.views?.toString()}
+                                        >
+                                            <IconEye className="primary-color size-5 sm:size-6"></IconEye>
+                                            <span>
+                                                {formatNumber(data?.views)}
+                                            </span>
+                                        </span>
+                                        <span
+                                            className="flex gap-2 items-center text-sm sm:text-base"
+                                            title={data?.totalComment?.toString()}
+                                        >
+                                            <IconComment className="primary-color size-5 sm:size-6"></IconComment>
+                                            <span>
+                                                {formatNumber(
+                                                    data?.totalComment
+                                                )}
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div className="sm:-mt-[3px] flex items-center gap-2 sm:hidden lg:flex">
                                         <RatingReadOnly
                                             stars={data?.rating}
                                             half={true}
@@ -155,28 +166,27 @@ export default async function RootLayout({
                                                 : "0.0"}
                                             )
                                         </span>
-                                    </span>
+                                    </div>
                                 </li>
-                                <li></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div className="wrapper">
-                    <div className="mt-2 sm:mt-4 flex gap-4">
-                        <Button className="flex bg-primary-color hover:opacity-90 w-[228.5625px] font-medium text-base">
+                    <div className="mt-5 sm:mt-4 flex gap-2 sm:gap-4 justify-center sm:justify-normal">
+                        <Button className="flex bg-primary-color hover:opacity-90 sm:w-[228.5625px] font-medium sm:text-base p-2 sm:p-0">
                             <IconSave></IconSave>
                             <span className="ml-1">Follow</span>
                         </Button>
-                        <Button className="flex bg-primary-color hover:opacity-90 p-2 font-medium text-base">
+                        <Button className="flex bg-primary-color hover:opacity-90 p-2 font-medium sm:text-base">
                             <IconHeart></IconHeart>
                             <span className="ml-1">Support</span>
                         </Button>
-                        <Button className="flex primary-color hover:bg-blue-100 bg-white p-2 font-medium text-base">
+                        <Button className="flex primary-color hover:bg-blue-100 bg-white p-2 font-medium sm:text-base">
                             <IconShare></IconShare>
                             <span className="ml-1">Share</span>
                         </Button>
-                        <Button className="flex primary-color hover:bg-blue-100 bg-white font-medium p-0 text-base">
+                        <Button className="sm:flex primary-color hover:bg-blue-100 bg-white font-medium p-0 text-base hidden">
                             <Link
                                 href={`/title/${params}/reviews`}
                                 className="p-2"
@@ -185,7 +195,7 @@ export default async function RootLayout({
                             </Link>
                         </Button>
                     </div>
-                    <ul className="flex mt-4 gap-1">
+                    <ul className="flex mt-4 gap-1 flex-wrap">
                         {data?.genres?.map((genres) => {
                             return (
                                 <li

@@ -1,16 +1,15 @@
 "use client";
-import React, { useCallback, useEffect, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import RatingReadOnly from "@/app/title/[slug]/reviews/@component/rating.read.only";
-import CReviewComments from "@/app/title/[slug]/reviews/@component/crud/c.review.comments";
-import UReviewComments from "@/app/title/[slug]/reviews/@component/crud/u.review.comments";
-import DReviewComments from "@/app/title/[slug]/reviews/@component/crud/d.review.comments";
-import { sendRequest } from "@/utils/api";
+import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
+import CReviewComments from "@/app/title/[slug]/reviews/@components/crud/c.review.comments";
+import UReviewComments from "@/app/title/[slug]/reviews/@components/crud/u/u.review.comments";
+import DReviewComments from "@/app/title/[slug]/reviews/@components/crud/d.review.comments";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import BtnUReview from "@/app/title/[slug]/reviews/@component/crud/btn.u.review";
+import BtnUReview from "@/app/title/[slug]/reviews/@components/crud/u/btn.u.review";
 
 dayjs.extend(relativeTime);
 
@@ -126,7 +125,7 @@ const RReviewComments = React.memo(
                                                     />
                                                     <div className="text-neutral-500 whitespace-nowrap text-sm ml-2 mt-0.5">
                                                         {dayjs(
-                                                            specialReview.updateAt
+                                                            specialReview.updatedAt
                                                         ).fromNow()}
                                                     </div>
                                                 </div>
@@ -183,7 +182,7 @@ const RReviewComments = React.memo(
                                             />
                                             <div className="text-neutral-500 whitespace-nowrap text-sm mt-0.5 ml-2">
                                                 {dayjs(
-                                                    review.updateAt
+                                                    review.updatedAt
                                                 ).fromNow()}
                                             </div>
                                         </div>

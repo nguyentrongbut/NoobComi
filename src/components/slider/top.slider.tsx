@@ -22,7 +22,7 @@ const TopSlider = (props: any) => {
     const [isEnd, setIsEnd] = useState(false);
 
     return (
-        <section className="wrapper my-12 lg:my-8">
+        <section className="wrapper my-6 sm:my-8 lg:my-12">
             <div className="flex items-center justify-between mb-6">
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-semibold flex-grow">
                     <Link href="/search">{title}</Link>
@@ -41,7 +41,7 @@ const TopSlider = (props: any) => {
                 // install Swiper modules
                 modules={[Scrollbar, A11y]}
                 spaceBetween={20}
-                slidesPerView={3.5}
+                slidesPerView={2.5}
                 slidesPerGroup={2}
                 // pagination={{ clickable: true }}
                 // scrollbar={{ draggable: true }}
@@ -57,6 +57,12 @@ const TopSlider = (props: any) => {
                     1024: {
                         slidesPerView: 5,
                     },
+                    640: {
+                        slidesPerView: 4.5,
+                    },
+                    500: {
+                        slidesPerView: 3.5
+                    }
                 }}
                 onReachBeginning={() => {
                     setIsBeginning(true);
@@ -95,7 +101,6 @@ const TopSlider = (props: any) => {
                                         data.title
                                     )}-${data.id}.html`}
                                 >
-                                    {/* mt-2 text-sm line-clamp-2 */}
                                     <figcaption className="line-clamp-fix mt-2 text-sm group-hover:opacity-85 transition-opacity duration-300 delay-200">
                                         {data.title}
                                     </figcaption>
