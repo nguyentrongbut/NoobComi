@@ -8,19 +8,20 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
+import { useRouter } from "next/navigation";
 
 const UReviewComments = React.memo((props: any) => {
     const {
         uId,
         currentIdUser,
         id,
-        fetchReviews,
         setHiddenReviewCurrent,
         setFormUpdate,
         currentRating,
         currentReview,
         formUpdate,
     } = props;
+    const router = useRouter();
 
     const [uRating, setURating] = useState(currentRating);
     const [uReview, setUReview] = useState(currentReview);
@@ -61,7 +62,7 @@ const UReviewComments = React.memo((props: any) => {
                 });
 
                 if (data) {
-                    await fetchReviews();
+                    router.refresh();
                     setFormUpdate(false);
                     setHiddenReviewCurrent(true);
                     toast({
@@ -81,7 +82,6 @@ const UReviewComments = React.memo((props: any) => {
             id,
             uRating,
             uReview,
-            fetchReviews,
             setFormUpdate,
             setHiddenReviewCurrent,
         ]

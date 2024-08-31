@@ -9,13 +9,15 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
+import { useRouter } from "next/navigation";
 
 const CReviewComments = React.memo((props: any) => {
-    const { id, currentIdUser, fetchReviews, hasReviewId } = props;
+    const { id, currentIdUser, hasReviewId } = props;
     const [yourReviewComment, setYourReviewComment] = useState("");
     const [rating, setRating] = useState<number | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const isSubmittingRef = useRef(false);
+    const router = useRouter();
 
     const handleSubmit = useCallback(
         async (e: React.FormEvent<HTMLFormElement>) => {
@@ -54,7 +56,7 @@ const CReviewComments = React.memo((props: any) => {
                 });
 
                 if (data) {
-                    await fetchReviews();
+                    router.refresh();
                     setYourReviewComment("");
                     toast({
                         title: "Success!",
@@ -67,14 +69,7 @@ const CReviewComments = React.memo((props: any) => {
             setIsSubmitting(false);
             isSubmittingRef.current = false;
         },
-        [
-            id,
-            currentIdUser,
-            fetchReviews,
-            hasReviewId,
-            rating,
-            yourReviewComment,
-        ]
+        [id, currentIdUser, hasReviewId, rating, yourReviewComment]
     );
 
     return (

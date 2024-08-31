@@ -18,9 +18,11 @@ import Image from "next/image";
 import { toast } from "@/components/ui/use-toast";
 import IconSuccess from "@/components/icon/icon.success";
 import IconLoading from "@/components/icon/icon.loading";
+import { useRouter } from "next/navigation";
 
 const DReviewComments = React.memo((props: any) => {
-    const { dId, fetchReviews } = props;
+    const { dId } = props;
+    const router = useRouter();
 
     const handleSubmit = useCallback(async () => {
         toast({
@@ -35,14 +37,14 @@ const DReviewComments = React.memo((props: any) => {
         });
 
         if (data) {
-            await fetchReviews();
+            router.refresh();
             toast({
                 title: "Success!",
                 description: "Your review was successfully deleted.",
                 icon: <IconSuccess />,
             });
         }
-    }, [dId, fetchReviews]);
+    }, [dId]);
 
     return (
         <span className="p-1 cursor-pointer">
