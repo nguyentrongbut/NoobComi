@@ -37,7 +37,7 @@ const DReviewComments = React.memo((props: any) => {
         });
 
         if (data) {
-            router.refresh();
+            await router.refresh();
             toast({
                 title: "Success!",
                 description: "Your review was successfully deleted.",

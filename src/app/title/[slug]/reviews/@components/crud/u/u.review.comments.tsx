@@ -62,7 +62,7 @@ const UReviewComments = React.memo((props: any) => {
                 });
 
                 if (data) {
-                    router.refresh();
+                    await router.refresh();
                     setFormUpdate(false);
                     setHiddenReviewCurrent(true);
                     toast({
