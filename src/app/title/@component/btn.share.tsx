@@ -24,9 +24,7 @@ import { Separator } from "@/components/ui/separator";
 import { useEffect, useState } from "react";
 import IconFacebook from "@/components/icon/icon.facebook";
 import IconTwitter from "@/components/icon/icon.twitter";
-import IconDiscord from "@/components/icon/icon.discord";
 import IconLinkedIn from "@/components/icon/icon.linkedin";
-import IconInstagram from "@/components/icon/icon.instagram";
 import Link from "next/link";
 
 const BtnShare = (props: any) => {
@@ -69,9 +67,6 @@ const BtnShare = (props: any) => {
             return number?.toString();
         }
     }
-    const shareOnPlatform = (platformUrl: string) => {
-        window.open(platformUrl, "_blank", "noopener,noreferrer");
-    };
 
     const platforms = [
         {
