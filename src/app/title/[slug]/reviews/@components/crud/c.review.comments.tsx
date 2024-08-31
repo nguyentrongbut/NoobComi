@@ -56,7 +56,7 @@ const CReviewComments = React.memo((props: any) => {
                 });
 
                 if (data) {
-                    await router.refresh();
+                    await Promise.resolve(router.refresh());
                     setYourReviewComment("");
                     toast({
                         title: "Success!",
