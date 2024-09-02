@@ -1,0 +1,5 @@
+{
+    "vim.leader": " ",
+    "vim.easymotion": true,
+    "vim.easymotionIncSearchForegroundColor": "#b4e5fa"
+}

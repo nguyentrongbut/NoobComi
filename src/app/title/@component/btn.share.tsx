@@ -45,7 +45,7 @@ const BtnShare = (props: any) => {
             .replace("/comments", "")
             .replace("/reviews", "");
         setUrl(currentUrl);
-    }, [window.location.href]);
+    }, []);
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(url);
@@ -144,7 +144,7 @@ const BtnShare = (props: any) => {
                                     title={totalComment}
                                 >
                                     <IconComment className="primary-color"></IconComment>
-                                    <span>{formatNumber(totalComment)}</span>
+                                    <span>{totalComment}</span>
                                 </span>
                             </div>
                             <div className="flex gap-2 py-1 mt-2">

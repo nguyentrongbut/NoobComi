@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import IconUpdate from "@/components/icon/icon.update";
 import IconUploadImage from "@/components/icon/icon.upload.image";
 import { Button } from "@/components/ui/button";
@@ -8,14 +8,20 @@ import { sendRequest } from "@/utils/api";
 import { useState } from "react";
 
 const UComment = (props: any) => {
-    const {commentId, toggleFormEditVisibility, messageComment, fetchComments, setLoading} = props;
-    const [uComment, setUComment] = useState(messageComment)
+    const {
+        commentId,
+        toggleFormEditVisibility,
+        messageComment,
+        fetchComments,
+        setLoading,
+    } = props;
+    const [uComment, setUComment] = useState(messageComment);
     const handleCancel = () => {
-        toggleFormEditVisibility(commentId)
+        toggleFormEditVisibility(commentId);
     };
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setLoading(true)
+        setLoading(true);
         if (uComment !== "") {
             const data = await sendRequest<CommentType>({
                 url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/comments/${commentId}`,
@@ -29,7 +35,7 @@ const UComment = (props: any) => {
                 await fetchComments();
                 setUComment("");
                 handleCancel();
-                setLoading(false)
+                setLoading(false);
             }
         }
     };

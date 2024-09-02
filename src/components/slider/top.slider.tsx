@@ -14,13 +14,35 @@ import { useRef, useState } from "react";
 import IconArrowPrev from "@/components/icon/icon.arrow.prev";
 import IconArrowNext from "@/components/icon/icon.arrow.next";
 import IconArrowPrev2 from "@/components/icon/icon.arrow.prev2";
-import { covertSlugUrl } from "@/utils/api";
+import { covertSlugUrl, sendRequest } from "@/utils/api";
+import { useRouter } from "next/navigation";
 const TopSlider = (props: any) => {
     const { data, title, linkPage, showLinkPage } = props;
     const swiperRef = useRef<any>(null);
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
+    const router = useRouter();
 
+    async function incrementViews(comic: ITopComics) {
+        const userId = 9;
+        if (!userId) {
+            return;
+        }
+        const viewsBy = comic.viewsBy || [];
+        if (!viewsBy.includes(userId)) {
+            const updateViews = await sendRequest({
+                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/comics/${comic.id}`,
+                method: "PATCH",
+                body: {
+                    views: comic?.views + 1,
+                    viewsBy: [...viewsBy, userId],
+                },
+            });
+            if (updateViews) {
+                router.refresh();
+            }
+        }
+    }
     return (
         <section className="wrapper my-6 sm:my-8 lg:my-12">
             <div className="flex items-center justify-between mb-6">
@@ -61,8 +83,8 @@ const TopSlider = (props: any) => {
                         slidesPerView: 4.5,
                     },
                     500: {
-                        slidesPerView: 3.5
-                    }
+                        slidesPerView: 3.5,
+                    },
                 }}
                 onReachBeginning={() => {
                     setIsBeginning(true);
@@ -82,8 +104,9 @@ const TopSlider = (props: any) => {
                                 <Link
                                     href={`/title/${covertSlugUrl(
                                         data.title
-                                    )}-${data.id}.html`}
+                                    )}-${data.id}.html/chapters`}
                                     className="aspect-[5/7] block h-full group-hover:opacity-85 transition-opacity"
+                                    onClick={() => incrementViews(data)}
                                 >
                                     <Image
                                         src={data.cover}

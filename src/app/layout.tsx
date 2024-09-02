@@ -4,7 +4,6 @@ import "./globals.css";
 import AppHeader from "@/components/header/app.header";
 import NavbarMobile from "@/components/header/navbar.mobile";
 import AppFooter from "@/components/footer/app.footer";
-import Scroll from "@/components/scroll/scroll";
 import { Toaster } from "@/components/ui/toaster";
 
 const poppins = Poppins({
@@ -24,7 +23,6 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <Scroll />
             <body className={poppins.className}>
                 <AppHeader />
                 {children}

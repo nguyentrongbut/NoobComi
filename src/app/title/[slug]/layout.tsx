@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import Tab from "@/app/title/@component/tab";
 import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
 import BtnShare from "@/app/title/@component/btn.share";
+import BtnToggleFollow from "@/app/title/@component/btn.toggle.follow";
 
 type Props = {
     params: { slug: string };
@@ -24,6 +25,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const res = await sendRequest<ITopComics>({
         url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/all-comics/${id}`,
         method: "GET",
+        nextOption: {
+            cache: "no-store",
+        },
     });
 
     return {
@@ -147,11 +151,7 @@ export default async function RootLayout({
                                             title={data?.totalComment?.toString()}
                                         >
                                             <IconComment className="primary-color size-5 sm:size-6"></IconComment>
-                                            <span>
-                                                {formatNumber(
-                                                    data?.totalComment
-                                                )}
-                                            </span>
+                                            <span>{formatNumber(data?.totalComment)}</span>
                                         </span>
                                     </div>
                                     <div className="sm:-mt-[3px] flex items-center gap-2 sm:hidden lg:flex">
@@ -162,8 +162,8 @@ export default async function RootLayout({
                                         <span className="mt-0.5 text-sm opacity-70">
                                             (
                                             {data?.rating
-                                                ? `${data.rating}`
-                                                : "0.0"}
+                                                ? `${data.rating.toFixed(1)}`
+                                                : "0.00"}
                                             )
                                         </span>
                                     </div>
@@ -174,15 +174,21 @@ export default async function RootLayout({
                 </div>
                 <div className="wrapper">
                     <div className="mt-5 sm:mt-4 flex gap-2 sm:gap-4 justify-center sm:justify-normal">
-                        <Button className="flex bg-primary-color hover:opacity-90 sm:w-[228.5625px] font-medium sm:text-base p-2 sm:p-0">
-                            <IconSave></IconSave>
-                            <span className="ml-1">Follow</span>
-                        </Button>
+                        <BtnToggleFollow id={id} totalFollow={data?.follow} followBy={data?.followBy}></BtnToggleFollow>
                         <Button className="flex bg-primary-color hover:opacity-90 p-2 font-medium sm:text-base">
                             <IconHeart></IconHeart>
                             <span className="ml-1">Support</span>
                         </Button>
-                        <BtnShare title={data.title} cover={data.cover} totalFollow={data.follow} totalLike={data.likes} totalView={data.views} totalComment={data.totalComment} author={data.author.name} params={params}></BtnShare>
+                        <BtnShare
+                            title={data.title}
+                            cover={data.cover}
+                            totalFollow={data.follow}
+                            totalLike={data.likes}
+                            totalView={data.views}
+                            totalComment={data.totalComment}
+                            author={data.author.name}
+                            params={params}
+                        ></BtnShare>
                         <Button className="sm:flex primary-color hover:bg-blue-100 bg-white font-medium p-0 text-base hidden">
                             <Link
                                 href={`/title/${params}/reviews`}

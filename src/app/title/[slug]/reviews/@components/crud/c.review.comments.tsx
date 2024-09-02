@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
+import { useRouter } from "next/navigation";
 
 const CReviewComments = React.memo((props: any) => {
     const { id, currentIdUser, fetchReviews, hasReviewId } = props;
@@ -16,6 +17,7 @@ const CReviewComments = React.memo((props: any) => {
     const [rating, setRating] = useState<number | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const isSubmittingRef = useRef(false);
+    const router = useRouter();
 
     const handleSubmit = useCallback(
         async (e: React.FormEvent<HTMLFormElement>) => {
@@ -61,6 +63,7 @@ const CReviewComments = React.memo((props: any) => {
                         description: "You have successfully reviewed",
                         icon: <IconSuccess />,
                     });
+                    router.refresh();
                 }
             }
 

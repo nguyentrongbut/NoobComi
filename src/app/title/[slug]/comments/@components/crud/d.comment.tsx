@@ -1,9 +1,11 @@
 "use client";
 import IconDelete from "@/components/icon/icon.delete";
 import { sendRequest } from "@/utils/api";
+import { useRouter } from "next/navigation";
 
 const DComment = (props: any) => {
     const { commentId, fetchComments, setLoading } = props;
+    const router = useRouter();
     const deleteComment = async () => {
         setLoading(true);
         const data = await sendRequest<IReviews>({
@@ -13,6 +15,7 @@ const DComment = (props: any) => {
         if (data) {
             await fetchComments();
             setLoading(false);
+            router.refresh();
         }
     };
     return (

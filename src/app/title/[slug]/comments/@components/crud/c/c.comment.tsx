@@ -7,12 +7,14 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { sendRequest } from "@/utils/api";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const CComment = (props: any) => {
     const { currentIdUser, id, fetchComments, yourParentId, setLoading } = props;
     const [currentUser, setCurrentUser] = useState<IUser | null>(null);
     const [yourComment, setYourComment] = useState("");
+    const router = useRouter();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -43,6 +45,7 @@ const CComment = (props: any) => {
                 await fetchComments();
                 setYourComment("");
                 setLoading(false)
+                router.refresh();
             }
         }
     };
