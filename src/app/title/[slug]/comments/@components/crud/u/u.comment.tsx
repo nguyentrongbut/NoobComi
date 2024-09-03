@@ -12,7 +12,6 @@ const UComment = (props: any) => {
         commentId,
         toggleFormEditVisibility,
         messageComment,
-        fetchComments,
         setLoading,
     } = props;
     const [uComment, setUComment] = useState(messageComment);
@@ -32,7 +31,6 @@ const UComment = (props: any) => {
                 },
             });
             if (data) {
-                await fetchComments();
                 setUComment("");
                 handleCancel();
                 setLoading(false);

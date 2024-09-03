@@ -17,7 +17,6 @@ const RCommentList: React.FC<RCommentListProps> = ({
     parentId = null,
     className,
     currentIdUser,
-    fetchComments,
     id,
     setLoading,
 }) => {
@@ -112,7 +111,6 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                 messageComment={
                                                     comment?.message
                                                 }
-                                                fetchComments={fetchComments}
                                                 setLoading={setLoading}
                                             ></UComment>
                                         ) : (
@@ -133,9 +131,6 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                                     ></BtnCCommentIcon>
                                                     <IconDotDropdown
                                                         commentId={comment?.id}
-                                                        fetchComments={
-                                                            fetchComments
-                                                        }
                                                         currentIdUser={
                                                             currentIdUser
                                                         }
@@ -161,7 +156,6 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                             }
                                             yourParentId={comment.id}
                                             currentIdUser={currentIdUser}
-                                            fetchComments={fetchComments}
                                             id={id}
                                         ></CCommentIcon>
                                     </div>
@@ -189,7 +183,6 @@ const RCommentList: React.FC<RCommentListProps> = ({
                                             : "max-h-[1000px]"
                                     } overflow-hidden transition-max-h`}
                                     currentIdUser={currentIdUser}
-                                    fetchComments={fetchComments}
                                     id={id}
                                     setLoading={setLoading}
                                 />

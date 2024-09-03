@@ -63,7 +63,6 @@ const UReviewComments = React.memo((props: any) => {
                 });
 
                 if (data) {
-                    await fetchReviews();
                     setFormUpdate(false);
                     setHiddenReviewCurrent(true);
                     toast({
