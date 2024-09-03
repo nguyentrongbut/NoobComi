@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const tabTitle = [
-    { title: "Chapters", href: "/" },
+    { title: "Chapters", href: "/chapters" },
     { title: "Comments", href: "/comments" },
     { title: "Reviews", href: "/reviews" },
 ];
@@ -34,6 +34,7 @@ const Tab = (props: any) => {
                                         ? "border-b-2 border-blue-600 font-bold"
                                         : "font-medium opacity-60"
                                 }`}
+                                scroll={false}
                             >
                                 {item.title}
                             </Link>

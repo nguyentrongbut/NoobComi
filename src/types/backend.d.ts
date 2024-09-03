@@ -28,6 +28,9 @@ declare global {
         createdAt: number;
         state: string;
         rating: number
+        viewsBy: number[];
+        chapters: IChapter[];
+        followBy: number[]
     }
 
     interface IChapter {

@@ -13,17 +13,39 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import IconArrowPrev from "@/components/icon/icon.arrow.prev";
 import IconArrowNext from "@/components/icon/icon.arrow.next";
-import { covertSlugUrl } from "@/utils/api";
+import { covertSlugUrl, sendRequest } from "@/utils/api";
+import { useRouter } from "next/navigation";
 const MainSlider = (props: any) => {
     const data: any = props.data;
     const swiperRef = useRef<any>();
     const [topNumber, setTopNumber] = useState(1);
+    const router = useRouter();
 
     const handleSlideChange = (swiper: any) => {
         const newIndex = swiper.realIndex + 1; // Swiper's realIndex is zero-based, adjust to one-based
         setTopNumber(newIndex);
     };
 
+    async function incrementViews(comic: ITopComics) {
+        const userId = 9; 
+        if (!userId) {
+            return; 
+        }
+        const viewsBy = comic.viewsBy || [];
+        if (!viewsBy.includes(userId)) {
+            const updateViews = await sendRequest({
+                url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/comics/${comic.id}`,
+                method: "PATCH",
+                body: {
+                    views: comic?.views + 1,
+                    viewsBy: [...viewsBy, userId],
+                },
+            });
+            if (updateViews) {
+                router.refresh();
+            }
+        }
+    }
     return (
         <section>
             <Swiper
@@ -51,8 +73,9 @@ const MainSlider = (props: any) => {
                             <Link
                                 href={`/title/${covertSlugUrl(comic.title)}-${
                                     comic.id
-                                }.html`}
+                                }.html/chapters`}
                                 className="flex h-full relative shadow"
+                                onClick={() => incrementViews(comic)}
                             >
                                 <Image
                                     src={comic.banner}

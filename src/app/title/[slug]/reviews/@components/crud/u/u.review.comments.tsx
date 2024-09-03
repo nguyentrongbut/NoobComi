@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
+import { useRouter } from "next/navigation";
 
 const UReviewComments = React.memo((props: any) => {
     const {
@@ -26,6 +27,7 @@ const UReviewComments = React.memo((props: any) => {
     const [uReview, setUReview] = useState(currentReview);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const isSubmittingRef = useRef(false);
+    const router = useRouter();
 
     const handleCancel = useCallback(() => {
         setFormUpdate(false);
@@ -69,6 +71,7 @@ const UReviewComments = React.memo((props: any) => {
                         description: "Your review was successfully updated.",
                         icon: <IconSuccess />,
                     });
+                    router.refresh();
                 }
             }
 
