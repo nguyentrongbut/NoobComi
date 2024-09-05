@@ -53,8 +53,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 
     return {
-        title: `${res?.title} Chapter ${res?.chapters?.length + 1} - MangaNoob (Open Beta)`,
-        description: `${res?.title} Chapter ${res?.chapters?.length + 1} - ${res?.desc} - MangaNoob (Open Beta)`,
+        title: `${res?.title} Next Chapter ${res?.chapters?.length + 1} | MangaNoob (Open Beta)`,
+        description: `${res?.title} Next Chapter ${res?.chapters?.length + 1} - ${res?.desc} | MangaNoob (Open Beta)`,
     };
 }
 const TitlePage = async ({ params }: Props) => {
