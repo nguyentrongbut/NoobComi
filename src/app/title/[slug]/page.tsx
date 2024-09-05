@@ -1,40 +1,26 @@
-import Image from "next/image";
-import Link from "next/link";
-import { Metadata } from "next";
-import { sendRequest } from "@/utils/api";
-import React from "react";
-import IconAuthor from "@/components/icon/icon.author";
-import IconSave from "@/components/icon/icon.save";
-import IconHeart from "@/components/icon/icon.heart";
-import IconEye from "@/components/icon/icon.eye";
-import IconComment from "@/components/icon/icon.comment";
-import { Button } from "@/components/ui/button";
-import Tab from "@/app/title/@component/tab";
-import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
+import ChapterTab from "@/app/@chapter/chapter";
 import BtnShare from "@/app/title/@component/btn.share";
 import BtnToggleFollow from "@/app/title/@component/btn.toggle.follow";
+import BtnWriteAReview from "@/app/title/@component/btn.write.a.review";
+import TabContent from "@/app/title/@component/tab.content.wrapper";
+import CommentsTab from "@/app/title/[slug]/comments/page";
+import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
+import ReviewsTab from "@/app/title/[slug]/reviews/page";
+import IconAuthor from "@/components/icon/icon.author";
+import IconComment from "@/components/icon/icon.comment";
+import IconEye from "@/components/icon/icon.eye";
+import IconHeart from "@/components/icon/icon.heart";
+import IconSave from "@/components/icon/icon.save";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { sendRequest } from "@/utils/api";
+import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
     params: { slug: string };
 };
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const id = extractIdFromSlug(params.slug);
-
-    // fetch data
-    const res = await sendRequest<ITopComics>({
-        url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/all-comics/${id}`,
-        method: "GET",
-        nextOption: {
-            cache: "no-store",
-        },
-    });
-
-    return {
-        title: `${res?.title} - MangaNoob (Open Beta)`,
-        description: `${res?.title} - ${res?.desc} - MangaNoob (Open Beta)`,
-    };
-}
 
 function extractIdFromSlug(slug: string): string {
     const temp = slug?.split(".html") ?? [];
@@ -54,17 +40,28 @@ function formatNumber(number: number) {
     }
 }
 
-export default async function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    let params: string | undefined;
-    if (React.isValidElement(children) && children.props.segmentPath) {
-        params = children.props.segmentPath[3][1];
-    }
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const id = extractIdFromSlug(params.slug);
 
-    const id = params ? extractIdFromSlug(params) : "";
+    // fetch data
+    const res = await sendRequest<ITopComics>({
+        url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/all-comics/${id}`,
+        method: "GET",
+        nextOption: {
+            cache: "no-store",
+        },
+    });
+
+    return {
+        title: `${res?.title} Chapter ${res?.chapters?.length + 1} - MangaNoob (Open Beta)`,
+        description: `${res?.title} Chapter ${res?.chapters?.length + 1} - ${res?.desc} - MangaNoob (Open Beta)`,
+    };
+}
+const TitlePage = async ({ params }: Props) => {
+
+    const id = params.slug ? extractIdFromSlug(params.slug) : "";
+
+    const currentIdUser = 8;
 
     const data = await sendRequest<ITopComics>({
         url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/all-comics/${id}`,
@@ -151,7 +148,11 @@ export default async function RootLayout({
                                             title={data?.totalComment?.toString()}
                                         >
                                             <IconComment className="primary-color size-5 sm:size-6"></IconComment>
-                                            <span>{formatNumber(data?.totalComment)}</span>
+                                            <span>
+                                                {formatNumber(
+                                                    data?.totalComment
+                                                )}
+                                            </span>
                                         </span>
                                     </div>
                                     <div className="sm:-mt-[3px] flex items-center gap-2 sm:hidden lg:flex">
@@ -174,7 +175,11 @@ export default async function RootLayout({
                 </div>
                 <div className="wrapper">
                     <div className="mt-5 sm:mt-4 flex gap-2 sm:gap-4 justify-center sm:justify-normal">
-                        <BtnToggleFollow id={id} totalFollow={data?.follow} followBy={data?.followBy}></BtnToggleFollow>
+                        <BtnToggleFollow
+                            id={Number(id)}
+                            totalFollow={data?.follow}
+                            followBy={data?.followBy}
+                        ></BtnToggleFollow>
                         <Button className="flex bg-primary-color hover:opacity-90 p-2 font-medium sm:text-base">
                             <IconHeart></IconHeart>
                             <span className="ml-1">Support</span>
@@ -189,14 +194,7 @@ export default async function RootLayout({
                             author={data.author.name}
                             params={params}
                         ></BtnShare>
-                        <Button className="sm:flex primary-color hover:bg-blue-100 bg-white font-medium p-0 text-base hidden">
-                            <Link
-                                href={`/title/${params}/reviews`}
-                                className="p-2"
-                            >
-                                Write a review
-                            </Link>
-                        </Button>
+                        <BtnWriteAReview></BtnWriteAReview>
                     </div>
                     <ul className="flex mt-4 gap-1 flex-wrap">
                         {data?.genres?.map((genres) => {
@@ -213,8 +211,57 @@ export default async function RootLayout({
                     <p className="text-sm sm:text-base mt-4">{data?.desc}</p>
                 </div>
             </header>
-            <Tab params={params}></Tab>
-            {children}
+
+            <Tabs defaultValue="chapters">
+                <section className="bg-white">
+                    <TabsList className="wrapper flex justify-start">
+                        <TabsTrigger
+                            value="chapters"
+                            className="px-3 sm:px-4 py-2 block min-w-[6rem] text-center flex-shrink-0 hover:opacity-90 transition-opacity data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:font-bold data-[state=inactive]:font-medium data-[state=inactive]:opacity-60 rounded-none text-base"
+                        >
+                            Chapters
+                        </TabsTrigger>
+                        <TabsTrigger
+                            value="comments"
+                            className="px-3 sm:px-4 py-2 block min-w-[6rem] text-center flex-shrink-0 hover:opacity-90 transition-opacity data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:font-bold data-[state=inactive]:font-medium data-[state=inactive]:opacity-60 rounded-none text-base"
+                        >
+                            Comments
+                        </TabsTrigger>
+                        <TabsTrigger
+                            value="reviews"
+                            className="px-3 sm:px-4 py-2 block min-w-[6rem] text-center flex-shrink-0 hover:opacity-90 transition-opacity data-[state=active]:border-b-2 data-[state=active]:border-blue-600 data-[state=active]:font-bold data-[state=inactive]:font-medium data-[state=inactive]:opacity-60 rounded-none text-base"
+                        >
+                            Reviews
+                        </TabsTrigger>
+                    </TabsList>
+                </section>
+                <TabsContent value="chapters">
+                    <TabContent>
+                        <ChapterTab
+                            id={id}
+                            currentIdUser={currentIdUser}
+                        ></ChapterTab>
+                    </TabContent>
+                </TabsContent>
+                <TabsContent value="comments">
+                    <TabContent>
+                        <CommentsTab
+                            id={id}
+                            currentIdUser={currentIdUser}
+                        ></CommentsTab>
+                    </TabContent>
+                </TabsContent>
+                <TabsContent value="reviews">
+                    <TabContent>
+                        <ReviewsTab
+                            id={id}
+                            currentIdUser={currentIdUser}
+                        ></ReviewsTab>
+                    </TabContent>
+                </TabsContent>
+            </Tabs>
         </main>
     );
-}
+};
+
+export default TitlePage;

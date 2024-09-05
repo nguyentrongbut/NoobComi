@@ -12,15 +12,16 @@ const BtnToggleFollow = ({
     totalFollow,
     followBy,
 }: {
-    id: string;
+    id: number;
     totalFollow: number;
     followBy: number[];
 }) => {
-    const userId = 9; 
+    const userId = 9;
     const router = useRouter();
     const [follow, setFollow] = useState(followBy.includes(userId));
 
     const handleFollowToggle = async () => {
+        if (!userId) return;
         if (follow) {
             const unfollowed = await sendRequest<ITopComics[]>({
                 url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/comics/${id}`,
@@ -53,7 +54,9 @@ const BtnToggleFollow = ({
     return (
         <Button
             className={`flex ${
-                follow ? "bg-[#e5e5e5] hover:bg-[#b2b2b2] text-black" : "bg-primary-color hover:opacity-90 text-white"
+                follow
+                    ? "bg-[#e5e5e5] hover:bg-[#b2b2b2] text-black"
+                    : "bg-primary-color hover:opacity-90 text-white"
             } sm:w-[228.5625px] font-medium sm:text-base p-2 sm:p-0`}
             onClick={handleFollowToggle}
         >
@@ -64,4 +67,3 @@ const BtnToggleFollow = ({
 };
 
 export default BtnToggleFollow;
-

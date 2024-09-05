@@ -73,7 +73,7 @@ const MainSlider = (props: any) => {
                             <Link
                                 href={`/title/${covertSlugUrl(comic.title)}-${
                                     comic.id
-                                }.html/chapters`}
+                                }`}
                                 className="flex h-full relative shadow"
                                 onClick={() => incrementViews(comic)}
                             >
