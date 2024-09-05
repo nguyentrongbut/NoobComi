@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const CComment = (props: any) => {
-    const { currentIdUser, id, fetchComments, yourParentId, setLoading } = props;
+    const { currentIdUser, id, yourParentId, setLoading } = props;
     const [currentUser, setCurrentUser] = useState<IUser | null>(null);
     const [yourComment, setYourComment] = useState("");
     const router = useRouter();
@@ -42,7 +42,6 @@ const CComment = (props: any) => {
                 },
             });
             if (data) {
-                await fetchComments();
                 setYourComment("");
                 setLoading(false)
                 router.refresh();

@@ -6,7 +6,6 @@ import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.o
 import CReviewComments from "@/app/title/[slug]/reviews/@components/crud/c.review.comments";
 import UReviewComments from "@/app/title/[slug]/reviews/@components/crud/u/u.review.comments";
 import DReviewComments from "@/app/title/[slug]/reviews/@components/crud/d.review.comments";
-import { sendRequest } from "@/utils/api";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -14,39 +13,28 @@ import BtnUReview from "@/app/title/[slug]/reviews/@components/crud/u/btn.u.revi
 
 dayjs.extend(relativeTime);
 
-const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
-    const [reviews, setReviews] = useState<IReviews[]>([]);
+const RReviewComments = React.memo(({ id, currentIdUser, reviews }: any) => {
     const [formUpdate, setFormUpdate] = useState(false);
     const [hiddenReviewCurrent, setHiddenReviewCurrent] = useState(true);
 
-    const fetchReviews = useCallback(async () => {
-        const reviews = await sendRequest<IReviews[]>({
-            url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews?comicId=${id}&_sort=updatedAt&_order=desc&_expand=author`,
-            method: "GET",
-            nextOption: {
-                cache: "no-store",
-            },
-        });
-        setReviews(reviews);
-    }, [id]);
-
-    useEffect(() => {
-        fetchReviews();
-    }, [fetchReviews]);
-
     const hasReviewId = useMemo(
-        () => reviews.some((review) => review.authorId === currentIdUser),
+        () => reviews.some((review: any) => review.authorId === currentIdUser),
         [reviews, currentIdUser]
     );
 
+    console.log(id);
+    
+    
     const specialReview = useMemo(
         () =>
-            reviews.find((review) => review.authorId === currentIdUser) || null,
+            reviews.find((review: any) => review.authorId === currentIdUser) ||
+        null,
         [reviews, currentIdUser]
     );
-
+    
     const otherReviews = useMemo(
-        () => reviews.filter((review) => review.authorId !== currentIdUser),
+        () =>
+            reviews.filter((review: any) => review.authorId !== currentIdUser),
         [reviews, currentIdUser]
     );
 
@@ -55,7 +43,6 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
             <CReviewComments
                 id={id}
                 currentIdUser={currentIdUser}
-                fetchReviews={fetchReviews}
                 hasReviewId={hasReviewId}
             />
 
@@ -64,7 +51,6 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                     uId={specialReview.id}
                     currentIdUser={currentIdUser}
                     id={id}
-                    fetchReviews={fetchReviews}
                     setHiddenReviewCurrent={setHiddenReviewCurrent}
                     formUpdate={formUpdate}
                     setFormUpdate={setFormUpdate}
@@ -135,9 +121,6 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                                                     />
                                                     <DReviewComments
                                                         dId={specialReview.id}
-                                                        fetchReviews={
-                                                            fetchReviews
-                                                        }
                                                     />
                                                 </div>
                                             </div>
@@ -163,7 +146,7 @@ const RReviewComments = React.memo(({ id, currentIdUser }: any) => {
                                 )}
                             </li>
                         )}
-                        {otherReviews.map((review) => (
+                        {otherReviews.map((review: any) => (
                             <li className="flex gap-4 mt-4" key={review.id}>
                                 <Link href="/author">
                                     <Avatar className="size-12 mb-auto">

@@ -4,7 +4,7 @@ import { sendRequest } from "@/utils/api";
 import { useRouter } from "next/navigation";
 
 const DComment = (props: any) => {
-    const { commentId, fetchComments, setLoading } = props;
+    const { commentId, setLoading } = props;
     const router = useRouter();
     const deleteComment = async () => {
         setLoading(true);
@@ -13,7 +13,6 @@ const DComment = (props: any) => {
             method: "DELETE",
         });
         if (data) {
-            await fetchComments();
             setLoading(false);
             router.refresh();
         }

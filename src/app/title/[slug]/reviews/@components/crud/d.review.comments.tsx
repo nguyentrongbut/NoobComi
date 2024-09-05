@@ -36,7 +36,6 @@ const DReviewComments = React.memo((props: any) => {
         });
 
         if (data) {
-            await fetchReviews();
             toast({
                 title: "Success!",
                 description: "Your review was successfully deleted.",

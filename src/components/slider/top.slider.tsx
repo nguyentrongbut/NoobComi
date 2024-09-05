@@ -104,7 +104,7 @@ const TopSlider = (props: any) => {
                                 <Link
                                     href={`/title/${covertSlugUrl(
                                         data.title
-                                    )}-${data.id}.html/chapters`}
+                                    )}-${data.id}`}
                                     className="aspect-[5/7] block h-full group-hover:opacity-85 transition-opacity"
                                     onClick={() => incrementViews(data)}
                                 >

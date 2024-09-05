@@ -12,7 +12,7 @@ import { sendRequest } from "@/utils/api";
 import { useRouter } from "next/navigation";
 
 const CReviewComments = React.memo((props: any) => {
-    const { id, currentIdUser, fetchReviews, hasReviewId } = props;
+    const { id, currentIdUser, hasReviewId } = props;
     const [yourReviewComment, setYourReviewComment] = useState("");
     const [rating, setRating] = useState<number | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,7 +56,6 @@ const CReviewComments = React.memo((props: any) => {
                 });
 
                 if (data) {
-                    await fetchReviews();
                     setYourReviewComment("");
                     toast({
                         title: "Success!",
@@ -73,7 +72,6 @@ const CReviewComments = React.memo((props: any) => {
         [
             id,
             currentIdUser,
-            fetchReviews,
             hasReviewId,
             rating,
             yourReviewComment,

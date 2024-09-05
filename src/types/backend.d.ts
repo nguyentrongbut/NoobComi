@@ -86,7 +86,6 @@ declare global {
         parentId?: number | null;
         className?: string
         currentIdUser?:number
-        fetchComments?: () => void
         setLoading?:  Dispatch<SetStateAction<boolean>>
         id?: number
     }

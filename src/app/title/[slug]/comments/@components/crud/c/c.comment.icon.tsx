@@ -14,7 +14,6 @@ const CCommentIcon = (props: any) => {
     const {
         currentIdUser,
         id,
-        fetchComments,
         yourParentId,
         toggleFormVisibility,
     } = props;
@@ -47,7 +46,6 @@ const CCommentIcon = (props: any) => {
                 },
             });
             if (data) {
-                await fetchComments();
                 setYourComment("");
                 handleCancel();
                 router.refresh();

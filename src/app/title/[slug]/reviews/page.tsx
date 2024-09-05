@@ -1,20 +1,24 @@
 import TabContent from "@/app/title/@component/tab.content.wrapper";
 import RReviewComments from "@/app/title/[slug]/reviews/@components/crud/r.review.comments";
+import { sendRequest } from "@/utils/api";
 
 const ReviewsTab = async (props: any) => {
-    const { params } = props;
-    const temp = params?.slug?.split(".html" ?? []);
-    const temp1 = temp[0]?.split("-" ?? []) as string[];
-    const id = temp1[temp1.length - 1];
-    const currentIdUser = 9;
+    const { id, currentIdUser } = props;
+
+    const reviews = await sendRequest<IReviews[]>({
+        url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/reviews?comicId=${id}&_sort=updatedAt&_order=desc&_expand=author`,
+        method: "GET",
+        nextOption: {
+            cache: "no-store",
+        },
+    });
 
     return (
-        <TabContent>
-            <RReviewComments
-                id={id}
-                currentIdUser={currentIdUser}
-            ></RReviewComments>
-        </TabContent>
+        <RReviewComments
+            id={id}
+            currentIdUser={currentIdUser}
+            reviews={reviews}
+        ></RReviewComments>
     );
 };
 
