@@ -1,5 +1,5 @@
 "use client";
-import DComment from "@/app/title/[slug]/comments/@components/crud/d.comment";
+import DComment from "@/app/(pages)/title/[slug]/comments/@components/crud/d.comment";  
 import IconDelete from "@/components/icon/icon.delete";
 import IconDot from "@/components/icon/icon.dot";
 import IconUpdate from "@/components/icon/icon.update";
@@ -26,7 +26,7 @@ import ImgQuestion from "@/../public/images/question.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import IconFlag from "@/components/icon/icon.flag";
-import BtnUComment from "@/app/title/[slug]/comments/@components/crud/u/btn.u.comment";
+import BtnUComment from "@/app/(pages)/title/[slug]/comments/@components/crud/u/btn.u.comment";
 
 const IconDotDropdown = (props: any) => {
     const { commentId, fetchComments, currentIdUser, commentUserId, toggleFormEditVisibility, setLoading } = props;

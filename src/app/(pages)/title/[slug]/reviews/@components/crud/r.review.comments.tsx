@@ -2,14 +2,14 @@
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
-import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
-import CReviewComments from "@/app/title/[slug]/reviews/@components/crud/c.review.comments";
-import UReviewComments from "@/app/title/[slug]/reviews/@components/crud/u/u.review.comments";
-import DReviewComments from "@/app/title/[slug]/reviews/@components/crud/d.review.comments";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import BtnUReview from "@/app/title/[slug]/reviews/@components/crud/u/btn.u.review";
+import CReviewComments from "@/app/(pages)/title/[slug]/reviews/@components/crud/c.review.comments";
+import UReviewComments from "@/app/(pages)/title/[slug]/reviews/@components/crud/u/u.review.comments";
+import BtnUReview from "@/app/(pages)/title/[slug]/reviews/@components/crud/u/btn.u.review";
+import DReviewComments from "@/app/(pages)/title/[slug]/reviews/@components/crud/d.review.comments";
+import RatingReadOnly from "@/app/(pages)/title/[slug]/reviews/@components/rating.read.only";
 
 dayjs.extend(relativeTime);
 

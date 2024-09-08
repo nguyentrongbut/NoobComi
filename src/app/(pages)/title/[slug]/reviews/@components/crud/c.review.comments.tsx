@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef, useState, useCallback } from "react";
-import Rating from "@/app/title/[slug]/reviews/@components/rating";
 import IconError from "@/components/icon/icon.error";
 import IconLoading from "@/components/icon/icon.loading";
 import IconSend from "@/components/icon/icon.send";
@@ -10,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { sendRequest } from "@/utils/api";
 import { useRouter } from "next/navigation";
+import Rating from "@/app/(pages)/title/[slug]/reviews/@components/rating";
 
 const CReviewComments = React.memo((props: any) => {
     const { id, currentIdUser, hasReviewId } = props;

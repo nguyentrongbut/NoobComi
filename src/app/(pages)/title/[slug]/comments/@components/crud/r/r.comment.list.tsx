@@ -5,10 +5,10 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import IconHeart from "@/components/icon/icon.heart";
 import { useState } from "react";
-import CCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/c.comment.icon";
-import BtnCCommentIcon from "@/app/title/[slug]/comments/@components/crud/c/btn.c.comment.icon";
-import IconDotDropdown from "@/app/title/[slug]/comments/@components/crud/icon.dot.dropdown";
-import UComment from "@/app/title/[slug]/comments/@components/crud/u/u.comment";
+import CCommentIcon from "@/app/(pages)/title/[slug]/comments/@components/crud/c/c.comment.icon";
+import BtnCCommentIcon from "@/app/(pages)/title/[slug]/comments/@components/crud/c/btn.c.comment.icon";
+import IconDotDropdown from "@/app/(pages)/title/[slug]/comments/@components/crud/icon.dot.dropdown";
+import UComment from "@/app/(pages)/title/[slug]/comments/@components/crud/u/u.comment";
 
 dayjs.extend(relativeTime);
 
