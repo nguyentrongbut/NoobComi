@@ -102,7 +102,7 @@ const TopSlider = (props: any) => {
                         <SwiperSlide key={`${data.id}-top-tier`}>
                             <figure className="group">
                                 <Link
-                                    href={`/title/${covertSlugUrl(
+                                    href={`/${covertSlugUrl(
                                         data.title
                                     )}-${data.id}`}
                                     className="aspect-[5/7] block h-full group-hover:opacity-85 transition-opacity"

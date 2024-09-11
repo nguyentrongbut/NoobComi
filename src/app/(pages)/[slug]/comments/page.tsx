@@ -1,5 +1,4 @@
-
-import RComment from "@/app/(pages)/title/[slug]/comments/@components/crud/r/r.comment";
+import RComment from "@/app/(pages)/[slug]/comments/@components/crud/r/r.comment";
 import { sendRequest } from "@/utils/api";
 
 const CommentsTab = async (props: any) => {

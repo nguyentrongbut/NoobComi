@@ -17,7 +17,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { sendRequest } from "@/utils/api";
+import { covertSlugUrl, sendRequest } from "@/utils/api";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ import IconAscending from "@/components/icon/icon.ascending";
 dayjs.extend(relativeTime);
 
 const ChapterTab = (props: any) => {
-    const { currentUser, id } = props;
+    const { currentUser, id, title } = props;
     const [chapters, setChapters] = useState<IChapter[]>([]);
     const [toggleFilter, setToggleFilter] = useState(true);
     useEffect(() => {
@@ -83,7 +83,13 @@ const ChapterTab = (props: any) => {
                                     !chapter.vip ? (
                                         <li className="cursor-pointer">
                                             <Link
-                                                href="/"
+                                                href={`/${covertSlugUrl(
+                                                    title
+                                                )}-${
+                                                    chapter?.id
+                                                }/${covertSlugUrl(
+                                                    chapter?.title
+                                                )}.html`}
                                                 className="flex gap-2 bg-neutral-100 rounded-md hover:bg-[#e5e5e5]"
                                             >
                                                 <div className="relative sm:max-w-[108px] sm:max-h-[72px] max-w-[96px] max-h-[64px]">

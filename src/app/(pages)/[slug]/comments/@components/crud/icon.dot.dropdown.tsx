@@ -1,5 +1,5 @@
 "use client";
-import DComment from "@/app/(pages)/title/[slug]/comments/@components/crud/d.comment";  
+import DComment from "@/app/(pages)/[slug]/comments/@components/crud/d.comment";
 import IconDelete from "@/components/icon/icon.delete";
 import IconDot from "@/components/icon/icon.dot";
 import IconUpdate from "@/components/icon/icon.update";
@@ -26,10 +26,17 @@ import ImgQuestion from "@/../public/images/question.png";
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import IconFlag from "@/components/icon/icon.flag";
-import BtnUComment from "@/app/(pages)/title/[slug]/comments/@components/crud/u/btn.u.comment";
+import BtnUComment from "@/app/(pages)/[slug]/comments/@components/crud/u/btn.u.comment";
 
 const IconDotDropdown = (props: any) => {
-    const { commentId, fetchComments, currentIdUser, commentUserId, toggleFormEditVisibility, setLoading } = props;
+    const {
+        commentId,
+        fetchComments,
+        currentIdUser,
+        commentUserId,
+        toggleFormEditVisibility,
+        setLoading,
+    } = props;
     const [isReportDialogOpen, setIsReportDialogOpen] = useState(false);
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const removePointerENone = () => {
@@ -59,7 +66,12 @@ const IconDotDropdown = (props: any) => {
                     {currentIdUser === commentUserId && (
                         <>
                             <DropdownMenuItem className="cursor-pointer p-0 flex justify-center hover:bg-neutral-200/50 border-b-[#e5e7eb]">
-                                <BtnUComment toggleFormEditVisibility={toggleFormEditVisibility} commentId={commentId}></BtnUComment>
+                                <BtnUComment
+                                    toggleFormEditVisibility={
+                                        toggleFormEditVisibility
+                                    }
+                                    commentId={commentId}
+                                ></BtnUComment>
                             </DropdownMenuItem>
 
                             <DropdownMenuItem
@@ -141,7 +153,10 @@ const IconDotDropdown = (props: any) => {
                                 setLoading={setLoading}
                             ></DComment>
                         </AlertDialogAction>
-                        <AlertDialogCancel onClick={removePointerENone} className="text-base">
+                        <AlertDialogCancel
+                            onClick={removePointerENone}
+                            className="text-base"
+                        >
                             Cancel
                         </AlertDialogCancel>
                     </AlertDialogFooter>

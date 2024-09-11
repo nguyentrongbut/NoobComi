@@ -1,5 +1,5 @@
-import TabContent from "@/app/(pages)/title/@component/tab.content.wrapper";
-import RReviewComments from "@/app/(pages)/title/[slug]/reviews/@components/crud/r.review.comments";
+import TabContent from "@/app/(pages)/@component/tab.content.wrapper";
+import RReviewComments from "@/app/(pages)/[slug]/reviews/@components/crud/r.review.comments";
 import { sendRequest } from "@/utils/api";
 
 const ReviewsTab = async (props: any) => {

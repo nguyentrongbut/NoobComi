@@ -5,11 +5,11 @@ import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import CReviewComments from "@/app/(pages)/title/[slug]/reviews/@components/crud/c.review.comments";
-import UReviewComments from "@/app/(pages)/title/[slug]/reviews/@components/crud/u/u.review.comments";
-import BtnUReview from "@/app/(pages)/title/[slug]/reviews/@components/crud/u/btn.u.review";
-import DReviewComments from "@/app/(pages)/title/[slug]/reviews/@components/crud/d.review.comments";
-import RatingReadOnly from "@/app/(pages)/title/[slug]/reviews/@components/rating.read.only";
+import CReviewComments from "@/app/(pages)/[slug]/reviews/@components/crud/c.review.comments";
+import UReviewComments from "@/app/(pages)/[slug]/reviews/@components/crud/u/u.review.comments";
+import BtnUReview from "@/app/(pages)/[slug]/reviews/@components/crud/u/btn.u.review";
+import DReviewComments from "@/app/(pages)/[slug]/reviews/@components/crud/d.review.comments";
+import RatingReadOnly from "@/app/(pages)/[slug]/reviews/@components/rating.read.only";
 
 dayjs.extend(relativeTime);
 
@@ -23,15 +23,14 @@ const RReviewComments = React.memo(({ id, currentIdUser, reviews }: any) => {
     );
 
     console.log(id);
-    
-    
+
     const specialReview = useMemo(
         () =>
             reviews.find((review: any) => review.authorId === currentIdUser) ||
-        null,
+            null,
         [reviews, currentIdUser]
     );
-    
+
     const otherReviews = useMemo(
         () =>
             reviews.filter((review: any) => review.authorId !== currentIdUser),
