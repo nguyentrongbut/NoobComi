@@ -45,11 +45,11 @@ export async function generateMetadata({
     };
 }
 
-export default async function RootLayout({
+export default function RootLayout({
     children,
-}: {
+}: Readonly<{
     children: React.ReactNode;
-}) {
+}>) {
     return (
         <html lang="en">
             <body className={`disabled-scroll ${poppins.className}`}>
