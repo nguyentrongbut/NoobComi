@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import { sendRequest } from "@/utils/api";
 import { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { ReactNode } from "react";
 
 const poppins = Poppins({
     subsets: ["latin"],
@@ -45,11 +46,7 @@ export async function generateMetadata({
     };
 }
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
             <body className={`disabled-scroll ${poppins.className}`}>
