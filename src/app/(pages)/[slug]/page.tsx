@@ -194,7 +194,7 @@ const TitlePage = async ({ params }: Props) => {
                             totalLike={data.likes}
                             totalView={data.views}
                             totalComment={data.totalComment}
-                            author={data.author.name}
+                            author={data?.author?.name}
                             params={params}
                         ></BtnShare>
                         <BtnWriteAReview></BtnWriteAReview>

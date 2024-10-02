@@ -83,13 +83,11 @@ const ChapterTab = (props: any) => {
                                     !chapter.vip ? (
                                         <li className="cursor-pointer">
                                             <Link
-                                                href={`/${covertSlugUrl(
+                                                href={`${covertSlugUrl(
                                                     title
-                                                )}-${
-                                                    chapter?.id
-                                                }/${covertSlugUrl(
+                                                )}-${id}/${covertSlugUrl(
                                                     chapter?.title
-                                                )}.html`}
+                                                )}-${chapter?.id}.html`}
                                                 className="flex gap-2 bg-neutral-100 rounded-md hover:bg-[#e5e5e5]"
                                             >
                                                 <div className="relative sm:max-w-[108px] sm:max-h-[72px] max-w-[96px] max-h-[64px]">
