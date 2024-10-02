@@ -47,23 +47,14 @@ export async function generateMetadata({
 
 export default async function RootLayout({
     children,
-    params,
 }: {
     children: React.ReactNode;
-    params: { slug: string[] };
 }) {
-    const id = extractIdFromSlug(params.slug[1]);
-    
-    const res1 = await sendRequest<IChapter>({
-        url: `${process.env.NEXT_PUBLIC_WEB_COMIC_API}/api/chapters/${id}`,
-        method: "GET",
-        nextOption: {
-            cache: "no-store",
-        },
-    });
     return (
         <html lang="en">
-            <body className={`disabled-scroll ${poppins.className}`}>{children}</body>
+            <body className={`disabled-scroll ${poppins.className}`}>
+                {children}
+            </body>
         </html>
     );
 }
