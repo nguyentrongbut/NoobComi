@@ -1,7 +1,7 @@
 "use client";
 
-import CComment from "@/app/title/[slug]/comments/@components/crud/c/c.comment";
-import RCommentList from "@/app/title/[slug]/comments/@components/crud/r/r.comment.list";
+import CComment from "@/app/(pages)/[slug]/comments/@components/crud/c/c.comment";
+import RCommentList from "@/app/(pages)/[slug]/comments/@components/crud/r/r.comment.list";
 import IconLoading from "@/components/icon/icon.loading";
 
 import { useState } from "react";

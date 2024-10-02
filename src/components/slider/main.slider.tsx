@@ -71,7 +71,7 @@ const MainSlider = (props: any) => {
                     return (
                         <SwiperSlide key={`${comic.id}-news`}>
                             <Link
-                                href={`/title/${covertSlugUrl(comic.title)}-${
+                                href={`/${covertSlugUrl(comic.title)}-${
                                     comic.id
                                 }`}
                                 className="flex h-full relative shadow"

@@ -176,6 +176,10 @@
         background: transparent;
     }
 
+    .disabled-scroll::-webkit-scrollbar  {
+        width: 0;
+    }
+
     .form-input:not(:placeholder-shown) + .form-label,
     .form-input:focus + .form-label {
         top: -12px;

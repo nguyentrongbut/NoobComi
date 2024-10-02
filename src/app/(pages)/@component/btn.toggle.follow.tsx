@@ -18,7 +18,7 @@ const BtnToggleFollow = ({
 }) => {
     const userId = 9;
     const router = useRouter();
-    const [follow, setFollow] = useState(followBy.includes(userId));
+    const [follow, setFollow] = useState(followBy?.includes(userId));
 
     const handleFollowToggle = async () => {
         if (!userId) return;

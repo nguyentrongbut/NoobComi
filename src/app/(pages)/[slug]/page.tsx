@@ -1,11 +1,11 @@
-import ChapterTab from "@/app/@chapter/chapter";
-import BtnShare from "@/app/title/@component/btn.share";
-import BtnToggleFollow from "@/app/title/@component/btn.toggle.follow";
-import BtnWriteAReview from "@/app/title/@component/btn.write.a.review";
-import TabContent from "@/app/title/@component/tab.content.wrapper";
-import CommentsTab from "@/app/title/[slug]/comments/page";
-import RatingReadOnly from "@/app/title/[slug]/reviews/@components/rating.read.only";
-import ReviewsTab from "@/app/title/[slug]/reviews/page";
+import BtnShare from "@/app/(pages)/@component/btn.share";
+import BtnToggleFollow from "@/app/(pages)/@component/btn.toggle.follow";
+import BtnWriteAReview from "@/app/(pages)/@component/btn.write.a.review";
+import ChapterTab from "@/app/(pages)/@component/chapter";
+import TabContent from "@/app/(pages)/@component/tab.content.wrapper";
+import CommentsTab from "@/app/(pages)/[slug]/comments/page";
+import RatingReadOnly from "@/app/(pages)/[slug]/reviews/@components/rating.read.only";
+import ReviewsTab from "@/app/(pages)/[slug]/reviews/page";
 import IconAuthor from "@/components/icon/icon.author";
 import IconComment from "@/components/icon/icon.comment";
 import IconEye from "@/components/icon/icon.eye";
@@ -53,12 +53,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
 
     return {
-        title: `${res?.title} Next Chapter ${res?.chapters?.length + 1} | MangaNoob (Open Beta)`,
-        description: `${res?.title} Next Chapter ${res?.chapters?.length + 1} - ${res?.desc} | MangaNoob (Open Beta)`,
+        title: `${res?.title} Next Chapter ${
+            res?.chapters?.length + 1
+        } | MangaNoob (Open Beta)`,
+        description: `${res?.title} Next Chapter ${
+            res?.chapters?.length + 1
+        } - ${res?.desc} | MangaNoob (Open Beta)`,
     };
 }
 const TitlePage = async ({ params }: Props) => {
-
     const id = params.slug ? extractIdFromSlug(params.slug) : "";
 
     const currentIdUser = 8;
@@ -191,7 +194,7 @@ const TitlePage = async ({ params }: Props) => {
                             totalLike={data.likes}
                             totalView={data.views}
                             totalComment={data.totalComment}
-                            author={data.author.name}
+                            author={data?.author?.name}
                             params={params}
                         ></BtnShare>
                         <BtnWriteAReview></BtnWriteAReview>
@@ -239,6 +242,7 @@ const TitlePage = async ({ params }: Props) => {
                     <TabContent>
                         <ChapterTab
                             id={id}
+                            title={data?.title}
                             currentIdUser={currentIdUser}
                         ></ChapterTab>
                     </TabContent>
