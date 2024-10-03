@@ -5,16 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { sendRequest } from "@/utils/api";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const UComment = (props: any) => {
-    const {
-        commentId,
-        toggleFormEditVisibility,
-        messageComment,
-        setLoading,
-    } = props;
+    const { commentId, toggleFormEditVisibility, messageComment, setLoading } =
+        props;
     const [uComment, setUComment] = useState(messageComment);
+    const router = useRouter();
     const handleCancel = () => {
         toggleFormEditVisibility(commentId);
     };
@@ -34,6 +32,7 @@ const UComment = (props: any) => {
                 setUComment("");
                 handleCancel();
                 setLoading(false);
+                router.refresh();
             }
         }
     };
