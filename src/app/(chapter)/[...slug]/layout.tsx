@@ -51,8 +51,8 @@ export default async function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
-            <body className={`disabled-scroll ${poppins.className}`}>
+        <html lang="en"> 
+            <body className={`${poppins.className} disabled-scroll`}>
                 {children}
             </body>
         </html>

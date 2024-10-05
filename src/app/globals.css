@@ -176,7 +176,7 @@
         background: transparent;
     }
 
-    .disabled-scroll::-webkit-scrollbar  {
+    .disabled-scroll::-webkit-scrollbar {
         width: 0;
     }
 

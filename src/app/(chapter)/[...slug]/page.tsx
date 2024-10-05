@@ -1,4 +1,5 @@
 
+import ChapterFooter from "@/app/(chapter)/@components/chapter.footer";
 import ChapterHeader from "@/app/(chapter)/@components/chapter.header";
 import IconComment from "@/components/icon/icon.comment";
 import IconEye from "@/components/icon/icon.eye";
@@ -44,7 +45,7 @@ const ChapterPage = async ({ params }: { params: { slug: string[] } }) => {
     const nextChapter = res[currentChapterIndex + 1];
 
     return (
-        <section>
+        <section className="mb-28">
             <ChapterHeader titleChapter={res1.content} totalLike={res1.likes} totalComment={res1.comments} slugChapters={slugChapters}></ChapterHeader>
             <div className="">
                 <div className="relative h-full w-full overflow-hidden">
@@ -182,6 +183,7 @@ const ChapterPage = async ({ params }: { params: { slug: string[] } }) => {
                     </Button>
                 </div>
             </div>
+            <ChapterFooter></ChapterFooter>
         </section>
     );
 };
