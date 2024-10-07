@@ -2,7 +2,13 @@
 import React, { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 
-const ChapterFooter = () => {
+const ChapterFooter = ({
+    footerRef,
+    showFooter,
+}: {
+    footerRef?: React.RefObject<HTMLDivElement>;
+    showFooter: boolean;
+}) => {
     const [scrollValue, setScrollValue] = useState(0);
 
     // Hàm cập nhật slider dựa trên vị trí cuộn của trang
@@ -34,7 +40,12 @@ const ChapterFooter = () => {
     }, []);
 
     return (
-        <footer className="fixed w-full bottom-0 left-0 z-10">
+        <footer
+            ref={footerRef}
+            className={`transition-opacity duration-500 ${
+                showFooter ? "opacity-100" : "opacity-0"
+            } fixed w-full bottom-0 left-0 z-10`}
+        >
             <div className="p-4 bg-white/80 border-t border-neutral-200 backdrop-blur-lg">
                 <div className="px-4 flex h-10 items-center select-none">
                     <div className="flex text-xs min-w-0 whitespace-nowrap leading-4">
@@ -59,4 +70,3 @@ const ChapterFooter = () => {
 };
 
 export default ChapterFooter;
-

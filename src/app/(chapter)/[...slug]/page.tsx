@@ -1,5 +1,3 @@
-import ChapterFooter from "@/app/(chapter)/@components/chapter.footer";
-import ChapterHeader from "@/app/(chapter)/@components/chapter.header";
 import IconComment from "@/components/icon/icon.comment";
 import IconEye from "@/components/icon/icon.eye";
 import IconHeart from "@/components/icon/icon.heart";

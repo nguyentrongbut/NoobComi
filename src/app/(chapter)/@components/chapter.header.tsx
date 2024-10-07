@@ -10,15 +10,24 @@ const ChapterHeader = ({
     titleChapter,
     totalLike,
     totalComment,
-    slugChapters
+    slugChapters,
+    headerRef,
+    showHeader,
 }: {
     titleChapter: any;
     totalLike: number;
     totalComment: number;
     slugChapters: string;
+    headerRef?: React.RefObject<HTMLDivElement>;
+    showHeader: boolean;
 }) => {
     return (
-        <header className="sm:px-4 px-2 py-[0.675rem] bg-white/80 border-b border-neutral-200 box-border backdrop-blur-lg fixed z-[1] top-0 left-0 w-full">
+        <header
+            ref={headerRef}
+            className={`transition-opacity duration-500 ${
+                showHeader ? "opacity-100" : "opacity-0"
+            } sm:px-4 px-2 py-[0.675rem] bg-white/80 border-b border-neutral-200 box-border backdrop-blur-lg fixed z-[1] top-0 left-0 w-full`}
+        >
             <div className="flex justify-between space-x-4 my-auto">
                 <Link href={`/${slugChapters}`} className="primary-color">
                     <Button className="text-base p-2 bg-transparent text-inherit hover:bg-[#b3e4f9] rounded-full flex gap-1">
